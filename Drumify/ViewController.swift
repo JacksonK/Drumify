@@ -20,7 +20,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     var numberOfRecords:Int = 0
     
-    var indexOfCurrentlyPlaying:IndexPath = IndexPath.init()
+    // Storing a copy of the IndexPath when tapping a cell to play, 
+    // so that it can be referenced again when its audio clip stops.
+    // This allows for that cell to change appearance when playing and pausing.
+    var indexPathCurrentlyPlaying:IndexPath = IndexPath.init()
     
     @IBOutlet weak var buttonLabel: UIButton!
     @IBOutlet weak var myTableView: UITableView!
@@ -68,9 +71,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         // Method below forces audio to playback through speakers instead of earpiece,
         // based on https://stackoverflow.com/q/1022992
         try! recordingSession.setCategory(AVAudioSession.Category.playAndRecord, 
-                                     mode: AVAudioSession.Mode.default, 
-                                     policy: AVAudioSession.RouteSharingPolicy.default, 
-                                     options: AVAudioSession.CategoryOptions.defaultToSpeaker)
+                                          mode: AVAudioSession.Mode.default, 
+                                          policy: AVAudioSession.RouteSharingPolicy.default, 
+                                          options: AVAudioSession.CategoryOptions.defaultToSpeaker)
         
         if let number:Int = UserDefaults.standard.object(forKey: "myNumber") as? Int
         {
@@ -119,7 +122,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         do
         {
             tableView.cellForRow(at: indexPath)?.textLabel?.text = "Audio File " +  String(indexPath.row+1) + " playing"
-            indexOfCurrentlyPlaying = indexPath
+            indexPathCurrentlyPlaying = indexPath
             audioPlayer = try AVAudioPlayer(contentsOf: path)
             audioPlayer.delegate = self
             audioPlayer.play()
@@ -131,7 +134,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        myTableView.cellForRow(at: indexOfCurrentlyPlaying)?.textLabel?.text = "Audio File " +  String(indexOfCurrentlyPlaying.row+1)
+        myTableView.cellForRow(at: indexPathCurrentlyPlaying)?.textLabel?.text = "Audio File " +  String(indexPathCurrentlyPlaying.row+1)
     }
 }
 
