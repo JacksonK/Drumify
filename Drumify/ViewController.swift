@@ -6,6 +6,9 @@
 //  Copyright © 2019 Jackson Kurtz. All rights reserved.
 //
 
+// using Font Awesome:
+// 
+
 import UIKit
 import AVFoundation
 
@@ -51,7 +54,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, UITableViewDele
             UserDefaults.standard.set(numberOfRecords, forKey: "myNumber")
             myTableView.reloadData()
             
-            buttonLabel.setTitle("\u{f04b}", for: .normal)
+            buttonLabel.setTitle("\u{f111}", for: .normal)
         }
     }
     

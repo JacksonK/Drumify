@@ -53,11 +53,13 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" id="PQK-vA-AGO">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3cx-QW-sAh">
-                                            <rect key="frame" x="20" y="44.5" width="374" height="45"/>
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3cx-QW-sAh">
+                                            <rect key="frame" x="20" y="25.5" width="374" height="83"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="33"/>
-                                            <state key="normal" title=""/>
+                                            <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
+                                            <state key="normal" title="">
+                                                <color key="titleColor" red="1" green="0.0" blue="0.024170271515557396" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
                                             <connections>
                                                 <action selector="record:" destination="BYZ-38-t0r" eventType="touchUpInside" id="v7L-wf-cNV"/>
                                             </connections>
