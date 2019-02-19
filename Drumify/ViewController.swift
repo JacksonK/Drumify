@@ -59,7 +59,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, UITableViewDele
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         recordingSession = AVAudioSession.sharedInstance()
-        
+        try! recordingSession.setCategory(AVAudioSession.Category.playAndRecord, 
+                                     mode: AVAudioSession.Mode.default, 
+                                     policy: AVAudioSession.RouteSharingPolicy.default, 
+                                     options: AVAudioSession.CategoryOptions.defaultToSpeaker)
         if let number:Int = UserDefaults.standard.object(forKey: "myNumber") as? Int
         {
             numberOfRecords = number
