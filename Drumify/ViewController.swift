@@ -13,12 +13,14 @@ import UIKit
 import AVFoundation
 
 
-class ViewController: UIViewController, AVAudioRecorderDelegate, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource {
     var recordingSession: AVAudioSession!
     var audioRecorder:AVAudioRecorder!
     var audioPlayer:AVAudioPlayer!
     
     var numberOfRecords:Int = 0
+    
+    var indexOfCurrentlyPlaying:IndexPath = IndexPath.init()
     
     @IBOutlet weak var buttonLabel: UIButton!
     @IBOutlet weak var myTableView: UITableView!
@@ -116,13 +118,20 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, UITableViewDele
         print( path )
         do
         {
+            tableView.cellForRow(at: indexPath)?.textLabel?.text = "Audio File " +  String(indexPath.row+1) + " playing"
+            indexOfCurrentlyPlaying = indexPath
             audioPlayer = try AVAudioPlayer(contentsOf: path)
+            audioPlayer.delegate = self
             audioPlayer.play()
         }
         catch
         {
             displayAlert(title: "Playback", message: "Failed to play audio file!")
         }
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
+        myTableView.cellForRow(at: indexOfCurrentlyPlaying)?.textLabel?.text = "Audio File " +  String(indexOfCurrentlyPlaying.row+1)
     }
 }
 
