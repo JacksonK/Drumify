@@ -35,7 +35,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, UITableViewDele
                 audioRecorder.delegate = self
                 audioRecorder.record()
                 
-                buttonLabel.setTitle("Stop Recording", for: .normal)
+                buttonLabel.setTitle("\u{f04d}", for: .normal)
             }
             catch
             {
@@ -51,7 +51,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, UITableViewDele
             UserDefaults.standard.set(numberOfRecords, forKey: "myNumber")
             myTableView.reloadData()
             
-            buttonLabel.setTitle("Record", for: .normal)
+            buttonLabel.setTitle("\u{f04b}", for: .normal)
         }
     }
     
@@ -104,7 +104,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, UITableViewDele
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-        cell.textLabel?.text = String(indexPath.row+1)
+        cell.textLabel?.text = "Audio File " +  String(indexPath.row+1)
         return cell
     }
     

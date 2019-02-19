@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B43C4B65221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = B43C4B64221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf */; };
 		DC3EFD1621FEA9FE000ED222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */; };
 		DC3EFD1821FEA9FE000ED222 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3EFD1721FEA9FE000ED222 /* ViewController.swift */; };
 		DC3EFD1B21FEA9FE000ED222 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC3EFD1921FEA9FE000ED222 /* Main.storyboard */; };
@@ -34,6 +35,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B43C4B64221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Solid-900.otf"; sourceTree = "<group>"; };
 		DC3EFD1221FEA9FE000ED222 /* Drumify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drumify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC3EFD1721FEA9FE000ED222 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +76,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B43C4B61221BB59100659D1C /* Font Awesome */ = {
+			isa = PBXGroup;
+			children = (
+				B43C4B64221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf */,
+			);
+			path = "Font Awesome";
+			sourceTree = "<group>";
+		};
 		DC3EFD0921FEA9FE000ED222 = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +107,7 @@
 		DC3EFD1421FEA9FE000ED222 /* Drumify */ = {
 			isa = PBXGroup;
 			children = (
+				B43C4B61221BB59100659D1C /* Font Awesome */,
 				DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */,
 				DC3EFD1721FEA9FE000ED222 /* ViewController.swift */,
 				DC3EFD1921FEA9FE000ED222 /* Main.storyboard */,
@@ -232,6 +243,7 @@
 				DC3EFD2021FEAA00000ED222 /* LaunchScreen.storyboard in Resources */,
 				DC3EFD1D21FEAA00000ED222 /* Assets.xcassets in Resources */,
 				DC3EFD1B21FEA9FE000ED222 /* Main.storyboard in Resources */,
+				B43C4B65221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
