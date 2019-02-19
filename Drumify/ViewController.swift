@@ -59,10 +59,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, UITableViewDele
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         recordingSession = AVAudioSession.sharedInstance()
+        
+        // Method below forces audio to playback through speakers instead of earpiece,
+        // based on https://stackoverflow.com/q/1022992
         try! recordingSession.setCategory(AVAudioSession.Category.playAndRecord, 
                                      mode: AVAudioSession.Mode.default, 
                                      policy: AVAudioSession.RouteSharingPolicy.default, 
                                      options: AVAudioSession.CategoryOptions.defaultToSpeaker)
+        
         if let number:Int = UserDefaults.standard.object(forKey: "myNumber") as? Int
         {
             numberOfRecords = number
