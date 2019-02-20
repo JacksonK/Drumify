@@ -114,7 +114,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingTableViewCell", for: indexPath) as! RecordingTableViewCell
-        
+        cell.playButtonBottom.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
         cell.songName?.text = "Audio File " +  String(indexPath.row+1)
         
         return cell
@@ -128,15 +128,20 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         }
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let path = getDirectory().appendingPathComponent("\(indexPath.row + 1).m4a")
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
         selectedIndexPath = indexPath
         myTableView.beginUpdates()
         myTableView.endUpdates()
         
-        print( path )
+    }
+    
+    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         
+        //myTableView.cellForRow(at: selectedIndexPath)?.songName?.text = "Audio File " +  String(indexPathCurrentlyPlaying.row+1)
+    }
+    
+    @objc func tappedPlayButton(sender: UIButton) {
+        let path = getDirectory().appendingPathComponent("\(selectedIndexPath!.row + 1).m4a")
         do
         {
             //tableView.cellForRow(at: indexPath)?.songName?.text = "Audio File " +  String(indexPath.row+1) + " playing"
@@ -148,11 +153,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         {
             displayAlert(title: "Playback", message: "Failed to play audio file!")
         }
-    }
-    
-    func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
-        
-        //myTableView.cellForRow(at: selectedIndexPath)?.songName?.text = "Audio File " +  String(indexPathCurrentlyPlaying.row+1)
     }
 }
 

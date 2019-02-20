@@ -68,6 +68,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="playButtonBottom" destination="Bgg-OH-SWc" id="FhZ-X3-ElL"/>
                                             <outlet property="playbackProgressView" destination="4xJ-Hk-xkY" id="W8c-fA-Zno"/>
                                             <outlet property="songName" destination="68N-P3-rv8" id="voN-ej-c52"/>
                                         </connections>
