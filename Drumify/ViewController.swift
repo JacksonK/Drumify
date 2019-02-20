@@ -11,13 +11,15 @@
 
 import UIKit
 import AVFoundation
+import AudioKit
 
 
 class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource {
     var recordingSession: AVAudioSession!
     var audioRecorder:AVAudioRecorder!
     var audioPlayer:AVAudioPlayer!
-    
+    var player:AKPlayer!
+
     var numberOfRecords:Int = 0
     
     // Storing a copy of the IndexPath when tapping a cell to play, 
@@ -159,12 +161,39 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     func playRecording(indexPath: IndexPath) {
         let path = getDirectory().appendingPathComponent("\(indexPath.row + 1).m4a")
+        print(path)
         do
         {
-            //tableView.cellForRow(at: indexPath)?.recordingName?.text = "Audio File " +  String(indexPath.row+1) + " playing"
-            audioPlayer = try AVAudioPlayer(contentsOf: path)
-            audioPlayer.delegate = self
-            audioPlayer.play()
+            // player is initialized
+            if (player != nil )
+            {
+                let cell = myTableView.cellForRow(at: self.selectedIndexPath!) as! RecordingTableViewCell
+                cell.recordingName.text = "Audio File " +  String(self.selectedIndexPath!.row+1)
+                self.player.stop()
+                try AudioKit.stop()
+            }
+            let cell = myTableView.cellForRow(at: indexPath) as! RecordingTableViewCell
+            cell.recordingName?.text = "Audio File " +  String(indexPath.row+1) + " playing"
+            selectedIndexPath = indexPath
+            
+            let file = try AKAudioFile(readFileName: "\(indexPath.row + 1).m4a", baseDir: .documents)
+            let buffer = file.pcmBuffer
+            let floats = UnsafeBufferPointer(start: buffer.floatChannelData?[0], count: Int(buffer.frameLength))
+            let cmax = floats.max()
+
+            let peakTime = (Double(floats.index( of: cmax! )!)/Double(file.samplesCount)) * file.duration
+            player = AKPlayer(audioFile: file)
+            player.startTime = peakTime
+            player.completionHandler = {
+                print( "callback!")
+                AKLog("completion callback has been triggered!")
+                let cell = self.myTableView.cellForRow(at: self.selectedIndexPath!) as! RecordingTableViewCell
+                cell.recordingName.text = "Audio File " +  String(self.selectedIndexPath!.row+1)                //self.player.stop()
+                //try AudioKit.stop()
+            }
+            AudioKit.output = player
+            try AudioKit.start()
+            player.play()
         }
         catch
         {
