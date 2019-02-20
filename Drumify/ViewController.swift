@@ -89,6 +89,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         }
         
         myTableView.dataSource = self;
+        myTableView.tableFooterView = UIView()
     }
 
     //Function that returns ppath to directory
