@@ -26,13 +26,51 @@
                                 <rect key="frame" x="0.0" y="88" width="414" height="674"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell" id="xEh-r5-CEv">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="44"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecordingTableViewCell" rowHeight="150" id="xEh-r5-CEv" customClass="RecordingTableViewCell" customModule="Drumify" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="414" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xEh-r5-CEv" id="WCa-7Q-IGl">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="149.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68N-P3-rv8">
+                                                    <rect key="frame" x="20" y="11" width="374" height="23"/>
+                                                    <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4xJ-Hk-xkY">
+                                                    <rect key="frame" x="20" y="59" width="374" height="4"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="4" id="UEL-iB-2qV"/>
+                                                    </constraints>
+                                                </progressView>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bgg-OH-SWc">
+                                                    <rect key="frame" x="192" y="90.5" width="30" height="39"/>
+                                                    <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="27"/>
+                                                    <state key="normal" title="">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                    <connections>
+                                                        <action selector="playRecording:" destination="xEh-r5-CEv" eventType="touchUpInside" id="UsC-tp-vcu"/>
+                                                    </connections>
+                                                </button>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="68N-P3-rv8" firstAttribute="top" secondItem="WCa-7Q-IGl" secondAttribute="topMargin" id="17s-0M-Ac7"/>
+                                                <constraint firstItem="4xJ-Hk-xkY" firstAttribute="top" secondItem="68N-P3-rv8" secondAttribute="bottom" constant="25" id="LfB-Hf-weP"/>
+                                                <constraint firstItem="68N-P3-rv8" firstAttribute="leading" secondItem="WCa-7Q-IGl" secondAttribute="leadingMargin" id="XPV-w4-d9Z"/>
+                                                <constraint firstItem="Bgg-OH-SWc" firstAttribute="centerX" secondItem="WCa-7Q-IGl" secondAttribute="centerX" id="buZ-IL-87B"/>
+                                                <constraint firstItem="4xJ-Hk-xkY" firstAttribute="trailing" secondItem="WCa-7Q-IGl" secondAttribute="trailingMargin" id="i4F-kf-HWk"/>
+                                                <constraint firstItem="4xJ-Hk-xkY" firstAttribute="leading" secondItem="WCa-7Q-IGl" secondAttribute="leadingMargin" id="kj4-dr-1Zj"/>
+                                                <constraint firstItem="68N-P3-rv8" firstAttribute="trailing" secondItem="WCa-7Q-IGl" secondAttribute="trailingMargin" id="pLT-jO-MZp"/>
+                                                <constraint firstItem="Bgg-OH-SWc" firstAttribute="top" secondItem="4xJ-Hk-xkY" secondAttribute="bottom" constant="27.5" id="sgn-wl-edx"/>
+                                            </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="playbackProgressView" destination="4xJ-Hk-xkY" id="W8c-fA-Zno"/>
+                                            <outlet property="songName" destination="68N-P3-rv8" id="voN-ej-c52"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>
@@ -53,7 +91,7 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" id="PQK-vA-AGO">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3cx-QW-sAh">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3cx-QW-sAh">
                                             <rect key="frame" x="20" y="8.5" width="374" height="83"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>

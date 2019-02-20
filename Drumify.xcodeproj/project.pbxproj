@@ -7,10 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		15D77A248EDAEA3A6B555860 /* Pods_DrumifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 120489B68AA929C414C0D2C5 /* Pods_DrumifyTests.framework */; };
-		22A647926081C8DE51B5C102 /* Pods_Drumify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DD659B020F71170582481DA3 /* Pods_Drumify.framework */; };
-		3EE45CD1B057C3941559D240 /* Pods_DrumifyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92459F0301F713D3CD8F3FE0 /* Pods_DrumifyUITests.framework */; };
+		0E71DC89EB091311F2864C70 /* Pods_Drumify.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7139AF6E6D06C2B3984DB82 /* Pods_Drumify.framework */; };
+		61C7377D686AD9BC7C20A7EA /* Pods_DrumifyTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4334098D640DC29D08B000E9 /* Pods_DrumifyTests.framework */; };
+		69E6A892A3B1B85742C7BE6D /* Pods_DrumifyUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33DF5F36BADF3A6AA8C6A718 /* Pods_DrumifyUITests.framework */; };
 		B43C4B65221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = B43C4B64221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf */; };
+		B463BBA4221C7E7100E310AA /* RecordingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B463BBA3221C7E7100E310AA /* RecordingTableViewCell.swift */; };
 		DC3EFD1621FEA9FE000ED222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */; };
 		DC3EFD1821FEA9FE000ED222 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3EFD1721FEA9FE000ED222 /* ViewController.swift */; };
 		DC3EFD1B21FEA9FE000ED222 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC3EFD1921FEA9FE000ED222 /* Main.storyboard */; };
@@ -38,15 +39,16 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		120489B68AA929C414C0D2C5 /* Pods_DrumifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DrumifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		16B5C4641E07081E07254BD0 /* Pods-Drumify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Drumify.release.xcconfig"; path = "Target Support Files/Pods-Drumify/Pods-Drumify.release.xcconfig"; sourceTree = "<group>"; };
-		197471D397FE0C87861025BF /* Pods-DrumifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyTests.release.xcconfig"; path = "Target Support Files/Pods-DrumifyTests/Pods-DrumifyTests.release.xcconfig"; sourceTree = "<group>"; };
-		23C01D07AFA691184543AC2F /* Pods-DrumifyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyUITests.debug.xcconfig"; path = "Target Support Files/Pods-DrumifyUITests/Pods-DrumifyUITests.debug.xcconfig"; sourceTree = "<group>"; };
-		408ECB8800A046AF14C91D86 /* Pods-DrumifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyTests.debug.xcconfig"; path = "Target Support Files/Pods-DrumifyTests/Pods-DrumifyTests.debug.xcconfig"; sourceTree = "<group>"; };
-		5CEBBDD8BB63A8B4BDD09CF6 /* Pods-DrumifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyUITests.release.xcconfig"; path = "Target Support Files/Pods-DrumifyUITests/Pods-DrumifyUITests.release.xcconfig"; sourceTree = "<group>"; };
-		92459F0301F713D3CD8F3FE0 /* Pods_DrumifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DrumifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		33DF5F36BADF3A6AA8C6A718 /* Pods_DrumifyUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DrumifyUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4334098D640DC29D08B000E9 /* Pods_DrumifyTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DrumifyTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4A1BBD9FA1CADECB8C06DBDD /* Pods-DrumifyUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyUITests.debug.xcconfig"; path = "Target Support Files/Pods-DrumifyUITests/Pods-DrumifyUITests.debug.xcconfig"; sourceTree = "<group>"; };
+		67D5E2F44C8BF6C100DEDC7B /* Pods-DrumifyTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyTests.debug.xcconfig"; path = "Target Support Files/Pods-DrumifyTests/Pods-DrumifyTests.debug.xcconfig"; sourceTree = "<group>"; };
+		738B985A6EFC099D7805B17D /* Pods-Drumify.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Drumify.release.xcconfig"; path = "Target Support Files/Pods-Drumify/Pods-Drumify.release.xcconfig"; sourceTree = "<group>"; };
+		97C815BBA88F8127EEA8EADD /* Pods-Drumify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Drumify.debug.xcconfig"; path = "Target Support Files/Pods-Drumify/Pods-Drumify.debug.xcconfig"; sourceTree = "<group>"; };
 		B43C4B64221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Solid-900.otf"; sourceTree = "<group>"; };
-		D40A2D4D3BA1BB7C1FFD1B53 /* Pods-Drumify.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Drumify.debug.xcconfig"; path = "Target Support Files/Pods-Drumify/Pods-Drumify.debug.xcconfig"; sourceTree = "<group>"; };
+		B461EF5731B55F01F7C329FE /* Pods-DrumifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyUITests.release.xcconfig"; path = "Target Support Files/Pods-DrumifyUITests/Pods-DrumifyUITests.release.xcconfig"; sourceTree = "<group>"; };
+		B463BBA3221C7E7100E310AA /* RecordingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingTableViewCell.swift; sourceTree = "<group>"; };
+		CB27D441B5C9C8148C4C265F /* Pods-DrumifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyTests.release.xcconfig"; path = "Target Support Files/Pods-DrumifyTests/Pods-DrumifyTests.release.xcconfig"; sourceTree = "<group>"; };
 		DC3EFD1221FEA9FE000ED222 /* Drumify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drumify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC3EFD1721FEA9FE000ED222 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -60,7 +62,7 @@
 		DC3EFD3121FEAA00000ED222 /* DrumifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrumifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3EFD3521FEAA00000ED222 /* DrumifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumifyUITests.swift; sourceTree = "<group>"; };
 		DC3EFD3721FEAA00000ED222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		DD659B020F71170582481DA3 /* Pods_Drumify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Drumify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7139AF6E6D06C2B3984DB82 /* Pods_Drumify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Drumify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -68,7 +70,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				22A647926081C8DE51B5C102 /* Pods_Drumify.framework in Frameworks */,
+				0E71DC89EB091311F2864C70 /* Pods_Drumify.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -76,7 +78,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				15D77A248EDAEA3A6B555860 /* Pods_DrumifyTests.framework in Frameworks */,
+				61C7377D686AD9BC7C20A7EA /* Pods_DrumifyTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -84,34 +86,21 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3EE45CD1B057C3941559D240 /* Pods_DrumifyUITests.framework in Frameworks */,
+				69E6A892A3B1B85742C7BE6D /* Pods_DrumifyUITests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3B20DB7C6694B6E3BA928C02 /* Frameworks */ = {
+		033D67BFF067A5AEC0FC1A1C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DD659B020F71170582481DA3 /* Pods_Drumify.framework */,
-				120489B68AA929C414C0D2C5 /* Pods_DrumifyTests.framework */,
-				92459F0301F713D3CD8F3FE0 /* Pods_DrumifyUITests.framework */,
+				E7139AF6E6D06C2B3984DB82 /* Pods_Drumify.framework */,
+				4334098D640DC29D08B000E9 /* Pods_DrumifyTests.framework */,
+				33DF5F36BADF3A6AA8C6A718 /* Pods_DrumifyUITests.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		5587FB774B8AE051A1FD5F9F /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				D40A2D4D3BA1BB7C1FFD1B53 /* Pods-Drumify.debug.xcconfig */,
-				16B5C4641E07081E07254BD0 /* Pods-Drumify.release.xcconfig */,
-				408ECB8800A046AF14C91D86 /* Pods-DrumifyTests.debug.xcconfig */,
-				197471D397FE0C87861025BF /* Pods-DrumifyTests.release.xcconfig */,
-				23C01D07AFA691184543AC2F /* Pods-DrumifyUITests.debug.xcconfig */,
-				5CEBBDD8BB63A8B4BDD09CF6 /* Pods-DrumifyUITests.release.xcconfig */,
-			);
-			path = Pods;
 			sourceTree = "<group>";
 		};
 		B43C4B61221BB59100659D1C /* Font Awesome */ = {
@@ -122,6 +111,19 @@
 			path = "Font Awesome";
 			sourceTree = "<group>";
 		};
+		C98774961698B2B1AB9F6C51 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				97C815BBA88F8127EEA8EADD /* Pods-Drumify.debug.xcconfig */,
+				738B985A6EFC099D7805B17D /* Pods-Drumify.release.xcconfig */,
+				67D5E2F44C8BF6C100DEDC7B /* Pods-DrumifyTests.debug.xcconfig */,
+				CB27D441B5C9C8148C4C265F /* Pods-DrumifyTests.release.xcconfig */,
+				4A1BBD9FA1CADECB8C06DBDD /* Pods-DrumifyUITests.debug.xcconfig */,
+				B461EF5731B55F01F7C329FE /* Pods-DrumifyUITests.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		DC3EFD0921FEA9FE000ED222 = {
 			isa = PBXGroup;
 			children = (
@@ -129,8 +131,8 @@
 				DC3EFD2921FEAA00000ED222 /* DrumifyTests */,
 				DC3EFD3421FEAA00000ED222 /* DrumifyUITests */,
 				DC3EFD1321FEA9FE000ED222 /* Products */,
-				5587FB774B8AE051A1FD5F9F /* Pods */,
-				3B20DB7C6694B6E3BA928C02 /* Frameworks */,
+				C98774961698B2B1AB9F6C51 /* Pods */,
+				033D67BFF067A5AEC0FC1A1C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -149,6 +151,7 @@
 			children = (
 				B43C4B61221BB59100659D1C /* Font Awesome */,
 				DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */,
+				B463BBA3221C7E7100E310AA /* RecordingTableViewCell.swift */,
 				DC3EFD1721FEA9FE000ED222 /* ViewController.swift */,
 				DC3EFD1921FEA9FE000ED222 /* Main.storyboard */,
 				DC3EFD1C21FEAA00000ED222 /* Assets.xcassets */,
@@ -183,7 +186,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DC3EFD3A21FEAA00000ED222 /* Build configuration list for PBXNativeTarget "Drumify" */;
 			buildPhases = (
-				6827A9BFDE7AB477766CFD21 /* [CP] Check Pods Manifest.lock */,
+				4F5CBE5420A06FD1F705668C /* [CP] Check Pods Manifest.lock */,
 				DC3EFD0E21FEA9FE000ED222 /* Sources */,
 				DC3EFD0F21FEA9FE000ED222 /* Frameworks */,
 				DC3EFD1021FEA9FE000ED222 /* Resources */,
@@ -201,7 +204,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DC3EFD3D21FEAA00000ED222 /* Build configuration list for PBXNativeTarget "DrumifyTests" */;
 			buildPhases = (
-				F6A5E7E0D769F719059E83F1 /* [CP] Check Pods Manifest.lock */,
+				E6583A8DB89C81B4593E30AB /* [CP] Check Pods Manifest.lock */,
 				DC3EFD2221FEAA00000ED222 /* Sources */,
 				DC3EFD2321FEAA00000ED222 /* Frameworks */,
 				DC3EFD2421FEAA00000ED222 /* Resources */,
@@ -220,7 +223,7 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = DC3EFD4021FEAA00000ED222 /* Build configuration list for PBXNativeTarget "DrumifyUITests" */;
 			buildPhases = (
-				C700272C2AC4C49CEA3EAEE6 /* [CP] Check Pods Manifest.lock */,
+				549A5C2C664D92E67CE88B19 /* [CP] Check Pods Manifest.lock */,
 				DC3EFD2D21FEAA00000ED222 /* Sources */,
 				DC3EFD2E21FEAA00000ED222 /* Frameworks */,
 				DC3EFD2F21FEAA00000ED222 /* Resources */,
@@ -307,7 +310,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		6827A9BFDE7AB477766CFD21 /* [CP] Check Pods Manifest.lock */ = {
+		4F5CBE5420A06FD1F705668C /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -329,7 +332,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		C700272C2AC4C49CEA3EAEE6 /* [CP] Check Pods Manifest.lock */ = {
+		549A5C2C664D92E67CE88B19 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -351,7 +354,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F6A5E7E0D769F719059E83F1 /* [CP] Check Pods Manifest.lock */ = {
+		E6583A8DB89C81B4593E30AB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -381,6 +384,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC3EFD1821FEA9FE000ED222 /* ViewController.swift in Sources */,
+				B463BBA4221C7E7100E310AA /* RecordingTableViewCell.swift in Sources */,
 				DC3EFD1621FEA9FE000ED222 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -554,17 +558,18 @@
 		};
 		DC3EFD3B21FEAA00000ED222 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D40A2D4D3BA1BB7C1FFD1B53 /* Pods-Drumify.debug.xcconfig */;
+			baseConfigurationReference = 97C815BBA88F8127EEA8EADD /* Pods-Drumify.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 64548X6W8H;
+				DEVELOPMENT_TEAM = FJ5DVU875S;
 				INFOPLIST_FILE = Drumify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify;
+				ONLY_ACTIVE_ARCH = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -573,17 +578,17 @@
 		};
 		DC3EFD3C21FEAA00000ED222 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 16B5C4641E07081E07254BD0 /* Pods-Drumify.release.xcconfig */;
+			baseConfigurationReference = 738B985A6EFC099D7805B17D /* Pods-Drumify.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 64548X6W8H;
+				DEVELOPMENT_TEAM = FJ5DVU875S;
 				INFOPLIST_FILE = Drumify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify;
+				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify123;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -592,7 +597,7 @@
 		};
 		DC3EFD3E21FEAA00000ED222 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 408ECB8800A046AF14C91D86 /* Pods-DrumifyTests.debug.xcconfig */;
+			baseConfigurationReference = 67D5E2F44C8BF6C100DEDC7B /* Pods-DrumifyTests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -614,7 +619,7 @@
 		};
 		DC3EFD3F21FEAA00000ED222 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 197471D397FE0C87861025BF /* Pods-DrumifyTests.release.xcconfig */;
+			baseConfigurationReference = CB27D441B5C9C8148C4C265F /* Pods-DrumifyTests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -636,7 +641,7 @@
 		};
 		DC3EFD4121FEAA00000ED222 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 23C01D07AFA691184543AC2F /* Pods-DrumifyUITests.debug.xcconfig */;
+			baseConfigurationReference = 4A1BBD9FA1CADECB8C06DBDD /* Pods-DrumifyUITests.debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
@@ -657,7 +662,7 @@
 		};
 		DC3EFD4221FEAA00000ED222 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 5CEBBDD8BB63A8B4BDD09CF6 /* Pods-DrumifyUITests.release.xcconfig */;
+			baseConfigurationReference = B461EF5731B55F01F7C329FE /* Pods-DrumifyUITests.release.xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
