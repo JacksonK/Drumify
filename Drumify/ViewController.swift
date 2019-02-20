@@ -11,12 +11,13 @@
 
 import UIKit
 import AVFoundation
-
+import AudioKit
 
 class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource {
     var recordingSession: AVAudioSession!
     var audioRecorder:AVAudioRecorder!
     var audioPlayer:AVAudioPlayer!
+    var player:AKPlayer!
     
     var numberOfRecords:Int = 0
     
@@ -65,6 +66,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //AudioKit.output = self.player
+        /*do {
+            try AudioKit.start()
+        }
+        catch {
+            displayAlert(title: "ViewDidLoad", message: "audiokit start error!")
+        }*/
+        
         // Do any additional setup after loading the view, typically from a nib.
         recordingSession = AVAudioSession.sharedInstance()
         
@@ -120,12 +129,35 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         let path = getDirectory().appendingPathComponent("\(indexPath.row + 1).m4a")
         print( path )
         do
-        {
+        { 
+            // player is initialized and running
+            if (player != nil )
+            {
+                
+                self.myTableView.cellForRow(at: self.indexPathCurrentlyPlaying)?.textLabel?.text = "Audio File " +  String(self.indexPathCurrentlyPlaying.row+1)
+                self.player.stop()
+                try AudioKit.stop()
+            }
             tableView.cellForRow(at: indexPath)?.textLabel?.text = "Audio File " +  String(indexPath.row+1) + " playing"
             indexPathCurrentlyPlaying = indexPath
-            audioPlayer = try AVAudioPlayer(contentsOf: path)
-            audioPlayer.delegate = self
-            audioPlayer.play()
+            //audioPlayer = try AVAudioPlayer(contentsOf: path)
+            //audioPlayer.delegate = self
+            //audioPlayer.play()
+            
+            
+            //play using audiokit
+            let file = try AKAudioFile(readFileName: "\(indexPath.row + 1).m4a", baseDir: .documents)
+            player = AKPlayer(audioFile: file)
+            player.completionHandler = {
+                print( "callback!")
+                AKLog("completion callback has been triggered!")
+                self.myTableView.cellForRow(at: self.indexPathCurrentlyPlaying)?.textLabel?.text = "Audio File " +  String(self.indexPathCurrentlyPlaying.row+1)
+                //self.player.stop()
+                //try AudioKit.stop()
+                }
+            AudioKit.output = player
+            try AudioKit.start()
+            player.play()
         }
         catch
         {
