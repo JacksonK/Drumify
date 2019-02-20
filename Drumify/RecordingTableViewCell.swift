@@ -13,6 +13,7 @@ class RecordingTableViewCell: UITableViewCell {
     @IBOutlet weak var recordingName: UILabel!
     @IBOutlet weak var playbackProgressView: UIProgressView!
     @IBOutlet weak var playButtonBottom: UIButton!
+    @IBOutlet weak var playButtonRight: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

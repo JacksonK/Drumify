@@ -116,8 +116,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingTableViewCell", for: indexPath) as! RecordingTableViewCell
         cell.playButtonBottom.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
+        cell.playButtonRight.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
         cell.recordingName?.text = "Audio File " +  String(indexPath.row+1)
-        
+
         return cell
     }
     
@@ -131,9 +132,18 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
         selectedIndexPath = indexPath
+        let cell = tableView.cellForRow(at: indexPath) as! RecordingTableViewCell
+        cell.playButtonRight.isHidden = true;
         myTableView.beginUpdates()
         myTableView.endUpdates()
         
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! RecordingTableViewCell
+        cell.playButtonRight.isHidden = false;
+        myTableView.beginUpdates()
+        myTableView.endUpdates()
     }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
@@ -142,7 +152,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     }
     
     @objc func tappedPlayButton(sender: UIButton) {
-        let path = getDirectory().appendingPathComponent("\(selectedIndexPath!.row + 1).m4a")
+        let cell = sender.superview?.superview
+        let indexPath = myTableView.indexPath(for: cell as! UITableViewCell)
+        playRecording(indexPath: indexPath!)
+    }
+    
+    func playRecording(indexPath: IndexPath) {
+        let path = getDirectory().appendingPathComponent("\(indexPath.row + 1).m4a")
         do
         {
             //tableView.cellForRow(at: indexPath)?.recordingName?.text = "Audio File " +  String(indexPath.row+1) + " playing"

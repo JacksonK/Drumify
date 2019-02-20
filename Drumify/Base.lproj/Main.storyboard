@@ -52,6 +52,14 @@
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
+                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bp6-8W-akg">
+                                                    <rect key="frame" x="364" y="3" width="30" height="39"/>
+                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                    <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="27"/>
+                                                    <state key="normal" title="">
+                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </state>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="68N-P3-rv8" firstAttribute="top" secondItem="WCa-7Q-IGl" secondAttribute="topMargin" id="17s-0M-Ac7"/>
@@ -66,6 +74,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="playButtonBottom" destination="Bgg-OH-SWc" id="FhZ-X3-ElL"/>
+                                            <outlet property="playButtonRight" destination="Bp6-8W-akg" id="iXa-xF-6Qo"/>
                                             <outlet property="playbackProgressView" destination="4xJ-Hk-xkY" id="W8c-fA-Zno"/>
                                             <outlet property="recordingName" destination="68N-P3-rv8" id="udc-iT-DHP"/>
                                         </connections>
