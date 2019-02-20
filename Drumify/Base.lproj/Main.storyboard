@@ -51,9 +51,6 @@
                                                     <state key="normal" title="">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="playRecording:" destination="xEh-r5-CEv" eventType="touchUpInside" id="UsC-tp-vcu"/>
-                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>

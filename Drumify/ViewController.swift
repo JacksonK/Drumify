@@ -115,7 +115,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingTableViewCell", for: indexPath) as! RecordingTableViewCell
         cell.playButtonBottom.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
-        cell.songName?.text = "Audio File " +  String(indexPath.row+1)
+        cell.recordingName?.text = "Audio File " +  String(indexPath.row+1)
         
         return cell
     }
@@ -137,14 +137,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         
-        //myTableView.cellForRow(at: selectedIndexPath)?.songName?.text = "Audio File " +  String(indexPathCurrentlyPlaying.row+1)
+        //myTableView.cellForRow(at: selectedIndexPath)?.recordingName?.text = "Audio File " +  String(indexPathCurrentlyPlaying.row+1)
     }
     
     @objc func tappedPlayButton(sender: UIButton) {
         let path = getDirectory().appendingPathComponent("\(selectedIndexPath!.row + 1).m4a")
         do
         {
-            //tableView.cellForRow(at: indexPath)?.songName?.text = "Audio File " +  String(indexPath.row+1) + " playing"
+            //tableView.cellForRow(at: indexPath)?.recordingName?.text = "Audio File " +  String(indexPath.row+1) + " playing"
             audioPlayer = try AVAudioPlayer(contentsOf: path)
             audioPlayer.delegate = self
             audioPlayer.play()

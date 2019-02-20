@@ -9,24 +9,10 @@
 import UIKit
 
 class RecordingTableViewCell: UITableViewCell {
-    @IBOutlet weak var songName: UILabel!
+    
+    @IBOutlet weak var recordingName: UILabel!
     @IBOutlet weak var playbackProgressView: UIProgressView!
-    
     @IBOutlet weak var playButtonBottom: UIButton!
-    
-    
-    @IBAction func playRecording(_ sender: UIButton) {
-        
-        let cell = sender.superview?.superview as! UITableViewCell
-        let tableView = cell.superview as! UITableView
-        let indexPath = tableView.indexPath(for: cell)
-        
-        //let view = tableView.superview as! UIView
-        //if let viewController = view.superview! as? ViewController {
-            
-        //}
-         
-    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
