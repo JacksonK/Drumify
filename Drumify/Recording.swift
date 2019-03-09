@@ -2,20 +2,23 @@
 //  Recording.swift
 //  Drumify
 //
-//  Created by Vernon Chan on 2/19/19.
+//  Created by Vernon Chan on 3/8/19.
 //  Copyright © 2019 Jackson Kurtz. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
-class Recording: UITableView {
+enum DrumType {
+    case bass
+    case snare
+    case hat
+    case uncategorized
+}
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
+struct Recording {
+    var name: String
+    var filepath: String
+    var duration: Double
+    var creation_date: Date
+    var category: DrumType
 }

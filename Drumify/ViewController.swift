@@ -61,6 +61,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             UserDefaults.standard.set(numberOfRecords, forKey: "myNumber")
             myTableView.reloadData()
             
+            
+            
             buttonLabel.setTitle("\u{f111}", for: .normal)
         }
     }

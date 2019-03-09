@@ -85,12 +85,6 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="zRE-1h-Baz"/>
                                 </connections>
                             </tableView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OBu-Sd-2tT">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
-                                <items>
-                                    <navigationItem title="Recordings" id="WMh-7s-RMA"/>
-                                </items>
-                            </navigationBar>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="4tA-Zb-JOs">
                                 <rect key="frame" x="0.0" y="762" width="414" height="100"/>
                                 <constraints>
@@ -113,21 +107,29 @@
                                 </items>
                                 <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="es5-8y-0pg" userLabel="Segment Control: Categories">
+                                <rect key="frame" x="8" y="52" width="398" height="29"/>
+                                <segments>
+                                    <segment title="Bass"/>
+                                    <segment title="Snare"/>
+                                    <segment title="Hi-hat"/>
+                                </segments>
+                            </segmentedControl>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="KC8-cy-4yN" firstAttribute="top" secondItem="OBu-Sd-2tT" secondAttribute="bottom" id="3dD-oC-CXa"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="es5-8y-0pg" secondAttribute="trailing" constant="8" id="0ho-Sn-5JM"/>
+                            <constraint firstItem="KC8-cy-4yN" firstAttribute="top" secondItem="es5-8y-0pg" secondAttribute="bottom" constant="8" id="6KI-LO-nEv"/>
+                            <constraint firstItem="es5-8y-0pg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="9sa-SQ-UEE"/>
                             <constraint firstItem="KC8-cy-4yN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CM8-Gb-9O3"/>
                             <constraint firstItem="4tA-Zb-JOs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="H1L-VV-SEu"/>
                             <constraint firstItem="KC8-cy-4yN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="44" id="HWL-by-cia"/>
                             <constraint firstItem="KC8-cy-4yN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="OuT-ZK-ZPO"/>
                             <constraint firstItem="4tA-Zb-JOs" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="RZ6-Cp-QkM"/>
                             <constraint firstItem="4tA-Zb-JOs" firstAttribute="top" secondItem="KC8-cy-4yN" secondAttribute="bottom" id="dGN-gF-yUW"/>
-                            <constraint firstItem="OBu-Sd-2tT" firstAttribute="trailing" secondItem="KC8-cy-4yN" secondAttribute="trailing" id="hZN-og-zcV"/>
                             <constraint firstItem="KC8-cy-4yN" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-100" id="lPh-bV-zwN"/>
                             <constraint firstItem="4tA-Zb-JOs" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="onh-2Y-rqq"/>
-                            <constraint firstItem="OBu-Sd-2tT" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="y2c-V0-vUf"/>
-                            <constraint firstItem="OBu-Sd-2tT" firstAttribute="leading" secondItem="KC8-cy-4yN" secondAttribute="leading" id="zwt-Nd-OwK"/>
+                            <constraint firstItem="es5-8y-0pg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="y3t-RC-PKm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
