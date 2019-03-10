@@ -19,8 +19,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     var audioRecorder:AVAudioRecorder!
     var audioPlayer:AVAudioPlayer!
     var player:AKPlayer!
+    
+    var recordings:[Recording]!
 
-    var numberOfRecords:Int = 0
+    var currentCategory:DrumType!
+    //var numberOfRecords:Int = 0
     
     // Storing a copy of the IndexPath when tapping a cell to play, 
     // so that it can be referenced again when its audio clip stops.
@@ -34,8 +37,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         //Check if we have active recorder
         if audioRecorder == nil
         {
-            numberOfRecords += 1
+            let numberOfRecords = recordings.count + 1
+            //currentRecording = TempRecording(filepath: "\(numberOfRecords).m4a", creation_date: Date())
             let filename = getDirectory().appendingPathComponent("\(numberOfRecords).m4a")
+            print("filepath: ", filename)
             let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC), AVSampleRateKey: 12000, AVNumberOfChannelsKey: 1, AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
             
             //Start audio recording
@@ -57,11 +62,41 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             //Stopping audio recording
             audioRecorder.stop()
             audioRecorder = nil
-            
-            UserDefaults.standard.set(numberOfRecords, forKey: "myNumber")
-            myTableView.reloadData()
-            
-            
+            let filepath = "\(self.recordings.count + 1).m4a"
+            getDrumCategory(fname: filepath,view: self)
+            print("categorization filepath: ", filepath)
+
+            //alert to name new recording
+            let alert = UIAlertController(title: "Name your recording:", message: "", preferredStyle: .alert)
+            alert.addTextField { (textField) in
+                textField.text = "recording#" + "\(self.recordings.count)"
+            }
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+                let textField = alert!.textFields![0] // Force unwrapping because we know it exists.
+                print("Text field: \(textField.text ?? "default value")")
+                let new_name = textField.text
+                //let filepath = self.getDirectory().appendingPathComponent("\(self.recordings.count + 1)")
+                //check if categorization was successful
+                if self.currentCategory == nil{
+                    print("failed to categorize drum sound")
+                    self.currentCategory = DrumType.uncategorized
+                }
+                let new_recording = Recording(filepath: filepath, creation_date: Date(), name: new_name!, duration: Double(0), category: self.currentCategory!)
+                print("category of this sound: ", self.currentCategory!)
+                self.currentCategory = nil
+                self.recordings.append(new_recording)
+                
+                do {
+                    let encodedData = try PropertyListEncoder().encode(self.recordings)
+                    UserDefaults.standard.set(encodedData, forKey: "recordings")
+                }
+                catch {
+                    print("error encoding recordings data in stop record!")
+                    
+                }
+                self.myTableView.reloadData()
+            }))
+            self.present(alert, animated: true, completion: nil)
             
             buttonLabel.setTitle("\u{f111}", for: .normal)
         }
@@ -72,16 +107,30 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         // Do any additional setup after loading the view, typically from a nib.
         recordingSession = AVAudioSession.sharedInstance()
         
+        currentCategory = nil
+        
         // Method below forces audio to playback through speakers instead of earpiece,
         // based on https://stackoverflow.com/q/1022992
         try! recordingSession.setCategory(AVAudioSession.Category.playAndRecord, 
                                           mode: AVAudioSession.Mode.default, 
                                           policy: AVAudioSession.RouteSharingPolicy.default, 
                                           options: AVAudioSession.CategoryOptions.defaultToSpeaker)
-        
+        /*
         if let number:Int = UserDefaults.standard.object(forKey: "myNumber") as? Int
         {
             numberOfRecords = number
+        }*/
+        
+        if let data = UserDefaults.standard.value(forKey:"recordings") as? Data {
+            recordings = try? PropertyListDecoder().decode([Recording].self, from:data)
+        }
+        /*
+        if let recData:Data = UserDefaults.standard.object(forKey: "recordings") as? Data {
+            recordings = (try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [Recording], from: recData)) as? [Recording]
+     
+        }*/
+        else {
+            recordings = []
         }
         
         AVAudioSession.sharedInstance().requestRecordPermission{(hasPermission) in
@@ -114,14 +163,15 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     //Table view setup
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return numberOfRecords
+        return recordings.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingTableViewCell", for: indexPath) as! RecordingTableViewCell
         cell.playButtonBottom.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
         cell.playButtonRight.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
-        cell.recordingName?.text = "Audio File " +  String(indexPath.row+1)
+        //cell.recordingName?.text = "Audio File " +  String(indexPath.row+1)
+        cell.recordingName?.text = recordings![indexPath.row].name
 
         return cell
     }

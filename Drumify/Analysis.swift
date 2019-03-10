@@ -22,13 +22,14 @@ var freqMatrix = Array(repeating: [Double](), count: 9)
 
 //finds list of 9 amplitude values for the frequency spectrum of audio file, with equal separation on a log scale
 //updates table with analysis in handler
-func getAmpProfile(fname: String) {
+func getDrumCategory(fname: String, view: ViewController) {
+    print("getting drum category")
     var ampProfile = [Double]()
     var selectedFreqs: [Int] = []
     for i in 0...10 {
         selectedFreqs.append(Int(pow(Float(2), Float(i))))
     }
-    if let drum = try? AKAudioFile(readFileName: fname) {
+    if let drum = try? AKAudioFile(readFileName: fname, baseDir: .documents) {
         var norm_drum:AKAudioFile
         do {
             norm_drum = try drum.normalized(baseDir: .temp, name: "tempNormalized", newMaxLevel: -4)
@@ -37,10 +38,15 @@ func getAmpProfile(fname: String) {
         catch {
             print("normalization error")
         }
-        
-        
         player.completionHandler = {
             timer.invalidate()
+            player.stop()
+            do {
+                try AudioKit.stop()
+            }
+            catch {
+               print("failed to stop audiokit after categorization")
+            }
             Swift.print("completion callback has been triggered!")
             for index in 0...freqMatrix.count-1 {
                 //print("num values: ", self.freqMatrix[index].count)
@@ -48,6 +54,7 @@ func getAmpProfile(fname: String) {
                 //print("average amplitudes: ", ampProfile)
             }
             let drum_type = categorizeProfile(profile: ampProfile)
+            view.currentCategory = drum_type
             print(ampProfile)
             print(drum_type)
         }
@@ -90,6 +97,9 @@ func getAmpProfile(fname: String) {
             }
             print( "\n")
         })
+    }
+    else {
+        print("failed to read file while getting drum category!")
     }
 }
 
