@@ -60,7 +60,7 @@ func getDrumCategory(fname: String, view: ViewController) {
             let drum_type = categorizeProfile(profile: ampProfile)
             view.currentCategory = drum_type
             print(ampProfile)
-            print(drum_type)
+            print("category found: ", drum_type)
         }
         player.isLooping = false
         player.buffering = .always

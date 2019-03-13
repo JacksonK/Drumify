@@ -51,6 +51,49 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         myTableView.reloadData()
     }
     
+    func createRecording(new_name: String, filepath: String) {
+        //check if categorization was successful
+
+        if self.currentCategory == nil{
+            print("failed to categorize drum sound")
+            self.currentCategory = DrumType.uncategorized
+        }
+        //create new recording structure
+        let new_recording = Recording(filepath: filepath, creation_date: Date(), name: new_name, duration: Double(0), category: self.currentCategory!)
+        print("category of this sound: ", self.currentCategory!)
+        self.currentCategory = nil
+        
+        //add recording to the correct category array
+        if new_recording.category == DrumType.bass {
+            self.bassRecordings.append(new_recording)
+            self.categoryTab.selectedSegmentIndex = 0
+        }
+        else if new_recording.category == DrumType.snare  {
+            self.snareRecordings.append(new_recording)
+            self.categoryTab.selectedSegmentIndex = 1
+        }
+        else {
+            self.hatRecordings.append(new_recording)
+            self.categoryTab.selectedSegmentIndex = 2
+        }
+        
+        do {
+            let encodedDataBass = try PropertyListEncoder().encode(self.bassRecordings)
+            let encodedDataSnare = try PropertyListEncoder().encode(self.snareRecordings)
+            let encodedDataHat = try PropertyListEncoder().encode(self.hatRecordings)
+            
+            UserDefaults.standard.set(encodedDataBass, forKey: "bassRecordings")
+            UserDefaults.standard.set(encodedDataSnare, forKey: "snareRecordings")
+            UserDefaults.standard.set(encodedDataHat, forKey: "hatRecordings")
+            //UserDefaults.standard.set(encodedData, forKey: "recordings")
+        }
+        catch {
+            print("error encoding recordings data in stop record!")
+            
+        }
+        self.myTableView.reloadData()
+    }
+    
     @IBAction func record(_ sender: Any) {
         //Check if we have active recorder
         if audioRecorder == nil
@@ -104,46 +147,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                 let textField = alert!.textFields![0] // Force unwrapping because we know it exists.
                 print("Text field: \(textField.text ?? "default value")")
                 let new_name = textField.text
-                //let filepath = self.getDirectory().appendingPathComponent("\(self.recordings.count + 1)")
-                //check if categorization was successful
-                if self.currentCategory == nil{
-                    print("failed to categorize drum sound")
-                    self.currentCategory = DrumType.uncategorized
-                }
-                //create new recording structure
-                let new_recording = Recording(filepath: filepath, creation_date: Date(), name: new_name!, duration: Double(0), category: self.currentCategory!)
-                print("category of this sound: ", self.currentCategory!)
-                self.currentCategory = nil
-                
-                //add recording to the correct category array
-                if new_recording.category == DrumType.bass {
-                    self.bassRecordings.append(new_recording)
-                    self.categoryTab.selectedSegmentIndex = 0
-                }
-                else if new_recording.category == DrumType.snare  {
-                    self.snareRecordings.append(new_recording)
-                    self.categoryTab.selectedSegmentIndex = 1
-                }
-                else {
-                    self.hatRecordings.append(new_recording)
-                    self.categoryTab.selectedSegmentIndex = 2
-                }
-                
-                do {
-                    let encodedDataBass = try PropertyListEncoder().encode(self.bassRecordings)
-                    let encodedDataSnare = try PropertyListEncoder().encode(self.snareRecordings)
-                    let encodedDataHat = try PropertyListEncoder().encode(self.hatRecordings)
-
-                    UserDefaults.standard.set(encodedDataBass, forKey: "bassRecordings")
-                    UserDefaults.standard.set(encodedDataSnare, forKey: "snareRecordings")
-                    UserDefaults.standard.set(encodedDataHat, forKey: "hatRecordings")
-                    //UserDefaults.standard.set(encodedData, forKey: "recordings")
-                }
-                catch {
-                    print("error encoding recordings data in stop record!")
-                    
-                }
-                self.myTableView.reloadData()
+                self.createRecording(new_name: new_name!, filepath: filepath)
             }))
             self.present(alert, animated: true, completion: nil)
             
