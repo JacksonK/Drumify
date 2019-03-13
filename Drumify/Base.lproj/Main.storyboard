@@ -34,27 +34,26 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68N-P3-rv8">
-                                                    <rect key="frame" x="20" y="11" width="374" height="23"/>
+                                                    <rect key="frame" x="20" y="11" width="335" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4xJ-Hk-xkY">
-                                                    <rect key="frame" x="20" y="59" width="374" height="4"/>
+                                                    <rect key="frame" x="20" y="59" width="335" height="4"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="4" id="UEL-iB-2qV"/>
                                                     </constraints>
                                                 </progressView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bgg-OH-SWc">
-                                                    <rect key="frame" x="192" y="90.5" width="30" height="39"/>
+                                                    <rect key="frame" x="172.5" y="90.5" width="30" height="39"/>
                                                     <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="27"/>
                                                     <state key="normal" title="">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
-                                                <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bp6-8W-akg">
-                                                    <rect key="frame" x="364" y="3" width="30" height="39"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bp6-8W-akg">
+                                                    <rect key="frame" x="325" y="3" width="30" height="39"/>
                                                     <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="27"/>
                                                     <state key="normal" title="">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -63,11 +62,13 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="68N-P3-rv8" firstAttribute="top" secondItem="WCa-7Q-IGl" secondAttribute="topMargin" id="17s-0M-Ac7"/>
+                                                <constraint firstAttribute="trailing" secondItem="Bp6-8W-akg" secondAttribute="trailing" constant="20" id="2MN-FJ-njB"/>
                                                 <constraint firstItem="4xJ-Hk-xkY" firstAttribute="top" secondItem="68N-P3-rv8" secondAttribute="bottom" constant="25" id="LfB-Hf-weP"/>
                                                 <constraint firstItem="68N-P3-rv8" firstAttribute="leading" secondItem="WCa-7Q-IGl" secondAttribute="leadingMargin" id="XPV-w4-d9Z"/>
                                                 <constraint firstItem="Bgg-OH-SWc" firstAttribute="centerX" secondItem="WCa-7Q-IGl" secondAttribute="centerX" id="buZ-IL-87B"/>
                                                 <constraint firstItem="4xJ-Hk-xkY" firstAttribute="trailing" secondItem="WCa-7Q-IGl" secondAttribute="trailingMargin" id="i4F-kf-HWk"/>
                                                 <constraint firstItem="4xJ-Hk-xkY" firstAttribute="leading" secondItem="WCa-7Q-IGl" secondAttribute="leadingMargin" id="kj4-dr-1Zj"/>
+                                                <constraint firstItem="Bp6-8W-akg" firstAttribute="top" secondItem="WCa-7Q-IGl" secondAttribute="top" constant="3" id="m6R-uO-P4t"/>
                                                 <constraint firstItem="68N-P3-rv8" firstAttribute="trailing" secondItem="WCa-7Q-IGl" secondAttribute="trailingMargin" id="pLT-jO-MZp"/>
                                                 <constraint firstItem="Bgg-OH-SWc" firstAttribute="top" secondItem="4xJ-Hk-xkY" secondAttribute="bottom" constant="27.5" id="sgn-wl-edx"/>
                                             </constraints>
@@ -92,7 +93,7 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" id="PQK-vA-AGO">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3cx-QW-sAh">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3cx-QW-sAh">
                                             <rect key="frame" x="20" y="8.5" width="374" height="83"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
@@ -126,7 +127,6 @@
                             <constraint firstItem="es5-8y-0pg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="9sa-SQ-UEE"/>
                             <constraint firstItem="KC8-cy-4yN" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="CM8-Gb-9O3"/>
                             <constraint firstItem="4tA-Zb-JOs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="H1L-VV-SEu"/>
-                            <constraint firstItem="KC8-cy-4yN" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="44" id="HWL-by-cia"/>
                             <constraint firstItem="KC8-cy-4yN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="OuT-ZK-ZPO"/>
                             <constraint firstItem="4tA-Zb-JOs" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="RZ6-Cp-QkM"/>
                             <constraint firstItem="4tA-Zb-JOs" firstAttribute="top" secondItem="KC8-cy-4yN" secondAttribute="bottom" id="dGN-gF-yUW"/>
@@ -140,11 +140,74 @@
                         <outlet property="buttonLabel" destination="3cx-QW-sAh" id="yuF-xX-jVZ"/>
                         <outlet property="categoryTab" destination="es5-8y-0pg" id="O6i-kk-u4Q"/>
                         <outlet property="myTableView" destination="KC8-cy-4yN" id="QBT-lv-uUB"/>
+                        <segue destination="LUK-kJ-xNx" kind="presentation" identifier="showAddRecordingModal" id="zyy-89-sN3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="52.173913043478265" y="26.116071428571427"/>
+        </scene>
+        <!--Add Recording Modal View Controller-->
+        <scene sceneID="1B8-7j-8di">
+            <objects>
+                <viewController id="LUK-kJ-xNx" customClass="AddRecordingModalViewController" customModule="Drumify" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="nCX-cV-DiX">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="wy2-NH-5n4">
+                                <rect key="frame" x="0.0" y="818" width="414" height="44"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <items>
+                                    <barButtonItem title="Delete" id="EQu-jd-Pb3"/>
+                                    <barButtonItem style="plain" systemItem="flexibleSpace" id="DJP-Og-x5f"/>
+                                    <barButtonItem title="Save" id="xWn-F3-wdn"/>
+                                </items>
+                            </toolbar>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="drum category" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MbA-A2-2Oo">
+                                <rect key="frame" x="20" y="727" width="113" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textField opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Hov-HE-1wL">
+                                <rect key="frame" x="20" y="677" width="374" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <action selector="renameFinished:" destination="LUK-kJ-xNx" eventType="editingDidEnd" id="8D7-cT-P7M"/>
+                                </connections>
+                            </textField>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="mJ9-aL-V16">
+                                <rect key="frame" x="20" y="756" width="374" height="29"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <segments>
+                                    <segment title="bass"/>
+                                    <segment title="snare"/>
+                                    <segment title="hi-hat"/>
+                                </segments>
+                                <connections>
+                                    <action selector="choseDrumCategory:" destination="LUK-kJ-xNx" eventType="valueChanged" id="HRU-1B-7nm"/>
+                                </connections>
+                            </segmentedControl>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSO-Re-FLz">
+                                <rect key="frame" x="20" y="648" width="43" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="d2I-ZT-aqF"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VcV-hE-Mzo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1121.7391304347827" y="25.446428571428569"/>
         </scene>
     </scenes>
 </document>

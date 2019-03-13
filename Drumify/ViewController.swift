@@ -82,6 +82,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             getDrumCategory(fname: filepath,view: self)
             print("categorization filepath: ", filepath)
 
+            performSegue(withIdentifier: "showAddRecordingModal", sender: nil)
             //alert to name new recording
             let alert = UIAlertController(title: "Name your recording:", message: "", preferredStyle: .alert)
             alert.addTextField { (textField) in
@@ -131,6 +132,16 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             self.present(alert, animated: true, completion: nil)
             
             buttonLabel.setTitle("\u{f111}", for: .normal)
+        }
+    }
+    
+    //send this ViewController instance to the modal which pops up when recording ends
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "showAddRecordingModal" {
+            if let destinationVC = segue.destination as? AddRecordingModalViewController {
+                destinationVC.callerInstance = self
+                
+            }
         }
     }
     
