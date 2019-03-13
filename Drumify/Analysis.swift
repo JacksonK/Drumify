@@ -106,16 +106,22 @@ func getDrumCategory(fname: String, view: ViewController) {
 func categorizeProfile(profile: [Double]) -> DrumType {
     var category = DrumType.uncategorized
     let max_index = profile.firstIndex(of: profile.max()!)
-    print("max freq index: ", max_index!)
-    if max_index! < 2 {
-        category = DrumType.bass
-    }
-    else if max_index! > 6 {
-        category = DrumType.hat
-        
+    if max_index == nil {
+        return category
     }
     else {
-        category = DrumType.snare
+        print("max freq index: ", max_index!)
+        if max_index! < 2 {
+            category = DrumType.bass
+        }
+        else if max_index! > 6 {
+            category = DrumType.hat
+            
+        }
+        else {
+            category = DrumType.snare
+        }
+        return category
     }
-    return category
+    
 }
