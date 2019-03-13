@@ -51,8 +51,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             print("created UID: ", currentUID)
             //let numberOfRecords = recordings.count + 1
             //currentRecording = TempRecording(filepath: "\(numberOfRecords).m4a", creation_date: Date())
-            let filename = getDirectory().appendingPathComponent("\(currentUID!).m4a")
-            print("filepath: ", filename)
+            let filename = getDirectory().appendingPathComponent(currentUID + ".m4a")
+            print("saving file with name: ", filename)
             let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC), AVSampleRateKey: 12000, AVNumberOfChannelsKey: 1, AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
             
             //Start audio recording
@@ -75,7 +75,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             audioRecorder.stop()
             audioRecorder = nil
             
-            let filepath = "\(self.currentUID!).m4a"
+            let filepath = currentUID + ".m4a"
             currentUID = nil
             
             //starts analysis of recorded file
@@ -98,6 +98,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                     print("failed to categorize drum sound")
                     self.currentCategory = DrumType.uncategorized
                 }
+                //create new recording structure
                 let new_recording = Recording(filepath: filepath, creation_date: Date(), name: new_name!, duration: Double(0), category: self.currentCategory!)
                 print("category of this sound: ", self.currentCategory!)
                 self.currentCategory = nil
@@ -105,12 +106,15 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                 //add recording to the correct category array
                 if new_recording.category == DrumType.bass {
                     self.bassRecordings.append(new_recording)
+                    self.categoryTab.selectedSegmentIndex = 0
                 }
                 else if new_recording.category == DrumType.snare  {
                     self.snareRecordings.append(new_recording)
+                    self.categoryTab.selectedSegmentIndex = 1
                 }
                 else {
                     self.hatRecordings.append(new_recording)
+                    self.categoryTab.selectedSegmentIndex = 2
                 }
                 
                 do {
@@ -275,12 +279,27 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     @objc func tappedPlayButton(sender: UIButton) {
         let cell = sender.superview?.superview
         let indexPath = myTableView.indexPath(for: cell as! UITableViewCell)
-        playRecording(indexPath: indexPath!)
+        if categoryTab.selectedSegmentIndex == 0 && indexPath!.row < bassRecordings.count{
+            playRecording(filePath: bassRecordings[indexPath!.row].filepath, indexPath: indexPath!)
+        }
+        else if categoryTab.selectedSegmentIndex == 1 && indexPath!.row < snareRecordings.count{
+            playRecording(filePath: snareRecordings![indexPath!.row].filepath, indexPath: indexPath!)
+        }
+        else if categoryTab.selectedSegmentIndex == 2 && indexPath!.row < hatRecordings.count{
+            playRecording(filePath: hatRecordings![indexPath!.row].filepath, indexPath: indexPath!)
+        }
+        else {
+            print("tappedPlayButton: selected cell index is invalid!")
+        }
     }
     
-    func playRecording(indexPath: IndexPath) {
-        let path = getDirectory().appendingPathComponent("\(indexPath.row + 1).m4a")
-        print(path)
+    //func getPeakTime() -> {
+        
+    //}
+    
+    func playRecording(filePath: String, indexPath: IndexPath) {
+        let path = getDirectory().appendingPathComponent(filePath)
+        print("attempting to play file with name: ", path)
         do
         {
             // player is initialized
@@ -295,7 +314,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             cell.recordingName?.text = "Audio File " +  String(indexPath.row+1) + " playing"
             selectedIndexPath = indexPath
             
-            let file = try AKAudioFile(readFileName: "\(indexPath.row + 1).m4a", baseDir: .documents)
+            let file = try AKAudioFile(readFileName: filePath, baseDir: .documents)
             let buffer = file.pcmBuffer
             let floats = UnsafeBufferPointer(start: buffer.floatChannelData?[0], count: Int(buffer.frameLength))
             let cmax = floats.max()
