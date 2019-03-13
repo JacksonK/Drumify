@@ -13,6 +13,7 @@
 		B41F409422335DB600C293C4 /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41F409322335DB600C293C4 /* Recording.swift */; };
 		B43C4B65221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = B43C4B64221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf */; };
 		B463BBA4221C7E7100E310AA /* RecordingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B463BBA3221C7E7100E310AA /* RecordingTableViewCell.swift */; };
+		DC36AE71223439A0004CC951 /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC36AE70223439A0004CC951 /* Analysis.swift */; };
 		DC3EFD1621FEA9FE000ED222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */; };
 		DC3EFD1821FEA9FE000ED222 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3EFD1721FEA9FE000ED222 /* ViewController.swift */; };
 		DC3EFD1B21FEA9FE000ED222 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC3EFD1921FEA9FE000ED222 /* Main.storyboard */; };
@@ -51,6 +52,7 @@
 		B461EF5731B55F01F7C329FE /* Pods-DrumifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyUITests.release.xcconfig"; path = "Target Support Files/Pods-DrumifyUITests/Pods-DrumifyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B463BBA3221C7E7100E310AA /* RecordingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingTableViewCell.swift; sourceTree = "<group>"; };
 		CB27D441B5C9C8148C4C265F /* Pods-DrumifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyTests.release.xcconfig"; path = "Target Support Files/Pods-DrumifyTests/Pods-DrumifyTests.release.xcconfig"; sourceTree = "<group>"; };
+		DC36AE70223439A0004CC951 /* Analysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analysis.swift; sourceTree = "<group>"; };
 		DC3EFD1221FEA9FE000ED222 /* Drumify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drumify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DC3EFD1721FEA9FE000ED222 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -156,6 +158,7 @@
 				DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */,
 				B463BBA3221C7E7100E310AA /* RecordingTableViewCell.swift */,
 				DC3EFD1721FEA9FE000ED222 /* ViewController.swift */,
+				DC36AE70223439A0004CC951 /* Analysis.swift */,
 				DC3EFD1921FEA9FE000ED222 /* Main.storyboard */,
 				DC3EFD1C21FEAA00000ED222 /* Assets.xcassets */,
 				DC3EFD1E21FEAA00000ED222 /* LaunchScreen.storyboard */,
@@ -390,6 +393,7 @@
 				B463BBA4221C7E7100E310AA /* RecordingTableViewCell.swift in Sources */,
 				DC3EFD1621FEA9FE000ED222 /* AppDelegate.swift in Sources */,
 				B41F409422335DB600C293C4 /* Recording.swift in Sources */,
+				DC36AE71223439A0004CC951 /* Analysis.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -566,14 +570,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FJ5DVU875S;
+				DEVELOPMENT_TEAM = 64548X6W8H;
 				INFOPLIST_FILE = Drumify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify123;
+				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -586,13 +590,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FJ5DVU875S;
+				DEVELOPMENT_TEAM = 64548X6W8H;
 				INFOPLIST_FILE = Drumify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify123;
+				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";

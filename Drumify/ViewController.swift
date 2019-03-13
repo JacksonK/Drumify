@@ -20,9 +20,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     var audioPlayer:AVAudioPlayer!
     var player:AKPlayer!
     
-    var recordings:[Recording]!
+    //var recordings:[Recording]!
+    var bassRecordings:[Recording]!
+    var snareRecordings:[Recording]!
+    var hatRecordings:[Recording]!
 
     var currentCategory:DrumType!
+    var currentUID:String!
     //var numberOfRecords:Int = 0
     
     // Storing a copy of the IndexPath when tapping a cell to play, 
@@ -32,14 +36,22 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     @IBOutlet weak var buttonLabel: UIButton!
     @IBOutlet weak var myTableView: UITableView!
+    @IBOutlet weak var categoryTab: UISegmentedControl!
+    
+    @IBAction func changedTab(_ sender: UISegmentedControl) {
+        myTableView.reloadData()
+    }
     
     @IBAction func record(_ sender: Any) {
         //Check if we have active recorder
         if audioRecorder == nil
         {
-            let numberOfRecords = recordings.count + 1
+           
+            currentUID = UUID().uuidString
+            print("created UID: ", currentUID)
+            //let numberOfRecords = recordings.count + 1
             //currentRecording = TempRecording(filepath: "\(numberOfRecords).m4a", creation_date: Date())
-            let filename = getDirectory().appendingPathComponent("\(numberOfRecords).m4a")
+            let filename = getDirectory().appendingPathComponent("\(currentUID!).m4a")
             print("filepath: ", filename)
             let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC), AVSampleRateKey: 12000, AVNumberOfChannelsKey: 1, AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
             
@@ -62,14 +74,18 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             //Stopping audio recording
             audioRecorder.stop()
             audioRecorder = nil
-            let filepath = "\(self.recordings.count + 1).m4a"
+            
+            let filepath = "\(self.currentUID!).m4a"
+            currentUID = nil
+            
+            //starts analysis of recorded file
             getDrumCategory(fname: filepath,view: self)
             print("categorization filepath: ", filepath)
 
             //alert to name new recording
             let alert = UIAlertController(title: "Name your recording:", message: "", preferredStyle: .alert)
             alert.addTextField { (textField) in
-                textField.text = "recording#" + "\(self.recordings.count)"
+                textField.text = "New Recording"
             }
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
                 let textField = alert!.textFields![0] // Force unwrapping because we know it exists.
@@ -84,11 +100,27 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                 let new_recording = Recording(filepath: filepath, creation_date: Date(), name: new_name!, duration: Double(0), category: self.currentCategory!)
                 print("category of this sound: ", self.currentCategory!)
                 self.currentCategory = nil
-                self.recordings.append(new_recording)
+                
+                //add recording to the correct category array
+                if new_recording.category == DrumType.bass {
+                    self.bassRecordings.append(new_recording)
+                }
+                else if new_recording.category == DrumType.snare  {
+                    self.snareRecordings.append(new_recording)
+                }
+                else {
+                    self.hatRecordings.append(new_recording)
+                }
                 
                 do {
-                    let encodedData = try PropertyListEncoder().encode(self.recordings)
-                    UserDefaults.standard.set(encodedData, forKey: "recordings")
+                    let encodedDataBass = try PropertyListEncoder().encode(self.bassRecordings)
+                    let encodedDataSnare = try PropertyListEncoder().encode(self.snareRecordings)
+                    let encodedDataHat = try PropertyListEncoder().encode(self.hatRecordings)
+
+                    UserDefaults.standard.set(encodedDataBass, forKey: "bassRecordings")
+                    UserDefaults.standard.set(encodedDataSnare, forKey: "snareRecordings")
+                    UserDefaults.standard.set(encodedDataHat, forKey: "hatRecordings")
+                    //UserDefaults.standard.set(encodedData, forKey: "recordings")
                 }
                 catch {
                     print("error encoding recordings data in stop record!")
@@ -108,6 +140,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         recordingSession = AVAudioSession.sharedInstance()
         
         currentCategory = nil
+        currentUID = nil
         
         // Method below forces audio to playback through speakers instead of earpiece,
         // based on https://stackoverflow.com/q/1022992
@@ -121,17 +154,19 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             numberOfRecords = number
         }*/
         
-        if let data = UserDefaults.standard.value(forKey:"recordings") as? Data {
-            recordings = try? PropertyListDecoder().decode([Recording].self, from:data)
+        //retrieve recordings data from local storage
+        if let bassData = UserDefaults.standard.value(forKey:"bassRecordings") as? Data {
+            bassRecordings = try? PropertyListDecoder().decode([Recording].self, from:bassData)
         }
-        /*
-        if let recData:Data = UserDefaults.standard.object(forKey: "recordings") as? Data {
-            recordings = (try? NSKeyedUnarchiver.unarchivedObject(ofClasses: [Recording], from: recData)) as? [Recording]
-     
-        }*/
-        else {
-            recordings = []
+        else { bassRecordings = [] }
+        if let snareData = UserDefaults.standard.value(forKey:"snareRecordings") as? Data {
+            snareRecordings = try? PropertyListDecoder().decode([Recording].self, from:snareData)
         }
+        else { snareRecordings = [] }
+        if let hatData = UserDefaults.standard.value(forKey:"hatRecordings") as? Data {
+            hatRecordings = try? PropertyListDecoder().decode([Recording].self, from:hatData)
+        }
+        else { hatRecordings = [] }
         
         AVAudioSession.sharedInstance().requestRecordPermission{(hasPermission) in
             if hasPermission
@@ -163,15 +198,36 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     //Table view setup
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return recordings.count
+        let categoryIndex = categoryTab.selectedSegmentIndex
+        if categoryIndex == 0 {
+            return bassRecordings.count
+        }
+        else if categoryIndex == 1 {
+            return snareRecordings.count
+        }
+        else {
+            return hatRecordings.count
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let categoryIndex = categoryTab.selectedSegmentIndex
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingTableViewCell", for: indexPath) as! RecordingTableViewCell
         cell.playButtonBottom.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
         cell.playButtonRight.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
         //cell.recordingName?.text = "Audio File " +  String(indexPath.row+1)
-        cell.recordingName?.text = recordings![indexPath.row].name
+        if categoryIndex == 0 {
+            cell.recordingName?.text = bassRecordings![indexPath.row].name
+        }
+        else if categoryIndex == 1 {
+            cell.recordingName?.text = snareRecordings![indexPath.row].name
+
+        }
+        else {
+            cell.recordingName?.text = hatRecordings![indexPath.row].name
+
+        }
 
         return cell
     }
