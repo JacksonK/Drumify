@@ -192,10 +192,25 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         return UIModalPresentationStyle.none
     }
     
+    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
+        UIView.animate(withDuration: 0.5) { 
+            self.view.alpha = 0.8
+        }
+    }
+    
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        UIView.animate(withDuration: 0.5) { 
+            self.view.alpha = 1.0
+            self.recordToolbar.alpha = 1.0
+        }
+    }
+    
+    
     
     @IBAction func unwindFromSavedRecording(sender: UIStoryboardSegue) {
         UIView.animate(withDuration: 0.5) { 
             self.recordToolbar.alpha = 1.0
+            self.view.alpha = 1.0
         }
         if let senderVC = sender.source as? AddRecordingModalViewController {            
             //if UITextFieldDelegate is implemented in Add Recording Modal,
@@ -215,6 +230,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     @IBAction func unwindFromDeletedRecording(sender: UIStoryboardSegue) {
         UIView.animate(withDuration: 0.5) { 
             self.recordToolbar.alpha = 1.0
+            self.view.alpha = 1.0
         }
         if sender.source is AddRecordingModalViewController {
             if let senderVC = sender.source as? AddRecordingModalViewController {

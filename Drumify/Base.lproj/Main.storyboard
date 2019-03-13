@@ -142,7 +142,7 @@
                         <outlet property="myTableView" destination="KC8-cy-4yN" id="QBT-lv-uUB"/>
                         <outlet property="recordToolbar" destination="4tA-Zb-JOs" id="S8C-EJ-Ogo"/>
                         <segue destination="LUK-kJ-xNx" kind="popoverPresentation" identifier="showAddRecordingModal" popoverAnchorView="4tA-Zb-JOs" id="zyy-89-sN3">
-                            <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                            <popoverArrowDirection key="popoverArrowDirection"/>
                         </segue>
                     </connections>
                 </viewController>
