@@ -82,7 +82,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             getDrumCategory(fname: filepath,view: self)
             print("categorization filepath: ", filepath)
 
-            performSegue(withIdentifier: "showAddRecordingModal", sender: nil)
+            //performSegue(withIdentifier: "showAddRecordingModal", sender: nil)
             //alert to name new recording
             let alert = UIAlertController(title: "Name your recording:", message: "", preferredStyle: .alert)
             alert.addTextField { (textField) in
@@ -144,10 +144,26 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         if segue.identifier == "showAddRecordingModal" {
             if let destinationVC = segue.destination as? AddRecordingModalViewController {
                 destinationVC.callerInstance = self
-                
             }
         }
     }
+    
+    @IBAction func unwindFromSavedRecording(sender: UIStoryboardSegue) {
+        if sender.source is AddRecordingModalViewController {
+            if let senderVC = sender.source as? AddRecordingModalViewController {
+                print("yo")
+            }
+        }
+    }
+    
+    @IBAction func unwindFromDeletedRecording(sender: UIStoryboardSegue) {
+        if sender.source is AddRecordingModalViewController {
+            if let senderVC = sender.source as? AddRecordingModalViewController {
+                print("ugh")
+            }
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()

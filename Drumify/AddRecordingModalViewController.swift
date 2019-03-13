@@ -11,17 +11,21 @@ import UIKit
 class AddRecordingModalViewController: UIViewController {
     var recording: Recording!
     var callerInstance: ViewController!
+    var recordingTitle: String = "default"
     
     @IBAction func renameFinished(_ sender: UITextField) {
-        
+        recordingTitle = sender.text!
+        print (sender.text!)
     }
     
     @IBAction func choseDrumCategory(_ sender: UISegmentedControl) {
+    
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
     }
     /*
     // MARK: - Navigation
