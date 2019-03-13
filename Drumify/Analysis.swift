@@ -29,15 +29,19 @@ func getDrumCategory(fname: String, view: ViewController) {
     for i in 0...10 {
         selectedFreqs.append(Int(pow(Float(2), Float(i))))
     }
+    print(selectedFreqs)
     if let drum = try? AKAudioFile(readFileName: fname, baseDir: .documents) {
-        var norm_drum:AKAudioFile
-        do {
+        //var norm_drum:AKAudioFile
+        /*do {
             norm_drum = try drum.normalized(baseDir: .temp, name: "tempNormalized", newMaxLevel: -4)
             player = AKPlayer(audioFile: norm_drum)
+            player.startTime = getPeakTime(file: norm_drum)
         }
         catch {
             print("normalization error")
-        }
+        }*/
+        player = AKPlayer(audioFile: drum)
+        player.startTime = getPeakTime(file: drum)
         player.completionHandler = {
             timer.invalidate()
             player.stop()
@@ -79,7 +83,7 @@ func getDrumCategory(fname: String, view: ViewController) {
             if (freqMatrix.last?.count)! > 6 {
                 timer.invalidate()
             }
-            print("freq response at ", timeCounter, " seconds")
+            //print("freq response at ", timeCounter, " seconds")
             
             for i in 0...FFT_SIZE-2{
                 
@@ -95,7 +99,7 @@ func getDrumCategory(fname: String, view: ViewController) {
                         freqMatrix[freqIndex].append(amplitude)
                     }
                     //print("bin: \(i/2) \t freq: \(self.sampleRate*0.5*i/self.FFT_SIZE)\t ampl.: \(amplitude)")
-                    print("bin#: \(freqIndex + 1) \t freq: \(sampleRate*0.5*i/FFT_SIZE)\t ampl.: \(amplitude)")
+                    //print("bin#: \(freqIndex + 1) \t freq: \(sampleRate*0.5*i/FFT_SIZE)\t ampl.: \(amplitude)")
                     
                 }
             }

@@ -13,6 +13,15 @@ import UIKit
 import AVFoundation
 import AudioKit
 
+func getPeakTime(file: AKAudioFile) -> Double{
+    let buffer = file.pcmBuffer
+    let floats = UnsafeBufferPointer(start: buffer.floatChannelData?[0], count: Int(buffer.frameLength))
+    let cmax = floats.max()
+    
+    let peakTime = (Double(floats.index( of: cmax! )!)/Double(file.samplesCount)) * file.duration
+    return peakTime
+}
+
 
 class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource {
     var recordingSession: AVAudioSession!
@@ -51,7 +60,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             print("created UID: ", currentUID)
             //let numberOfRecords = recordings.count + 1
             //currentRecording = TempRecording(filepath: "\(numberOfRecords).m4a", creation_date: Date())
-            let filename = getDirectory().appendingPathComponent(currentUID + ".m4a")
+            let file = currentUID + ".m4a"
+            let filename = getDirectory().appendingPathComponent(file)
             print("saving file with name: ", filename)
             let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC), AVSampleRateKey: 12000, AVNumberOfChannelsKey: 1, AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
             
@@ -63,6 +73,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                 audioRecorder.record()
                 
                 buttonLabel.setTitle("\u{f04d}", for: .normal)
+                print("started recording")
             }
             catch
             {
@@ -78,11 +89,12 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             let filepath = currentUID + ".m4a"
             currentUID = nil
             
-            //starts analysis of recorded file
-            getDrumCategory(fname: filepath,view: self)
             print("categorization filepath: ", filepath)
 
-            performSegue(withIdentifier: "showAddRecordingModal", sender: nil)
+            //starts analysis of recorded file
+            getDrumCategory(fname: filepath,view: self)
+
+            //performSegue(withIdentifier: "showAddRecordingModal", sender: nil)
             //alert to name new recording
             let alert = UIAlertController(title: "Name your recording:", message: "", preferredStyle: .alert)
             alert.addTextField { (textField) in
@@ -293,9 +305,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         }
     }
     
-    //func getPeakTime() -> {
-        
-    //}
+    
     
     func playRecording(filePath: String, indexPath: IndexPath) {
         let path = getDirectory().appendingPathComponent(filePath)
@@ -315,13 +325,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             selectedIndexPath = indexPath
             
             let file = try AKAudioFile(readFileName: filePath, baseDir: .documents)
-            let buffer = file.pcmBuffer
-            let floats = UnsafeBufferPointer(start: buffer.floatChannelData?[0], count: Int(buffer.frameLength))
-            let cmax = floats.max()
-
-            let peakTime = (Double(floats.index( of: cmax! )!)/Double(file.samplesCount)) * file.duration
+            
             player = AKPlayer(audioFile: file)
-            player.startTime = peakTime
+            player.startTime = getPeakTime(file: file)
             player.completionHandler = {
                 print( "callback!")
                 AKLog("completion callback has been triggered!")
