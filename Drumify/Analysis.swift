@@ -60,6 +60,10 @@ func getDrumCategory(fname: String, view: ViewController) {
         }
         player.isLooping = false
         player.buffering = .always
+        
+        //get peak time to start audio analysis on
+        //let peakTime = (Double(floats.index( of: cmax! )!)/Double(file.samplesCount)) * file.duration
+        
         fftTap = AKFFTTap.init(player)
         AudioKit.output = player
         do {

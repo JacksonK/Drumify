@@ -52,7 +52,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             //let numberOfRecords = recordings.count + 1
             //currentRecording = TempRecording(filepath: "\(numberOfRecords).m4a", creation_date: Date())
             let filename = getDirectory().appendingPathComponent(currentUID + ".m4a")
-            print("filepath: ", filename)
+            print("saving file with name: ", filename)
             let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC), AVSampleRateKey: 12000, AVNumberOfChannelsKey: 1, AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
             
             //Start audio recording
@@ -105,12 +105,15 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                 //add recording to the correct category array
                 if new_recording.category == DrumType.bass {
                     self.bassRecordings.append(new_recording)
+                    self.categoryTab.selectedSegmentIndex = 0
                 }
                 else if new_recording.category == DrumType.snare  {
                     self.snareRecordings.append(new_recording)
+                    self.categoryTab.selectedSegmentIndex = 1
                 }
                 else {
                     self.hatRecordings.append(new_recording)
+                    self.categoryTab.selectedSegmentIndex = 2
                 }
                 
                 do {
@@ -279,9 +282,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         }
     }
     
+    //func getPeakTime() -> {
+        
+    //}
+    
     func playRecording(filePath: String, indexPath: IndexPath) {
         let path = getDirectory().appendingPathComponent(filePath)
-        print(path)
+        print("attempting to play file with name: ", path)
         do
         {
             // player is initialized
