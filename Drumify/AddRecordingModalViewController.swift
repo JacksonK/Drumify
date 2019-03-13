@@ -22,13 +22,22 @@ class AddRecordingModalViewController: UIViewController/*, UITextFieldDelegate*/
     @IBOutlet weak var filenameTextField: UITextField!
     @IBOutlet weak var drumCategorySegmentedControl: UISegmentedControl!
     
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var deleteButton: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         filenameTextField.placeholder = "recording " + getTodayString()
         filename = filenameTextField.placeholder
         
-        //filenameTextField.delegate = self
+        saveButton.layer.cornerRadius = saveButton.frame.height/2
+        
+        deleteButton.layer.cornerRadius = deleteButton.frame.height/2
+        deleteButton.layer.borderWidth = Constants.RoundedButton.borderWidth
+        deleteButton.layer.borderColor = UIColor.white.cgColor
+        
+        
     }
     /*
     // MARK: - Navigation
@@ -61,17 +70,5 @@ class AddRecordingModalViewController: UIViewController/*, UITextFieldDelegate*/
         return today_string
         
     }
-    
-    //UITextField delegate methods
-    /*
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        textField.resignFirstResponder()
-        return true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        filename = textField.text
-    }
-     */
 }
 
