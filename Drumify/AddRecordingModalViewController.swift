@@ -8,24 +8,27 @@
 
 import UIKit
 
-class AddRecordingModalViewController: UIViewController {
+class AddRecordingModalViewController: UIViewController/*, UITextFieldDelegate*/ {
     var recording: Recording!
     var callerInstance: ViewController!
-    var recordingTitle: String = "default"
-    
+    var filepath: String!
+    var filename: String!
+    /*
     @IBAction func renameFinished(_ sender: UITextField) {
         recordingTitle = sender.text!
         print (sender.text!)
     }
-    
-    @IBAction func choseDrumCategory(_ sender: UISegmentedControl) {
-    
-    }
+    */
+    @IBOutlet weak var filenameTextField: UITextField!
+    @IBOutlet weak var drumCategorySegmentedControl: UISegmentedControl!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        filenameTextField.placeholder = "recording " + getTodayString()
+        filename = filenameTextField.placeholder
         
+        //filenameTextField.delegate = self
     }
     /*
     // MARK: - Navigation
@@ -36,5 +39,39 @@ class AddRecordingModalViewController: UIViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    //function from
+    //https://stackoverflow.com/questions/43199635/get-current-time-as-string-swift-3-0
+    func getTodayString() -> String{
+        
+        let date = Date()
+        let calender = Calendar.current
+        let components = calender.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date)
+        
+        let year = components.year
+        let month = components.month
+        let day = components.day
+        let hour = components.hour
+        let minute = components.minute
+        let second = components.second
+        
+        let today_string = String(year!) + "-" + String(month!) + "-" + String(day!) + " " + String(hour!)  + ":" + String(minute!) + ":" +  String(second!)
 
+        
+        return today_string
+        
+    }
+    
+    //UITextField delegate methods
+    /*
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        filename = textField.text
+    }
+     */
 }
+
