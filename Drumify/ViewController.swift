@@ -23,7 +23,7 @@ func getPeakTime(file: AKAudioFile) -> Double{
 }
 
 
-class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource {
+class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
     var recordingSession: AVAudioSession!
     var audioRecorder:AVAudioRecorder!
     var audioPlayer:AVAudioPlayer!
@@ -47,13 +47,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var categoryTab: UISegmentedControl!
     
+    @IBOutlet weak var recordToolbar: UIToolbar!
     @IBAction func changedTab(_ sender: UISegmentedControl) {
         myTableView.reloadData()
     }
     
     func createRecording(new_name: String, filepath: String) {
         //check if categorization was successful
-
         if self.currentCategory == nil{
             print("failed to categorize drum sound")
             self.currentCategory = DrumType.uncategorized
@@ -135,9 +135,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             print("categorization filepath: ", filepath)
 
             //starts analysis of recorded file
-            getDrumCategory(fname: filepath,view: self)
+            getDrumCategory(fname: filepath, view: self)
 
-            //performSegue(withIdentifier: "showAddRecordingModal", sender: nil)
+            performSegue(withIdentifier: "showAddRecordingModal", sender: filepath)
             //alert to name new recording
             let alert = UIAlertController(title: "Name your recording:", message: "", preferredStyle: .alert)
             alert.addTextField { (textField) in
@@ -159,27 +159,85 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showAddRecordingModal" {
             if let destinationVC = segue.destination as? AddRecordingModalViewController {
-                destinationVC.callerInstance = self
+                destinationVC.modalPresentationStyle = UIModalPresentationStyle.popover
+                destinationVC.popoverPresentationController!.delegate = self
+                
+                if let filepathString = sender as! String? {
+                    destinationVC.filepath = filepathString
+                    
+                }
             }
+        }
+        UIView.animate(withDuration: 0.5) { 
+            self.recordToolbar.alpha = 0.0
+        }
+        
+//        UIView.animate(withDuration: 2.0, animations: { 
+//            //self.recordToolbar.frame.size.height += 100
+//            
+//            self.recordToolbar.frame = CGRect(x: self.recordToolbar.frame.origin.x,
+//                                              y: self.recordToolbar.frame.origin.y + 10,
+//                                              width: self.recordToolbar.frame.width, 
+//                                              height: self.recordToolbar.frame.height)
+//        }, completion: {
+//            finished in
+//            self.recordToolbar.frame = CGRect(x: self.recordToolbar.frame.origin.x,
+//                                              y: self.recordToolbar.frame.origin.y + 10,
+//                                              width: self.recordToolbar.frame.width, 
+//                                              height: self.recordToolbar.frame.height)
+//        })
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+    
+    func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
+        UIView.animate(withDuration: 0.5) { 
+            self.view.alpha = 0.8
         }
     }
     
+    func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
+        UIView.animate(withDuration: 0.5) { 
+            self.view.alpha = 1.0
+            self.recordToolbar.alpha = 1.0
+        }
+    }
+    
+    
+    
     @IBAction func unwindFromSavedRecording(sender: UIStoryboardSegue) {
-        if sender.source is AddRecordingModalViewController {
-            if let senderVC = sender.source as? AddRecordingModalViewController {
-                print("yo")
+        UIView.animate(withDuration: 0.5) { 
+            self.recordToolbar.alpha = 1.0
+            self.view.alpha = 1.0
+        }
+        if let senderVC = sender.source as? AddRecordingModalViewController {            
+            //if UITextFieldDelegate is implemented in Add Recording Modal,
+            //should work with just this one line
+            //createRecording(new_name: senderVC.filename, filepath: senderVC.filepath)
+            var filename: String = senderVC.filenameTextField.placeholder!
+            
+            if senderVC.filenameTextField.text != nil {
+                if (senderVC.filenameTextField.text?.count)! > 0 {
+                    filename = senderVC.filenameTextField.text!
+                }
             }
+            createRecording(new_name: filename, filepath: senderVC.filepath)
         }
     }
     
     @IBAction func unwindFromDeletedRecording(sender: UIStoryboardSegue) {
+        UIView.animate(withDuration: 0.5) { 
+            self.recordToolbar.alpha = 1.0
+            self.view.alpha = 1.0
+        }
         if sender.source is AddRecordingModalViewController {
             if let senderVC = sender.source as? AddRecordingModalViewController {
                 print("ugh")
             }
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -380,6 +438,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         {
             displayAlert(title: "Playback", message: "Failed to play audio file!")
         }
+    }
+    
+    func megaPrint(string: String) {
+        print("\n\n\n\n\n" + string + "\n\n\n\n\n")
     }
 }
 
