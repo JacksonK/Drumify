@@ -77,6 +77,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             self.categoryTab.selectedSegmentIndex = 2
         }
         
+        saveRecordingDataChange()
+        self.myTableView.reloadData()
+    }
+    
+    private func saveRecordingDataChange() {
         do {
             let encodedDataBass = try PropertyListEncoder().encode(self.bassRecordings)
             let encodedDataSnare = try PropertyListEncoder().encode(self.snareRecordings)
@@ -85,13 +90,10 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             UserDefaults.standard.set(encodedDataBass, forKey: "bassRecordings")
             UserDefaults.standard.set(encodedDataSnare, forKey: "snareRecordings")
             UserDefaults.standard.set(encodedDataHat, forKey: "hatRecordings")
-            //UserDefaults.standard.set(encodedData, forKey: "recordings")
         }
         catch {
             print("error encoding recordings data in stop record!")
-            
         }
-        self.myTableView.reloadData()
     }
     
     @IBAction func record(_ sender: Any) {
@@ -359,6 +361,23 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         cell.playButtonRight.isHidden = false;
         myTableView.beginUpdates()
         myTableView.endUpdates()
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            let categoryIndex = categoryTab.selectedSegmentIndex
+            if categoryIndex == 0 {
+                bassRecordings.remove(at: indexPath.row)
+            }
+            else if categoryIndex == 1 {
+                snareRecordings.remove(at: indexPath.row)
+            }
+            else {
+                hatRecordings.remove(at: indexPath.row)
+            }
+            saveRecordingDataChange()
+            tableView.reloadData()
+        }
     }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
