@@ -325,6 +325,23 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         }
     }
     
+//    func updateProgressView() {
+//        var i = 0
+//        var prog : Float = 0.10
+//        let step : Float = (Float(1.0) / Float(tempValuesArray.count)) * 0.90
+//        print(step)
+//        DispatchQueue.global().async {
+//            while i < self.tempValuesArray.count {
+//                print(prog)
+//                DispatchQueue.main.async { () -> Void in
+//                    self.progressView.setProgress(prog, animated: true)
+//                    self.progressLabel.text = String(prog)
+//                }
+//                prog += step
+//                i = i + 1
+//            }
+//        }
+//    }
     
     
     func playRecording(filePath: String, indexPath: IndexPath) {

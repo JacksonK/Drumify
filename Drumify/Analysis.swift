@@ -31,15 +31,15 @@ func getDrumCategory(fname: String, view: ViewController) {
     }
     print(selectedFreqs)
     if let drum = try? AKAudioFile(readFileName: fname, baseDir: .documents) {
-        //var norm_drum:AKAudioFile
-        /*do {
+        var norm_drum:AKAudioFile
+        do {
             norm_drum = try drum.normalized(baseDir: .temp, name: "tempNormalized", newMaxLevel: -4)
             player = AKPlayer(audioFile: norm_drum)
             player.startTime = getPeakTime(file: norm_drum)
         }
         catch {
             print("normalization error")
-        }*/
+        }
         player = AKPlayer(audioFile: drum)
         player.startTime = getPeakTime(file: drum)
         player.completionHandler = {
@@ -99,7 +99,7 @@ func getDrumCategory(fname: String, view: ViewController) {
                         freqMatrix[freqIndex].append(amplitude)
                     }
                     //print("bin: \(i/2) \t freq: \(self.sampleRate*0.5*i/self.FFT_SIZE)\t ampl.: \(amplitude)")
-                    //print("bin#: \(freqIndex + 1) \t freq: \(sampleRate*0.5*i/FFT_SIZE)\t ampl.: \(amplitude)")
+                    print("bin#: \(freqIndex + 1) \t freq: \(sampleRate*0.5*i/FFT_SIZE)\t ampl.: \(amplitude)")
                     
                 }
             }
@@ -119,10 +119,10 @@ func categorizeProfile(profile: [Double]) -> DrumType {
     }
     else {
         print("max freq index: ", max_index!)
-        if max_index! < 2 {
+        if max_index! < 3 {
             category = DrumType.bass
         }
-        else if max_index! > 6 {
+        else if max_index! > 5 {
             category = DrumType.hat
             
         }
