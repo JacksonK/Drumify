@@ -365,18 +365,23 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            let categoryIndex = categoryTab.selectedSegmentIndex
-            if categoryIndex == 0 {
-                bassRecordings.remove(at: indexPath.row)
-            }
-            else if categoryIndex == 1 {
-                snareRecordings.remove(at: indexPath.row)
-            }
-            else {
-                hatRecordings.remove(at: indexPath.row)
-            }
-            saveRecordingDataChange()
-            tableView.reloadData()
+            let alert = UIAlertController(title: "Are you sure you want to delete this recording?", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { action in
+                let categoryIndex = self.categoryTab.selectedSegmentIndex
+                if categoryIndex == 0 {
+                    self.bassRecordings.remove(at: indexPath.row)
+                }
+                else if categoryIndex == 1 {
+                    self.snareRecordings.remove(at: indexPath.row)
+                }
+                else {
+                    self.hatRecordings.remove(at: indexPath.row)
+                }
+                self.saveRecordingDataChange()
+                tableView.reloadData()
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
         }
     }
     
