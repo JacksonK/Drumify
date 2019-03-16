@@ -21,6 +21,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     var audioRecorder:AVAudioRecorder!
     var audioPlayer:AVAudioPlayer!
     var player:AKPlayer!
+    var playbackTimer:  Timer!
+
     
     //var recordings:[Recording]!
     var bassRecordings:[Recording]!
@@ -332,6 +334,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingTableViewCell", for: indexPath) as! RecordingTableViewCell
         cell.playButtonBottom.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
         cell.playButtonRight.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
+        cell.currTimeLabel.text = "0.00"
         //cell.recordingName?.text = "Audio File " +  String(indexPath.row+1)
         if categoryIndex == 0 {
             cell.recordingName?.text = bassRecordings![indexPath.row].name
@@ -377,6 +380,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         myTableView.endUpdates()
     }
     
+    //deleting rows in table view
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
             let alert = UIAlertController(title: "Are you sure you want to delete this recording?", message: "", preferredStyle: .alert)
@@ -404,42 +408,49 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         //myTableView.cellForRow(at: selectedIndexPath)?.recordingName?.text = "Audio File " +  String(indexPathCurrentlyPlaying.row+1)
     }
     
+    //handles user tapping any play button attatched to a table view cell
     @objc func tappedPlayButton(sender: UIButton) {
         let cell = sender.superview?.superview
+        let recording_cell = cell as! RecordingTableViewCell
         let indexPath = myTableView.indexPath(for: cell as! UITableViewCell)
         if categoryTab.selectedSegmentIndex == 0 && indexPath!.row < bassRecordings.count{
-            playRecording(filePath: bassRecordings[indexPath!.row].filepath, indexPath: indexPath!)
+            let bassRec = bassRecordings[indexPath!.row]
+            updateProgressView(cell: recording_cell, rec: bassRec)
+            playRecording(filePath: bassRec.filepath, indexPath: indexPath!)
         }
         else if categoryTab.selectedSegmentIndex == 1 && indexPath!.row < snareRecordings.count{
-            playRecording(filePath: snareRecordings![indexPath!.row].filepath, indexPath: indexPath!)
+            let snareRec = snareRecordings![indexPath!.row]
+            updateProgressView(cell: recording_cell, rec: snareRec)
+            playRecording(filePath: snareRec.filepath, indexPath: indexPath!)
+
         }
         else if categoryTab.selectedSegmentIndex == 2 && indexPath!.row < hatRecordings.count{
-            playRecording(filePath: hatRecordings![indexPath!.row].filepath, indexPath: indexPath!)
+            let hatRec = hatRecordings![indexPath!.row]
+            updateProgressView(cell: recording_cell, rec: hatRec)
+            playRecording(filePath: hatRec.filepath, indexPath: indexPath!)
         }
         else {
             print("tappedPlayButton: selected cell index is invalid!")
         }
+        
     }
     
-//    func updateProgressView() {
-//        var i = 0
-//        var prog : Float = 0.10
-//        let step : Float = (Float(1.0) / Float(tempValuesArray.count)) * 0.90
-//        print(step)
-//        DispatchQueue.global().async {
-//            while i < self.tempValuesArray.count {
-//                print(prog)
-//                DispatchQueue.main.async { () -> Void in
-//                    self.progressView.setProgress(prog, animated: true)
-//                    self.progressLabel.text = String(prog)
-//                }
-//                prog += step
-//                i = i + 1
-//            }
-//        }
-//    }
+    //updates progress view in given cell for given file
+    func updateProgressView(cell:RecordingTableViewCell, rec:Recording) {
+        print("starting to update progress view...")
+        playbackTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (timer) in
+            let currTime = self.player.currentTime - rec.start_time
+            cell.playbackProgressView.progress = Float(currTime / rec.duration)
+            cell.currTimeLabel.text = "\(Double(round(100*currTime)/100))"
+            print("progress view time: ", currTime)
+            if !self.player.isPlaying || self.player.currentTime < 0 {
+                self.playbackTimer.invalidate()
+                cell.currTimeLabel.text = "0.00"
+            }
+        })
+    }
     
-    
+    //plays audio of given file
     func playRecording(filePath: String, indexPath: IndexPath) {
         let path = getDirectory().appendingPathComponent(filePath)
         print("attempting to play file with name: ", path)
@@ -449,12 +460,12 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             if (player != nil )
             {
                 let cell = myTableView.cellForRow(at: self.selectedIndexPath!) as! RecordingTableViewCell
-                cell.recordingName.text = "Audio File " +  String(self.selectedIndexPath!.row+1)
+                //cell.recordingName.text = "Audio File " +  String(self.selectedIndexPath!.row+1)
                 self.player.stop()
                 try AudioKit.stop()
             }
             let cell = myTableView.cellForRow(at: indexPath) as! RecordingTableViewCell
-            cell.recordingName?.text = "Audio File " +  String(indexPath.row+1) + " playing"
+            //cell.recordingName?.text = "Audio File " +  String(indexPath.row+1) + " playing"
             selectedIndexPath = indexPath
             
             let file = try AKAudioFile(readFileName: filePath, baseDir: .documents)
@@ -465,7 +476,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                 print( "callback!")
                 AKLog("completion callback has been triggered!")
                 let cell = self.myTableView.cellForRow(at: self.selectedIndexPath!) as! RecordingTableViewCell
-                cell.recordingName.text = "Audio File " +  String(self.selectedIndexPath!.row+1)                //self.player.stop()
+                //cell.recordingName.text = "Audio File " +  String(self.selectedIndexPath!.row+1)                //self.player.stop()
                 //try AudioKit.stop()
             }
             AudioKit.output = player

@@ -68,12 +68,22 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cUK-Er-cO0">
+                                                    <rect key="frame" x="20" y="67" width="94" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="94" id="cSd-kY-lhL"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="nUS-oF-W7u" firstAttribute="centerY" secondItem="68N-P3-rv8" secondAttribute="centerY" constant="55" id="0ve-lG-y1H"/>
                                                 <constraint firstItem="68N-P3-rv8" firstAttribute="top" secondItem="WCa-7Q-IGl" secondAttribute="topMargin" id="17s-0M-Ac7"/>
                                                 <constraint firstAttribute="trailing" secondItem="Bp6-8W-akg" secondAttribute="trailing" constant="20" id="2MN-FJ-njB"/>
                                                 <constraint firstItem="4xJ-Hk-xkY" firstAttribute="top" secondItem="68N-P3-rv8" secondAttribute="bottom" constant="25" id="LfB-Hf-weP"/>
+                                                <constraint firstItem="cUK-Er-cO0" firstAttribute="leading" secondItem="WCa-7Q-IGl" secondAttribute="leading" constant="20" id="Vjy-Ne-gCL"/>
                                                 <constraint firstItem="68N-P3-rv8" firstAttribute="leading" secondItem="WCa-7Q-IGl" secondAttribute="leadingMargin" id="XPV-w4-d9Z"/>
                                                 <constraint firstItem="Bgg-OH-SWc" firstAttribute="centerX" secondItem="WCa-7Q-IGl" secondAttribute="centerX" id="buZ-IL-87B"/>
                                                 <constraint firstItem="4xJ-Hk-xkY" firstAttribute="trailing" secondItem="WCa-7Q-IGl" secondAttribute="trailingMargin" id="i4F-kf-HWk"/>
@@ -81,10 +91,12 @@
                                                 <constraint firstItem="Bp6-8W-akg" firstAttribute="leading" secondItem="nUS-oF-W7u" secondAttribute="trailing" constant="-30" id="lA8-gA-03f"/>
                                                 <constraint firstItem="Bp6-8W-akg" firstAttribute="top" secondItem="WCa-7Q-IGl" secondAttribute="top" constant="3" id="m6R-uO-P4t"/>
                                                 <constraint firstItem="68N-P3-rv8" firstAttribute="trailing" secondItem="WCa-7Q-IGl" secondAttribute="trailingMargin" id="pLT-jO-MZp"/>
+                                                <constraint firstItem="cUK-Er-cO0" firstAttribute="top" secondItem="68N-P3-rv8" secondAttribute="bottom" constant="33" id="roe-Jv-mpk"/>
                                                 <constraint firstItem="Bgg-OH-SWc" firstAttribute="top" secondItem="4xJ-Hk-xkY" secondAttribute="bottom" constant="27.5" id="sgn-wl-edx"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="currTimeLabel" destination="cUK-Er-cO0" id="nIl-QN-kmh"/>
                                             <outlet property="durationLabel" destination="nUS-oF-W7u" id="MkN-J6-UfN"/>
                                             <outlet property="playButtonBottom" destination="Bgg-OH-SWc" id="FhZ-X3-ElL"/>
                                             <outlet property="playButtonRight" destination="Bp6-8W-akg" id="iXa-xF-6Qo"/>
