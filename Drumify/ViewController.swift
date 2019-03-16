@@ -438,11 +438,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     //updates progress view in given cell for given file
     func updateProgressView(cell:RecordingTableViewCell, rec:Recording) {
         print("starting to update progress view...")
-        playbackTimer = Timer.scheduledTimer(withTimeInterval: 0.01, repeats: true, block: { (timer) in
+        playbackTimer = Timer.scheduledTimer(withTimeInterval: 0.001, repeats: true, block: { (timer) in
             let currTime = self.player.currentTime - rec.start_time
             cell.playbackProgressView.progress = Float(currTime / rec.duration)
             cell.currTimeLabel.text = "\(Double(round(100*currTime)/100))"
-            print("progress view time: ", currTime)
+            //print("progress view time: ", currTime)
             if !self.player.isPlaying || self.player.currentTime < 0 {
                 self.playbackTimer.invalidate()
                 cell.currTimeLabel.text = "0.00"
