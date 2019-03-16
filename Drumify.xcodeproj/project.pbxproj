@@ -158,10 +158,10 @@
 		DC3EFD1421FEA9FE000ED222 /* Drumify */ = {
 			isa = PBXGroup;
 			children = (
-				B4176A352239C39B00FFF813 /* Constants.swift */,
 				B4AEB9FE22397EE30024B0A4 /* Drumify.entitlements */,
-				B41F409322335DB600C293C4 /* Recording.swift */,
 				B43C4B61221BB59100659D1C /* Font Awesome */,
+				B4176A352239C39B00FFF813 /* Constants.swift */,
+				B41F409322335DB600C293C4 /* Recording.swift */,
 				DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */,
 				B463BBA3221C7E7100E310AA /* RecordingTableViewCell.swift */,
 				DC36AE70223439A0004CC951 /* Analysis.swift */,

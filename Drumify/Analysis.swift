@@ -111,6 +111,15 @@ func getDrumCategory(fname: String, view: ViewController) {
     }
 }
 
+func getPeakTime(file: AKAudioFile) -> Double{
+    let buffer = file.pcmBuffer
+    let floats = UnsafeBufferPointer(start: buffer.floatChannelData?[0], count: Int(buffer.frameLength))
+    let cmax = floats.max()
+    
+    let peakTime = (Double(floats.index( of: cmax! )!)/Double(file.samplesCount)) * file.duration
+    return peakTime
+}
+
 func categorizeProfile(profile: [Double]) -> DrumType {
     var category = DrumType.uncategorized
     let max_index = profile.firstIndex(of: profile.max()!)

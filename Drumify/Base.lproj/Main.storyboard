@@ -59,8 +59,18 @@
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUS-oF-W7u">
+                                                    <rect key="frame" x="309" y="67" width="85" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="85" id="2Tu-kv-s0A"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="nUS-oF-W7u" firstAttribute="centerY" secondItem="68N-P3-rv8" secondAttribute="centerY" constant="55" id="0ve-lG-y1H"/>
                                                 <constraint firstItem="68N-P3-rv8" firstAttribute="top" secondItem="WCa-7Q-IGl" secondAttribute="topMargin" id="17s-0M-Ac7"/>
                                                 <constraint firstAttribute="trailing" secondItem="Bp6-8W-akg" secondAttribute="trailing" constant="20" id="2MN-FJ-njB"/>
                                                 <constraint firstItem="4xJ-Hk-xkY" firstAttribute="top" secondItem="68N-P3-rv8" secondAttribute="bottom" constant="25" id="LfB-Hf-weP"/>
@@ -68,12 +78,14 @@
                                                 <constraint firstItem="Bgg-OH-SWc" firstAttribute="centerX" secondItem="WCa-7Q-IGl" secondAttribute="centerX" id="buZ-IL-87B"/>
                                                 <constraint firstItem="4xJ-Hk-xkY" firstAttribute="trailing" secondItem="WCa-7Q-IGl" secondAttribute="trailingMargin" id="i4F-kf-HWk"/>
                                                 <constraint firstItem="4xJ-Hk-xkY" firstAttribute="leading" secondItem="WCa-7Q-IGl" secondAttribute="leadingMargin" id="kj4-dr-1Zj"/>
+                                                <constraint firstItem="Bp6-8W-akg" firstAttribute="leading" secondItem="nUS-oF-W7u" secondAttribute="trailing" constant="-30" id="lA8-gA-03f"/>
                                                 <constraint firstItem="Bp6-8W-akg" firstAttribute="top" secondItem="WCa-7Q-IGl" secondAttribute="top" constant="3" id="m6R-uO-P4t"/>
                                                 <constraint firstItem="68N-P3-rv8" firstAttribute="trailing" secondItem="WCa-7Q-IGl" secondAttribute="trailingMargin" id="pLT-jO-MZp"/>
                                                 <constraint firstItem="Bgg-OH-SWc" firstAttribute="top" secondItem="4xJ-Hk-xkY" secondAttribute="bottom" constant="27.5" id="sgn-wl-edx"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
+                                            <outlet property="durationLabel" destination="nUS-oF-W7u" id="MkN-J6-UfN"/>
                                             <outlet property="playButtonBottom" destination="Bgg-OH-SWc" id="FhZ-X3-ElL"/>
                                             <outlet property="playButtonRight" destination="Bp6-8W-akg" id="iXa-xF-6Qo"/>
                                             <outlet property="playbackProgressView" destination="4xJ-Hk-xkY" id="W8c-fA-Zno"/>

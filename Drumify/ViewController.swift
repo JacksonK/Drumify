@@ -13,14 +13,7 @@ import UIKit
 import AVFoundation
 import AudioKit
 
-func getPeakTime(file: AKAudioFile) -> Double{
-    let buffer = file.pcmBuffer
-    let floats = UnsafeBufferPointer(start: buffer.floatChannelData?[0], count: Int(buffer.frameLength))
-    let cmax = floats.max()
-    
-    let peakTime = (Double(floats.index( of: cmax! )!)/Double(file.samplesCount)) * file.duration
-    return peakTime
-}
+
 
 
 class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
@@ -58,8 +51,24 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             print("failed to categorize drum sound")
             self.currentCategory = DrumType.uncategorized
         }
+        
+        //create akaudiofile for duration
+        var duration:Double = 0
+        var start_time:Double = 0
+        do {
+            let file = try AKAudioFile(readFileName: filepath, baseDir: .documents)
+            start_time = Double(round(100*(getPeakTime(file: file)))/100)
+            print( "total duration: ", file.duration)
+            duration = Double(round(100*(file.duration - start_time))/100)
+        }
+        catch {
+            print("error creating file to get duration")
+        }
+        print( "duration: ", duration)
+        print( "start_time: ", start_time)
+        
         //create new recording structure
-        let new_recording = Recording(filepath: filepath, creation_date: Date(), name: new_name, duration: Double(0), category: self.currentCategory!)
+        let new_recording = Recording(filepath: filepath, creation_date: Date(), name: new_name, duration: duration, start_time: start_time, category: self.currentCategory!)
         print("category of this sound: ", self.currentCategory!)
         self.currentCategory = nil
         
@@ -326,13 +335,18 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         //cell.recordingName?.text = "Audio File " +  String(indexPath.row+1)
         if categoryIndex == 0 {
             cell.recordingName?.text = bassRecordings![indexPath.row].name
+            cell.durationLabel?.text = "\(bassRecordings![indexPath.row].duration)"
         }
         else if categoryIndex == 1 {
             cell.recordingName?.text = snareRecordings![indexPath.row].name
+            cell.durationLabel?.text = "\(snareRecordings![indexPath.row].duration)"
+
 
         }
         else {
             cell.recordingName?.text = hatRecordings![indexPath.row].name
+            cell.durationLabel?.text = "\(hatRecordings![indexPath.row].duration)"
+
 
         }
 
