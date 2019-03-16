@@ -230,7 +230,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             //should work with just this one line
             //createRecording(new_name: senderVC.filename, filepath: senderVC.filepath)
             var filename: String = senderVC.filenameTextField.placeholder!
-            
+            currentCategory = senderVC.chosen_category
             if senderVC.filenameTextField.text != nil {
                 if (senderVC.filenameTextField.text?.count)! > 0 {
                     filename = senderVC.filenameTextField.text!

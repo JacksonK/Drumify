@@ -13,6 +13,7 @@ class AddRecordingModalViewController: UIViewController/*, UITextFieldDelegate*/
     var callerInstance: ViewController!
     var filepath: String!
     var filename: String!
+    var chosen_category:DrumType = DrumType.bass
     /*
     @IBAction func renameFinished(_ sender: UITextField) {
         recordingTitle = sender.text!
@@ -38,6 +39,18 @@ class AddRecordingModalViewController: UIViewController/*, UITextFieldDelegate*/
         deleteButton.layer.borderColor = UIColor.white.cgColor
         
         
+    }
+    @IBAction func pickedCategory(_ sender: Any) {
+        print("category picked, updating global category variable")
+        if drumCategorySegmentedControl.selectedSegmentIndex == 0 {
+            chosen_category = DrumType.bass
+        }
+        else if drumCategorySegmentedControl.selectedSegmentIndex == 1 {
+            chosen_category = DrumType.snare
+        }
+        else if drumCategorySegmentedControl.selectedSegmentIndex == 2 {
+            chosen_category = DrumType.hat
+        }
     }
     /*
     // MARK: - Navigation

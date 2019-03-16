@@ -208,6 +208,9 @@
                                     <segment title="hi-hat"/>
                                 </segments>
                                 <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <action selector="pickedCategory:" destination="LUK-kJ-xNx" eventType="valueChanged" id="pOT-Cq-1fy"/>
+                                </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cSO-Re-FLz">
                                 <rect key="frame" x="20" y="-24" width="43" height="21"/>
