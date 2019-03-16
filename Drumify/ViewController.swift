@@ -205,12 +205,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         return UIModalPresentationStyle.none
     }
     
+    //the function runs right before the popover appears.
     func prepareForPopoverPresentation(_ popoverPresentationController: UIPopoverPresentationController) {
         UIView.animate(withDuration: 0.5) { 
             self.view.alpha = 0.8
         }
     }
     
+    //this function runs when the user taps outside of the popover to dismiss it
     func popoverPresentationControllerDidDismissPopover(_ popoverPresentationController: UIPopoverPresentationController) {
         UIView.animate(withDuration: 0.5) { 
             self.view.alpha = 1.0
@@ -219,7 +221,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     }
     
     
-    
+    //user pressed save in the popover
     @IBAction func unwindFromSavedRecording(sender: UIStoryboardSegue) {
         UIView.animate(withDuration: 0.5) { 
             self.recordToolbar.alpha = 1.0
@@ -240,16 +242,17 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         }
     }
     
+    //user pressed delete in the popover
     @IBAction func unwindFromDeletedRecording(sender: UIStoryboardSegue) {
         UIView.animate(withDuration: 0.5) { 
             self.recordToolbar.alpha = 1.0
             self.view.alpha = 1.0
         }
-        if sender.source is AddRecordingModalViewController {
-            if let senderVC = sender.source as? AddRecordingModalViewController {
-                print("ugh")
-            }
-        }
+//        if sender.source is AddRecordingModalViewController {
+//            if let senderVC = sender.source as? AddRecordingModalViewController {
+//                print("ugh")
+//            }
+//        }
     }
     
     override func viewDidLoad() {
