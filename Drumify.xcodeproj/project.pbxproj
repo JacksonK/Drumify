@@ -23,6 +23,7 @@
 		DC3EFD2021FEAA00000ED222 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC3EFD1E21FEAA00000ED222 /* LaunchScreen.storyboard */; };
 		DC3EFD2B21FEAA00000ED222 /* DrumifyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3EFD2A21FEAA00000ED222 /* DrumifyTests.swift */; };
 		DC3EFD3621FEAA00000ED222 /* DrumifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3EFD3521FEAA00000ED222 /* DrumifyUITests.swift */; };
+		DCB9C1AF223DEA3000475E13 /* BeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB9C1AE223DEA3000475E13 /* BeatViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +72,7 @@
 		DC3EFD3121FEAA00000ED222 /* DrumifyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = DrumifyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3EFD3521FEAA00000ED222 /* DrumifyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DrumifyUITests.swift; sourceTree = "<group>"; };
 		DC3EFD3721FEAA00000ED222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DCB9C1AE223DEA3000475E13 /* BeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatViewController.swift; sourceTree = "<group>"; };
 		E7139AF6E6D06C2B3984DB82 /* Pods_Drumify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Drumify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -167,6 +169,7 @@
 				DC36AE70223439A0004CC951 /* Analysis.swift */,
 				DC3EFD1921FEA9FE000ED222 /* Main.storyboard */,
 				DC3EFD1721FEA9FE000ED222 /* ViewController.swift */,
+				DCB9C1AE223DEA3000475E13 /* BeatViewController.swift */,
 				B43CC7362238C7B0004B4F57 /* AddRecordingModalViewController.swift */,
 				DC3EFD1C21FEAA00000ED222 /* Assets.xcassets */,
 				DC3EFD1E21FEAA00000ED222 /* LaunchScreen.storyboard */,
@@ -408,6 +411,7 @@
 				B41F409422335DB600C293C4 /* Recording.swift in Sources */,
 				B4176A362239C39B00FFF813 /* Constants.swift in Sources */,
 				B43CC7372238C7B0004B4F57 /* AddRecordingModalViewController.swift in Sources */,
+				DCB9C1AF223DEA3000475E13 /* BeatViewController.swift in Sources */,
 				DC36AE71223439A0004CC951 /* Analysis.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
