@@ -330,6 +330,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         cell.playButtonBottom.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
         cell.playButtonRight.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
         cell.currTimeLabel.text = "0.00"
+        cell.selectionStyle = .none
         //cell.recordingName?.text = "Audio File " +  String(indexPath.row+1)
         if categoryIndex == 0 {
             cell.recordingName?.text = bassRecordings![indexPath.row].name
