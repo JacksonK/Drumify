@@ -329,6 +329,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         let cell = tableView.dequeueReusableCell(withIdentifier: "RecordingTableViewCell", for: indexPath) as! RecordingTableViewCell
         cell.playButtonBottom.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
         cell.playButtonRight.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
+        cell.deleteButton.addTarget(self, action: #selector(self.deleteRecordingFromCell(sender:)), for: .touchUpInside)
         cell.currTimeLabel.text = "0.00"
         cell.selectionStyle = .none
         //cell.recordingName?.text = "Audio File " +  String(indexPath.row+1)
@@ -379,24 +380,36 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     //deleting rows in table view
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == UITableViewCell.EditingStyle.delete {
-            let alert = UIAlertController(title: "Are you sure you want to delete this recording?", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { action in
-                let categoryIndex = self.categoryTab.selectedSegmentIndex
-                if categoryIndex == 0 {
-                    self.bassRecordings.remove(at: indexPath.row)
-                }
-                else if categoryIndex == 1 {
-                    self.snareRecordings.remove(at: indexPath.row)
-                }
-                else {
-                    self.hatRecordings.remove(at: indexPath.row)
-                }
-                self.saveRecordingDataChange()
-                tableView.reloadData()
-            }))
-            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            deleteRecording(at: indexPath)
         }
+    }
+    
+    @objc func deleteRecordingFromCell(sender: UIButton) {
+        let cell = sender.superview?.superview
+        let recording_cell = cell as! RecordingTableViewCell
+        let indexPath = myTableView.indexPath(for: cell as! UITableViewCell)
+        
+        deleteRecording(at: indexPath!)
+    }
+    
+    func deleteRecording(at indexPath: IndexPath) {
+        let alert = UIAlertController(title: "Are you sure you want to delete this recording?", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { action in
+            let categoryIndex = self.categoryTab.selectedSegmentIndex
+            if categoryIndex == 0 {
+                self.bassRecordings.remove(at: indexPath.row)
+            }
+            else if categoryIndex == 1 {
+                self.snareRecordings.remove(at: indexPath.row)
+            }
+            else {
+                self.hatRecordings.remove(at: indexPath.row)
+            }
+            self.saveRecordingDataChange()
+            self.myTableView.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {

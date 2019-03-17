@@ -115,6 +115,7 @@
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="currTimeLabel" destination="cUK-Er-cO0" id="nIl-QN-kmh"/>
+                                            <outlet property="deleteButton" destination="0u1-Hh-BW4" id="On2-1U-PmH"/>
                                             <outlet property="durationLabel" destination="nUS-oF-W7u" id="MkN-J6-UfN"/>
                                             <outlet property="playButtonBottom" destination="Bgg-OH-SWc" id="FhZ-X3-ElL"/>
                                             <outlet property="playButtonRight" destination="Bp6-8W-akg" id="iXa-xF-6Qo"/>
@@ -339,7 +340,7 @@
             <objects>
                 <viewController id="sMp-ky-df6" customClass="BeatViewController" customModule="Drumify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nqj-3m-g5I">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" ambiguous="YES" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Rz0-7W-xVV">
@@ -349,8 +350,8 @@
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" id="wlR-FF-642">
-                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="e00-Qk-NHU">
-                                            <rect key="frame" x="20" y="8.5" width="374" height="83"/>
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="e00-Qk-NHU">
+                                            <rect key="frame" x="16" y="8.5" width="382" height="83"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
                                             <state key="normal" title="">
