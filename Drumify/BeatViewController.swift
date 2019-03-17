@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BeatViewController: ViewController {
+class BeatViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
