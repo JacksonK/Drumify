@@ -49,6 +49,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     func createRecording(new_name: String, filepath: String) {
         //check if categorization was successful
+        print("creating recording...")
         if self.currentCategory == nil{
             print("failed to categorize drum sound")
             self.currentCategory = DrumType.uncategorized
@@ -142,27 +143,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             audioRecorder.stop()
             audioRecorder = nil
             
-            let filepath = currentUID + ".m4a"
+            let filename = currentUID + ".m4a"
             currentUID = nil
             
-            print("categorization filepath: ", filepath)
+            print("categorization filepath: ", filename)
 
-            //starts analysis of recorded file
-            getDrumCategory(fname: filepath, view: self)
-
-            performSegue(withIdentifier: "showAddRecordingModal", sender: filepath)
-            //alert to name new recording
-            let alert = UIAlertController(title: "Name your recording:", message: "", preferredStyle: .alert)
-            alert.addTextField { (textField) in
-                textField.text = "New Recording"
-            }
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
-                let textField = alert!.textFields![0] // Force unwrapping because we know it exists.
-                print("Text field: \(textField.text ?? "default value")")
-                let new_name = textField.text
-                self.createRecording(new_name: new_name!, filepath: filepath)
-            }))
-            self.present(alert, animated: true, completion: nil)
+            //starts analysis of recorded file, segue occurs on completion
+            getDrumCategory(fname: filename, view: self)
             
             buttonLabel.setTitle("\u{f111}", for: .normal)
         }
@@ -177,7 +164,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                 
                 if let filepathString = sender as! String? {
                     destinationVC.filepath = filepathString
-                    
+                    destinationVC.suggested_category = currentCategory
                 }
             }
         }
@@ -223,6 +210,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     //user pressed save in the popover
     @IBAction func unwindFromSavedRecording(sender: UIStoryboardSegue) {
+        print("begin unwind...")
         UIView.animate(withDuration: 0.5) { 
             self.recordToolbar.alpha = 1.0
             self.view.alpha = 1.0
@@ -231,10 +219,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             //if UITextFieldDelegate is implemented in Add Recording Modal,
             //should work with just this one line
             //createRecording(new_name: senderVC.filename, filepath: senderVC.filepath)
+            print("before placeholder")
             var filename: String = senderVC.filenameTextField.placeholder!
             currentCategory = senderVC.chosen_category
             if senderVC.filenameTextField.text != nil {
+                print("before filename count")
                 if (senderVC.filenameTextField.text?.count)! > 0 {
+                    print("before filename text")
+
                     filename = senderVC.filenameTextField.text!
                 }
             }

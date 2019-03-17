@@ -13,7 +13,8 @@ class AddRecordingModalViewController: UIViewController/*, UITextFieldDelegate*/
     var callerInstance: ViewController!
     var filepath: String!
     var filename: String!
-    var chosen_category:DrumType = DrumType.bass
+    var suggested_category:DrumType!
+    var chosen_category:DrumType?
     /*
     @IBAction func renameFinished(_ sender: UITextField) {
         recordingTitle = sender.text!
@@ -35,14 +36,29 @@ class AddRecordingModalViewController: UIViewController/*, UITextFieldDelegate*/
         // Do any additional setup after loading the view.
         filenameTextField.placeholder = "recording " + getTodayString()
         filename = filenameTextField.placeholder
-        
+                
         saveButton.layer.cornerRadius = saveButton.frame.height/2
         
         deleteButton.layer.cornerRadius = deleteButton.frame.height/2
         deleteButton.layer.borderWidth = Constants.RoundedButton.borderWidth
         deleteButton.layer.borderColor = UIColor.white.cgColor
         
+        //sets selected category to the analysis value
+        chosen_category = suggested_category
         
+        if DrumType.bass == suggested_category {
+            drumCategorySegmentedControl.selectedSegmentIndex = 0
+        }
+        else if DrumType.snare == suggested_category {
+            drumCategorySegmentedControl.selectedSegmentIndex = 1
+        }
+        else if DrumType.hat == suggested_category {
+            drumCategorySegmentedControl.selectedSegmentIndex = 2
+        }
+        // catorization failed, uncategorized
+        else {
+            drumCategorySegmentedControl.selectedSegmentIndex = 0
+        }
     }
     @IBAction func pickedCategory(_ sender: Any) {
         print("category picked, updating global category variable")
