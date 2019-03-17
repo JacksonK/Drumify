@@ -43,17 +43,30 @@ class AddRecordingModalViewController: UIViewController/*, UITextFieldDelegate*/
         deleteButton.layer.borderWidth = Constants.RoundedButton.borderWidth
         deleteButton.layer.borderColor = UIColor.white.cgColor
         
+        suggestedLineBass.isHidden = true
+        suggestedLineBass.layer.cornerRadius = suggestedLineBass.frame.height/2
+        
+        suggestedLineSnare.isHidden = true
+        suggestedLineSnare.layer.cornerRadius = suggestedLineSnare.frame.height/2
+        
+        suggestedLineHihat.isHidden = true
+        suggestedLineHihat.layer.cornerRadius = suggestedLineHihat.frame.height/2
+        
+        
         //sets selected category to the analysis value
         chosen_category = suggested_category
         
         if DrumType.bass == suggested_category {
             drumCategorySegmentedControl.selectedSegmentIndex = 0
+            suggestedLineBass.isHidden = false
         }
         else if DrumType.snare == suggested_category {
             drumCategorySegmentedControl.selectedSegmentIndex = 1
+            suggestedLineSnare.isHidden = false
         }
         else if DrumType.hat == suggested_category {
             drumCategorySegmentedControl.selectedSegmentIndex = 2
+            suggestedLineHihat.isHidden = false
         }
         // catorization failed, uncategorized
         else {
