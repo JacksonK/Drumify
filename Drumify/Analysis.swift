@@ -61,6 +61,8 @@ func getDrumCategory(fname: String, view: ViewController) {
             view.currentCategory = drum_type
             print(ampProfile)
             print("category found: ", drum_type)
+            print( "fname in analysis: ", fname)
+            view.performSegue(withIdentifier: "showAddRecordingModal", sender: fname)
         }
         player.isLooping = false
         player.buffering = .always
