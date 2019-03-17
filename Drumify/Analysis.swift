@@ -42,6 +42,8 @@ func getDrumCategory(fname: String, view: ViewController) {
         }
         player = AKPlayer(audioFile: drum)
         player.startTime = getPeakTime(file: drum)
+        
+        //called once analysis is complete
         player.completionHandler = {
             timer.invalidate()
             player.stop()
@@ -109,6 +111,9 @@ func getDrumCategory(fname: String, view: ViewController) {
         })
     }
     else {
+        let alert = UIAlertController(title: "Recording failed!", message: "", preferredStyle: UIAlertController.Style.alert)
+        alert.addAction(UIAlertAction(title: "OK", style: UIAlertAction.Style.default, handler: nil))
+        view.present(alert, animated: true, completion: nil)
         print("failed to read file while getting drum category!")
     }
 }
