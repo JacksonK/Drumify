@@ -20,6 +20,10 @@ class AddRecordingModalViewController: UIViewController/*, UITextFieldDelegate*/
         print (sender.text!)
     }
     */
+    @IBOutlet weak var suggestedLineBass: UIButton!
+    @IBOutlet weak var suggestedLineSnare: UIButton!
+    @IBOutlet weak var suggestedLineHihat: UIButton!
+    
     @IBOutlet weak var filenameTextField: UITextField!
     @IBOutlet weak var drumCategorySegmentedControl: UISegmentedControl!
     
