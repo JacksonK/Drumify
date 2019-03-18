@@ -21,7 +21,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     var audioRecorder:AVAudioRecorder!
     var audioPlayer:AVAudioPlayer!
     var player:AKPlayer!
-    var playbackTimer:  Timer!
+    var playbackTimer:Timer!
 
     
     //var recordings:[Recording]!
@@ -117,18 +117,27 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             print("created UID: ", currentUID)
             //let numberOfRecords = recordings.count + 1
             //currentRecording = TempRecording(filepath: "\(numberOfRecords).m4a", creation_date: Date())
+            setupRecSession()
+
             let file = currentUID + ".m4a"
             let filename = getDirectory().appendingPathComponent(file)
             print("saving file with name: ", filename)
-            let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC), AVSampleRateKey: 12000, AVNumberOfChannelsKey: 1, AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
+            let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
+                            AVSampleRateKey: 12000,
+                            AVNumberOfChannelsKey: 1,
+                            AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
             
             //Start audio recording
             do
             {
                 audioRecorder = try AVAudioRecorder(url: filename, settings: settings)
                 audioRecorder.delegate = self
-                audioRecorder.record()
+                audioRecorder.prepareToRecord()
+                let start_status = audioRecorder.record()
                 
+                print("recording status: ", start_status)
+                print("recording during status: ", audioRecorder.isRecording)
+
                 buttonLabel.setTitle("\u{f04d}", for: .normal)
                 print("started recording")
             }
@@ -141,16 +150,17 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         {
             //Stopping audio recording
             audioRecorder.stop()
+            let stop_status = audioRecorder.isRecording
+            print("recording stop status: ", stop_status)
             audioRecorder = nil
             
             let filename = currentUID + ".m4a"
-            currentUID = nil
             
             print("categorization filepath: ", filename)
 
             //starts analysis of recorded file, segue occurs on completion
             getDrumCategory(fname: filename, view: self)
-            
+            currentUID = nil
             buttonLabel.setTitle("\u{f111}", for: .normal)
         }
     }
@@ -247,20 +257,30 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
 //        }
     }
     
+    func setupRecSession() {
+        do {
+            try recordingSession.setCategory(AVAudioSession.Category.playAndRecord,
+                                             mode: AVAudioSession.Mode.default,
+                                             policy: AVAudioSession.RouteSharingPolicy.default,
+                                             options: AVAudioSession.CategoryOptions.defaultToSpeaker)
+            try recordingSession.setActive(true)
+        }
+        catch {
+            print("failed to load recording session")
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
         recordingSession = AVAudioSession.sharedInstance()
-        
+
         currentCategory = nil
         currentUID = nil
         
         // Method below forces audio to playback through speakers instead of earpiece,
         // based on https://stackoverflow.com/q/1022992
-        try! recordingSession.setCategory(AVAudioSession.Category.playAndRecord, 
-                                          mode: AVAudioSession.Mode.default, 
-                                          policy: AVAudioSession.RouteSharingPolicy.default, 
-                                          options: AVAudioSession.CategoryOptions.defaultToSpeaker)
+        
         /*
         if let number:Int = UserDefaults.standard.object(forKey: "myNumber") as? Int
         {
@@ -281,13 +301,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         }
         else { hatRecordings = [] }
         
-        AVAudioSession.sharedInstance().requestRecordPermission{(hasPermission) in
+        recordingSession.requestRecordPermission{(hasPermission) in
             if hasPermission
             {
                 print("ACCEPTED")
             }
-            
         }
+        
+        setupRecSession()
         
         myTableView.dataSource = self;
         myTableView.tableFooterView = UIView()
@@ -386,7 +407,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     @objc func deleteRecordingFromCell(sender: UIButton) {
         let cell = sender.superview?.superview
-        let recording_cell = cell as! RecordingTableViewCell
         let indexPath = myTableView.indexPath(for: cell as! UITableViewCell)
         
         deleteRecording(at: indexPath!)
@@ -468,13 +488,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             // player is initialized
             if (player != nil )
             {
-                let cell = myTableView.cellForRow(at: self.selectedIndexPath!) as! RecordingTableViewCell
-                //cell.recordingName.text = "Audio File " +  String(self.selectedIndexPath!.row+1)
                 self.player.stop()
                 try AudioKit.stop()
             }
-            let cell = myTableView.cellForRow(at: indexPath) as! RecordingTableViewCell
-            //cell.recordingName?.text = "Audio File " +  String(indexPath.row+1) + " playing"
             selectedIndexPath = indexPath
             
             let file = try AKAudioFile(readFileName: filePath, baseDir: .documents)
@@ -484,8 +500,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             player.completionHandler = {
                 print( "callback!")
                 AKLog("completion callback has been triggered!")
-                let cell = self.myTableView.cellForRow(at: self.selectedIndexPath!) as! RecordingTableViewCell
-                //cell.recordingName.text = "Audio File " +  String(self.selectedIndexPath!.row+1)                //self.player.stop()
+                //self.player.stop()
                 //try AudioKit.stop()
             }
             AudioKit.output = player
