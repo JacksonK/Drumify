@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="sMp-ky-df6">
     <device id="retina6_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -147,7 +147,16 @@
                                     <constraint firstAttribute="height" constant="100" id="CAz-nZ-RbK"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Recordings" id="57E-fI-Pr2"/>
+                                    <barButtonItem style="plain" id="g3m-IC-RID">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DOc-Fq-BKT">
+                                            <rect key="frame" x="20" y="14" width="42" height="72"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
+                                            <state key="normal" title="">
+                                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Qxg-du-ozM"/>
                                     <barButtonItem style="plain" id="PQK-vA-AGO">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3cx-QW-sAh">
@@ -163,10 +172,18 @@
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Y9H-6W-SDo"/>
-                                    <barButtonItem title="Beats" id="6RO-4b-LGT">
-                                        <connections>
-                                            <segue destination="sMp-ky-df6" kind="presentation" modalTransitionStyle="crossDissolve" id="v30-oC-tnt"/>
-                                        </connections>
+                                    <barButtonItem style="plain" id="hu3-LA-RD2">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RuR-zL-Faq">
+                                            <rect key="frame" x="334" y="14" width="60" height="72"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
+                                            <state key="normal" title="">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="sMp-ky-df6" kind="presentation" modalTransitionStyle="crossDissolve" id="wfN-XN-nLu"/>
+                                            </connections>
+                                        </button>
                                     </barButtonItem>
                                 </items>
                                 <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -356,10 +373,18 @@
                                     <constraint firstAttribute="height" constant="100" id="bIp-Qu-ePB"/>
                                 </constraints>
                                 <items>
-                                    <barButtonItem title="Recordings" id="08E-Ab-Vnd">
-                                        <connections>
-                                            <segue destination="BYZ-38-t0r" kind="presentation" modalTransitionStyle="crossDissolve" id="PMN-qI-5bB"/>
-                                        </connections>
+                                    <barButtonItem style="plain" id="dVB-8f-Exk">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gIq-8f-Nw7">
+                                            <rect key="frame" x="20" y="14" width="42" height="72"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
+                                            <state key="normal" title="">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="presentation" modalTransitionStyle="crossDissolve" id="t1M-V6-j8O"/>
+                                            </connections>
+                                        </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="mwj-wm-Ydn"/>
                                     <barButtonItem style="plain" id="NOw-U8-L2r">
@@ -376,7 +401,16 @@
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="rTM-WO-Qow"/>
-                                    <barButtonItem title="Beats" id="oJU-9a-bHa"/>
+                                    <barButtonItem style="plain" id="nED-cy-W6d">
+                                        <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Uxp-sm-qfd">
+                                            <rect key="frame" x="334" y="14" width="60" height="72"/>
+                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                            <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
+                                            <state key="normal" title="">
+                                                <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                        </button>
+                                    </barButtonItem>
                                 </items>
                                 <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
@@ -484,7 +518,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwH-aR-vC5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="926.08695652173924" y="-219.64285714285714"/>
+            <point key="canvasLocation" x="895.6521739130435" y="-211.60714285714286"/>
         </scene>
     </scenes>
 </document>
