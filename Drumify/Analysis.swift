@@ -15,18 +15,20 @@ var fftTap: AKFFTTap?
 var timer:  Timer!
 
 //finds list of 9 amplitude values for the frequency spectrum of audio file, with equal separation on a log scale
-//updates table with analysis in handler
+//categorizes file on completion, calling popover AddRecordingModalViewController
 func getDrumCategory(fname: String, view: ViewController) {
+    //#1 setup variables
     print("getting drum category")
     var ampProfile = [Double]()
     var selectedFreqs: [Int] = []
     var freqMatrix = Array(repeating: [Double](), count: 9)
     var timeCounter:Double = 0
-
     for i in 0...10 {
         selectedFreqs.append(Int(pow(Float(2), Float(i))))
     }
     print(selectedFreqs)
+    
+    //#2 setup player and FFT tap
     if let drum = try? AKAudioFile(readFileName: fname, baseDir: .documents) {
         var norm_drum:AKAudioFile
         do {
@@ -65,12 +67,10 @@ func getDrumCategory(fname: String, view: ViewController) {
         }
         player.isLooping = false
         player.buffering = .always
-        
-        //get peak time to start audio analysis on
-        //let peakTime = (Double(floats.index( of: cmax! )!)/Double(file.samplesCount)) * file.duration
-        
         fftTap = AKFFTTap.init(player)
         AudioKit.output = player
+        
+        //#3 start player and analysis timer
         do {
             try AudioKit.start()
             
@@ -116,6 +116,7 @@ func getDrumCategory(fname: String, view: ViewController) {
     }
 }
 
+// returns loudest point in time of the file.
 func getPeakTime(file: AKAudioFile) -> Double{
     let buffer = file.pcmBuffer
     let floats = UnsafeBufferPointer(start: buffer.floatChannelData?[0], count: Int(buffer.frameLength))
@@ -125,6 +126,7 @@ func getPeakTime(file: AKAudioFile) -> Double{
     return peakTime
 }
 
+//given amplitude profile averages, picks a drum type that best matches profile
 func categorizeProfile(profile: [Double]) -> DrumType {
     var category = DrumType.uncategorized
     let max_index = profile.firstIndex(of: profile.max()!)
