@@ -34,40 +34,40 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68N-P3-rv8">
-                                                    <rect key="frame" x="20" y="11" width="335" height="23"/>
+                                                    <rect key="frame" x="20" y="11" width="374" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4xJ-Hk-xkY">
-                                                    <rect key="frame" x="20" y="59" width="335" height="4"/>
+                                                    <rect key="frame" x="20" y="59" width="374" height="4"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="4" id="UEL-iB-2qV"/>
                                                     </constraints>
                                                 </progressView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bgg-OH-SWc">
-                                                    <rect key="frame" x="172.66666666666666" y="90.666666666666671" width="30" height="39.000000000000014"/>
+                                                    <rect key="frame" x="192" y="90.666666666666671" width="30" height="39.000000000000014"/>
                                                     <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="27"/>
                                                     <state key="normal" title="">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0u1-Hh-BW4">
-                                                    <rect key="frame" x="325" y="91" width="30" height="39"/>
+                                                    <rect key="frame" x="364" y="91" width="30" height="39"/>
                                                     <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="27"/>
                                                     <state key="normal" title="">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bp6-8W-akg">
-                                                    <rect key="frame" x="325" y="3" width="30" height="39"/>
+                                                    <rect key="frame" x="364" y="3" width="30" height="39"/>
                                                     <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="27"/>
                                                     <state key="normal" title="">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUS-oF-W7u">
-                                                    <rect key="frame" x="270" y="67" width="85" height="21"/>
+                                                    <rect key="frame" x="309" y="67" width="85" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="85" id="2Tu-kv-s0A"/>
                                                     </constraints>
@@ -340,7 +340,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VcV-hE-Mzo" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="e0c-Iv-ofH" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="896" y="255"/>
+            <point key="canvasLocation" x="896" y="236"/>
         </scene>
         <!--Beat View Controller-->
         <scene sceneID="8z6-LU-9oo">

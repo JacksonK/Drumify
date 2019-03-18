@@ -13,12 +13,6 @@ import AudioKit
 var player: AKPlayer!
 var fftTap: AKFFTTap?
 var timer:  Timer!
-let FFT_SIZE = 512
-let sampleRate:double_t = 44100
-let timeInterval = 0.01
-var timeCounter:Double = 0
-//var freqMatrix = Array<Any>(repeating: Array<Double>(), count: 9 )
-var freqMatrix = Array(repeating: [Double](), count: 9)
 
 //finds list of 9 amplitude values for the frequency spectrum of audio file, with equal separation on a log scale
 //updates table with analysis in handler
@@ -26,6 +20,9 @@ func getDrumCategory(fname: String, view: ViewController) {
     print("getting drum category")
     var ampProfile = [Double]()
     var selectedFreqs: [Int] = []
+    var freqMatrix = Array(repeating: [Double](), count: 9)
+    var timeCounter:Double = 0
+
     for i in 0...10 {
         selectedFreqs.append(Int(pow(Float(2), Float(i))))
     }
@@ -41,7 +38,7 @@ func getDrumCategory(fname: String, view: ViewController) {
             print("normalization error")
         }
         player = AKPlayer(audioFile: drum)
-        player.startTime = getPeakTime(file: drum)
+        player.startTime = getPeakTime(file: drum) - Constants.Analysis.Offset
         
         //called once analysis is complete
         player.completionHandler = {
@@ -82,28 +79,29 @@ func getDrumCategory(fname: String, view: ViewController) {
         }
         catch {print("failed to run audiokit")}
         
-        timer = Timer.scheduledTimer(withTimeInterval: timeInterval, repeats: true, block: { (timer) in
-            timeCounter += timeInterval
-            if (freqMatrix.last?.count)! > 6 {
+        timer = Timer.scheduledTimer(withTimeInterval: Constants.Analysis.TimerRate, repeats: true, block: { (timer) in
+            timeCounter += Constants.Analysis.TimerRate
+            if (freqMatrix.last?.count)! >= Constants.Analysis.MaxSnapshots {
+                print("reached max length freq matrix!")
                 timer.invalidate()
             }
-            //print("freq response at ", timeCounter, " seconds")
+            print("freq response at ", timeCounter, " seconds")
             
-            for i in 0...FFT_SIZE-2{
+            for i in 0...Constants.Analysis.FFTSize-2{
                 
                 if(selectedFreqs.contains(i)) {
                     let re = fftTap!.fftData[i]
                     //print(self.fftTap!.fftData.count)
                     //print(self.fftTap!.fftData[i])
                     let im = fftTap!.fftData[i + 1]
-                    let normBinMag = 2.0 * sqrt(re * re + im * im)/FFT_SIZE
+                    let normBinMag = 2.0 * sqrt(re * re + im * im)/Constants.Analysis.FFTSize
                     let amplitude = (20.0 * log10(normBinMag))
                     let freqIndex = selectedFreqs.firstIndex(of: i)!
                     if amplitude.isFinite {
                         freqMatrix[freqIndex].append(amplitude)
                     }
                     //print("bin: \(i/2) \t freq: \(self.sampleRate*0.5*i/self.FFT_SIZE)\t ampl.: \(amplitude)")
-                    print("bin#: \(freqIndex + 1) \t freq: \(sampleRate*0.5*i/FFT_SIZE)\t ampl.: \(amplitude)")
+                    print("bin#: \(freqIndex + 1) \t freq: \(Constants.Analysis.SampleRate*0.5*i/Constants.Analysis.FFTSize)\t ampl.: \(amplitude)")
                     
                 }
             }
@@ -135,10 +133,10 @@ func categorizeProfile(profile: [Double]) -> DrumType {
     }
     else {
         print("max freq index: ", max_index!)
-        if max_index! < 3 {
+        if max_index! < Constants.Analysis.BassBinLimit {
             category = DrumType.bass
         }
-        else if max_index! > 5 {
+        else if max_index! > Constants.Analysis.HatBinLimit {
             category = DrumType.hat
             
         }
