@@ -500,8 +500,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             player.completionHandler = {
                 print( "callback!")
                 AKLog("completion callback has been triggered!")
-                //self.player.stop()
-                //try AudioKit.stop()
+                self.player.stop()
+                do {
+                    try AudioKit.stop()
+                }
+                catch {
+                    print("failed to stop audiokit after playing")
+                }
             }
             AudioKit.output = player
             try AudioKit.start()
