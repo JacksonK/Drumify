@@ -13,11 +13,13 @@ struct Beat: Codable {
     var date: Date
     var measures: Int
     var bpm: Int
+    var lanes: [Lane]
 
-    init(name: String, date: Date, measures: Int, bpm: Int) {
+    init(name: String) {
         self.name = name
-        self.date = date
-        self.measures = measures
-        self.bpm = bpm
+        self.date = Date()
+        self.measures = 1
+        self.bpm = 120
+        self.lanes = [Lane()]
     }
 }
