@@ -38,8 +38,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     // This allows for that cell to change appearance when playing and pausing.
     var selectedIndexPath:IndexPath? = nil
     
+    //somehow setting this to true correctly forces the view to be landscape only, idk why.
     override var shouldAutorotate: Bool {
-        return false
+        return true
     }
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {

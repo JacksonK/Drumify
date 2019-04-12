@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
+    <device id="retina4_7" orientation="landscape">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -19,55 +19,55 @@
             <objects>
                 <viewController title="Recordings" definesPresentationContext="YES" providesPresentationContextTransitionStyle="YES" id="BYZ-38-t0r" customClass="ViewController" customModule="Drumify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KC8-cy-4yN">
-                                <rect key="frame" x="0.0" y="101" width="375" height="466"/>
+                                <rect key="frame" x="0.0" y="89" width="667" height="186"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="RecordingTableViewCell" rowHeight="150" id="xEh-r5-CEv" customClass="RecordingTableViewCell" customModule="Drumify" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="150"/>
+                                        <rect key="frame" x="0.0" y="28" width="667" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xEh-r5-CEv" id="WCa-7Q-IGl">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="667" height="149.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="68N-P3-rv8">
-                                                    <rect key="frame" x="15" y="11" width="637" height="23"/>
+                                                    <rect key="frame" x="15" y="11" width="345" height="23"/>
                                                     <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="4xJ-Hk-xkY">
-                                                    <rect key="frame" x="15" y="59" width="637" height="4"/>
+                                                    <rect key="frame" x="15" y="59" width="345" height="4"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="4" id="UEL-iB-2qV"/>
                                                     </constraints>
                                                 </progressView>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bgg-OH-SWc">
-                                                    <rect key="frame" x="318.5" y="90.5" width="30" height="39"/>
+                                                    <rect key="frame" x="172.5" y="90.5" width="30" height="39"/>
                                                     <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="27"/>
                                                     <state key="normal" title="">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0u1-Hh-BW4">
-                                                    <rect key="frame" x="622" y="91" width="30" height="39"/>
+                                                    <rect key="frame" x="330" y="91" width="30" height="39"/>
                                                     <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="27"/>
                                                     <state key="normal" title="">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Bp6-8W-akg">
-                                                    <rect key="frame" x="617" y="3" width="30" height="39"/>
+                                                    <rect key="frame" x="325" y="3" width="30" height="39"/>
                                                     <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="27"/>
                                                     <state key="normal" title="">
                                                         <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nUS-oF-W7u">
-                                                    <rect key="frame" x="562" y="67" width="85" height="21"/>
+                                                    <rect key="frame" x="270" y="67" width="85" height="21"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="85" id="2Tu-kv-s0A"/>
                                                     </constraints>
@@ -130,14 +130,14 @@
                                 </connections>
                             </tableView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="4tA-Zb-JOs">
-                                <rect key="frame" x="0.0" y="567" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="275" width="667" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="CAz-nZ-RbK"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" id="g3m-IC-RID">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DOc-Fq-BKT">
-                                            <rect key="frame" x="16" y="14" width="42" height="72"/>
+                                            <rect key="frame" x="20" y="14" width="42" height="72"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
                                             <state key="normal" title="">
@@ -148,7 +148,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Qxg-du-ozM"/>
                                     <barButtonItem style="plain" id="PQK-vA-AGO">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="3cx-QW-sAh">
-                                            <rect key="frame" x="137.5" y="8.5" width="100" height="83"/>
+                                            <rect key="frame" x="283.5" y="8.5" width="100" height="83"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
                                             <state key="normal" title="">
@@ -162,7 +162,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="Y9H-6W-SDo"/>
                                     <barButtonItem style="plain" id="hu3-LA-RD2">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="RuR-zL-Faq">
-                                            <rect key="frame" x="299" y="14" width="60" height="72"/>
+                                            <rect key="frame" x="587" y="14" width="60" height="72"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
                                             <state key="normal" title="">
@@ -177,7 +177,7 @@
                                 <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MdH-Zc-GpA">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="20" width="667" height="32"/>
                                 <color key="barTintColor" red="0.14507749676704407" green="0.1451098620891571" blue="0.14507544040679932" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <fontDescription key="fontDescription" name="DiwanMishafi" family="Mishafi" pointSize="26"/>
@@ -187,7 +187,7 @@
                                 </items>
                             </navigationBar>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="es5-8y-0pg" userLabel="Segment Control: Categories">
-                                <rect key="frame" x="8" y="73" width="359" height="29"/>
+                                <rect key="frame" x="8" y="61" width="651" height="29"/>
                                 <segments>
                                     <segment title="bass"/>
                                     <segment title="snare"/>
@@ -372,23 +372,60 @@
             </objects>
             <point key="canvasLocation" x="896" y="236"/>
         </scene>
+        <!--Sound Picker View Controller-->
+        <scene sceneID="gMx-Xq-NTS">
+            <objects>
+                <viewController id="1Zi-xt-Xj9" customClass="SoundPickerViewController" customModule="Drumify" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="NcB-f9-Evx">
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="test label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6TA-iW-xSL">
+                                <rect key="frame" x="34" y="31" width="70" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8D-z1-NdE">
+                                <rect key="frame" x="36" y="70" width="42" height="30"/>
+                                <state key="normal" title="return"/>
+                                <connections>
+                                    <segue destination="iVs-vJ-Yzs" kind="unwind" unwindAction="unwindFromSoundPicker:" id="Btc-q3-cRT"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6TA-iW-xSL" firstAttribute="leading" secondItem="Aiu-qD-5vU" secondAttribute="leading" constant="34" id="giC-Ye-zjC"/>
+                            <constraint firstItem="P8D-z1-NdE" firstAttribute="leading" secondItem="Aiu-qD-5vU" secondAttribute="leading" constant="36" id="koP-Ge-5hR"/>
+                            <constraint firstItem="6TA-iW-xSL" firstAttribute="top" secondItem="Aiu-qD-5vU" secondAttribute="top" constant="31" id="xMJ-4u-d34"/>
+                            <constraint firstItem="P8D-z1-NdE" firstAttribute="top" secondItem="6TA-iW-xSL" secondAttribute="bottom" constant="18" id="yne-GG-n6h"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Aiu-qD-5vU"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="2gP-2Y-Toh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="iVs-vJ-Yzs" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="1787.8560719640182" y="-260"/>
+        </scene>
         <!--Beat View Controller-->
         <scene sceneID="8z6-LU-9oo">
             <objects>
                 <viewController id="sMp-ky-df6" customClass="BeatViewController" customModule="Drumify" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Nqj-3m-g5I">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="667" height="375"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" translatesAutoresizingMaskIntoConstraints="NO" id="Rz0-7W-xVV">
-                                <rect key="frame" x="0.0" y="567" width="375" height="100"/>
+                                <rect key="frame" x="0.0" y="275" width="667" height="100"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="100" id="bIp-Qu-ePB"/>
                                 </constraints>
                                 <items>
                                     <barButtonItem style="plain" id="dVB-8f-Exk">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gIq-8f-Nw7">
-                                            <rect key="frame" x="16" y="14" width="42" height="72"/>
+                                            <rect key="frame" x="20" y="14" width="42" height="72"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
                                             <state key="normal" title="">
@@ -402,7 +439,7 @@
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="mwj-wm-Ydn"/>
                                     <barButtonItem style="plain" id="NOw-U8-L2r">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="MrH-bG-Oeh">
-                                            <rect key="frame" x="157.5" y="8.5" width="60" height="83"/>
+                                            <rect key="frame" x="303.5" y="8.5" width="60" height="83"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
                                             <state key="normal" title="">
@@ -410,13 +447,14 @@
                                             </state>
                                             <connections>
                                                 <action selector="record:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BUa-Qc-gEg"/>
+                                                <segue destination="1Zi-xt-Xj9" kind="show" id="lHb-4n-npM"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
                                     <barButtonItem style="plain" systemItem="flexibleSpace" id="rTM-WO-Qow"/>
                                     <barButtonItem style="plain" id="nED-cy-W6d">
                                         <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Uxp-sm-qfd">
-                                            <rect key="frame" x="299" y="14" width="60" height="72"/>
+                                            <rect key="frame" x="587" y="14" width="60" height="72"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
                                             <state key="normal" title="">
@@ -428,18 +466,18 @@
                                 <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9L9-NQ-87q">
-                                <rect key="frame" x="0.0" y="64" width="375" height="503"/>
+                                <rect key="frame" x="0.0" y="44" width="667" height="231"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="beatCell" rowHeight="90" id="lum-KL-GA3" customClass="BeatTableViewCell" customModule="Drumify" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                        <rect key="frame" x="0.0" y="28" width="667" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lum-KL-GA3" id="DRn-hd-Z6D">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="667" height="89.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8po-Tf-Zv4">
-                                                    <rect key="frame" x="20" y="25" width="589" height="36"/>
+                                                    <rect key="frame" x="20" y="25" width="297" height="36"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="30"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -463,7 +501,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9t-MZ-81b">
-                                                    <rect key="frame" x="527" y="59" width="120" height="20"/>
+                                                    <rect key="frame" x="235" y="59" width="120" height="20"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="jj4-4N-rht"/>
                                                     </constraints>
@@ -472,7 +510,7 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYr-y1-M6x">
-                                                    <rect key="frame" x="611" y="22" width="30" height="39"/>
+                                                    <rect key="frame" x="319" y="22" width="30" height="39"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="qtg-U7-6WT"/>
                                                         <constraint firstAttribute="height" constant="39" id="xSU-wA-gmf"/>
@@ -513,7 +551,7 @@
                                 </connections>
                             </tableView>
                             <navigationBar contentMode="scaleToFill" barStyle="black" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="95h-7T-KN3">
-                                <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                                <rect key="frame" x="0.0" y="0.0" width="667" height="32"/>
                                 <color key="barTintColor" red="0.14507749680000001" green="0.14510986209999999" blue="0.14507544040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
                                     <fontDescription key="fontDescription" name="DiwanMishafi" family="Mishafi" pointSize="26"/>

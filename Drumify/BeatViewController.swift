@@ -15,6 +15,14 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     var beats:[Beat]!
 
+    //somehow setting this to true correctly forces the view to be landscape only, idk why.
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return beats.count
@@ -39,12 +47,19 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        
         beats = []
         //beats.append(Beat(name:"Hip-Hop Beat", date:Date(), measures:32, bpm:90))
         //beats.append(Beat(name:"Lo-fi House Beat", date:Date(), measures:64, bpm:110))
         //beats.append(Beat(name:"All Hand Sounds Beat", date:Date(), measures:16, bpm:100))
         // Do any additional setup after loading the view.
+    }
+    
+    @IBAction func unwindFromSoundPicker (_ sender: UIStoryboardSegue) {
+    
     }
     
 
