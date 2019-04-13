@@ -13,7 +13,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
     @IBOutlet weak var titleLabel: UILabel!
     
     var beat:Beat!
-    
+    let laneColors = [UIColor.red,UIColor.yellow, UIColor.green, UIColor.blue, UIColor.purple]
     //sets custom layout for collection view
     let columnLayout = ColumnFlowLayout(
         cellsPerRow: 8,
@@ -39,7 +39,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return beat.lanes.count * beat.lanes[0].bars[0].count
+        return beat.lanes.count * beat.cellPerRow
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -48,7 +48,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         
         
         if beat.isCellActive(index: indexPath.row, bar: 0){
-            cell.backgroundColor = .red
+            cell.backgroundColor = laneColors[ indexPath.row / (beat.cellPerRow) ]
         }
         else {
             cell.backgroundColor = .gray
@@ -68,7 +68,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         
         sequencerCollectionView?.collectionViewLayout = columnLayout
         
-        beat = Beat(name: "test")
+        beat = Beat(name: "test", cellPerRow: 8)
         titleLabel.text = beat.name
     }
 }

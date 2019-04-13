@@ -12,8 +12,8 @@ struct Lane: Codable {
     var recording: Recording?
     var bars = Array(repeating: [Bool](), count: 1)
 
-    init() {
-        for _ in 0...7 {
+    init(cellPerRow: Int) {
+        for _ in 0...(cellPerRow-1) {
             bars[0].append(false)
         }
     }
