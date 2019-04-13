@@ -122,7 +122,7 @@ func getPeakTime(file: AKAudioFile) -> Double{
     let floats = UnsafeBufferPointer(start: buffer.floatChannelData?[0], count: Int(buffer.frameLength))
     let cmax = floats.max()
     
-    let peakTime = (Double(floats.index( of: cmax! )!)/Double(file.samplesCount)) * file.duration
+    let peakTime = (Double(floats.firstIndex( of: cmax! )!)/Double(file.samplesCount)) * file.duration
     return peakTime
 }
 

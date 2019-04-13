@@ -29,6 +29,8 @@
 		DCB3B012223E1B8800C8E05E /* BeatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB3B011223E1B8800C8E05E /* BeatTableViewCell.swift */; };
 		DCB3B014223E1B9F00C8E05E /* Beat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB3B013223E1B9F00C8E05E /* Beat.swift */; };
 		DCB9C1AF223DEA3000475E13 /* BeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB9C1AE223DEA3000475E13 /* BeatViewController.swift */; };
+		DCEC3E8A22614827003ABA7C /* CustomSequencerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC3E8922614827003ABA7C /* CustomSequencerCell.swift */; };
+		DCEC3E8C2261500E003ABA7C /* ColumnFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCEC3E8B2261500E003ABA7C /* ColumnFlowLayout.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,6 +84,8 @@
 		DCB3B011223E1B8800C8E05E /* BeatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatTableViewCell.swift; sourceTree = "<group>"; };
 		DCB3B013223E1B9F00C8E05E /* Beat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beat.swift; sourceTree = "<group>"; };
 		DCB9C1AE223DEA3000475E13 /* BeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatViewController.swift; sourceTree = "<group>"; };
+		DCEC3E8922614827003ABA7C /* CustomSequencerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSequencerCell.swift; sourceTree = "<group>"; };
+		DCEC3E8B2261500E003ABA7C /* ColumnFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnFlowLayout.swift; sourceTree = "<group>"; };
 		E7139AF6E6D06C2B3984DB82 /* Pods_Drumify.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Drumify.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -173,8 +177,10 @@
 				B4176A352239C39B00FFF813 /* Constants.swift */,
 				DC70EB1F2258133400BA9B22 /* Models */,
 				DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */,
-				DC70EB26225820D400BA9B22 /* SequencerViewController.swift */,
 				B463BBA3221C7E7100E310AA /* RecordingTableViewCell.swift */,
+				DCEC3E8922614827003ABA7C /* CustomSequencerCell.swift */,
+				DC70EB26225820D400BA9B22 /* SequencerViewController.swift */,
+				DCEC3E8B2261500E003ABA7C /* ColumnFlowLayout.swift */,
 				DCB3B011223E1B8800C8E05E /* BeatTableViewCell.swift */,
 				DC36AE70223439A0004CC951 /* Analysis.swift */,
 				DC3EFD1921FEA9FE000ED222 /* Main.storyboard */,
@@ -288,6 +294,7 @@
 				TargetAttributes = {
 					DC3EFD1121FEA9FE000ED222 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 						SystemCapabilities = {
 							com.apple.Keychain = {
 								enabled = 0;
@@ -296,10 +303,12 @@
 					};
 					DC3EFD2521FEAA00000ED222 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 						TestTargetID = DC3EFD1121FEA9FE000ED222;
 					};
 					DC3EFD3021FEAA00000ED222 = {
 						CreatedOnToolsVersion = 10.0;
+						LastSwiftMigration = 1020;
 						TestTargetID = DC3EFD1121FEA9FE000ED222;
 					};
 				};
@@ -428,7 +437,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				DC3EFD1821FEA9FE000ED222 /* ViewController.swift in Sources */,
+				DCEC3E8C2261500E003ABA7C /* ColumnFlowLayout.swift in Sources */,
 				B463BBA4221C7E7100E310AA /* RecordingTableViewCell.swift in Sources */,
+				DCEC3E8A22614827003ABA7C /* CustomSequencerCell.swift in Sources */,
 				DC70EB27225820D500BA9B22 /* SequencerViewController.swift in Sources */,
 				DCB3B012223E1B8800C8E05E /* BeatTableViewCell.swift in Sources */,
 				DCB3B014223E1B9F00C8E05E /* Beat.swift in Sources */,
@@ -626,7 +637,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -647,7 +658,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -668,7 +679,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jk.DrumifyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Drumify.app/Drumify";
 			};
@@ -690,7 +701,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jk.DrumifyTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Drumify.app/Drumify";
 			};
@@ -711,7 +722,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jk.DrumifyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Drumify;
 			};
@@ -732,7 +743,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = jk.DrumifyUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.2;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Drumify;
 			};
