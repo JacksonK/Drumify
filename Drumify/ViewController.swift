@@ -14,8 +14,6 @@ import AVFoundation
 import AudioKit
 
 
-
-
 class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDelegate, UITableViewDelegate, UITableViewDataSource, UIPopoverPresentationControllerDelegate {
     var recordingSession: AVAudioSession!
     var audioRecorder:AVAudioRecorder!

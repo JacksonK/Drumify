@@ -6,7 +6,7 @@ target 'Drumify' do
   use_frameworks!
 
   # Pods for Drumify
-  pod 'AudioKit', '~> 4.0'
+  pod 'AudioKit', '~> 4.7'
 
   target 'DrumifyTests' do
     inherit! :search_paths
