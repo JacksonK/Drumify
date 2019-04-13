@@ -36,6 +36,15 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     // This allows for that cell to change appearance when playing and pausing.
     var selectedIndexPath:IndexPath? = nil
     
+    //somehow setting this to true correctly forces the view to be landscape only, idk why.
+    override var shouldAutorotate: Bool {
+        return true
+    }
+    
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+        return .portrait
+    }
+    
     @IBOutlet weak var buttonLabel: UIButton!
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var categoryTab: UISegmentedControl!
@@ -284,6 +293,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         {
             numberOfRecords = number
         }*/
+        
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
         
         //retrieve recordings data from local storage
         if let bassData = UserDefaults.standard.value(forKey:"bassRecordings") as? Data {
