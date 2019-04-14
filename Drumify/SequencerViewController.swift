@@ -42,6 +42,10 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         return beat.lanes.count * beat.cellPerRow
     }
     
+    @IBAction func addLane(_ sender: Any) {
+        beat.addLane()
+        sequencerCollectionView.reloadData()
+    }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomSequencerCell
         print("index path: ", indexPath)

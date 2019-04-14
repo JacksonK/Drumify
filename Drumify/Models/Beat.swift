@@ -58,4 +58,16 @@ struct Beat: Codable {
             self.lanes[lane].bars[bar][cellNum] = true
         }
     }
+    
+    mutating func addLane() {
+        if(lanes.count < 8) {
+            lanes.append( Lane(cellPerRow: self.cellPerRow))
+        }
+    }
+    
+    mutating func removeLane(index: Int) {
+        if(lanes.count > 1) {
+            lanes.remove(at: index)
+        }
+    }
 }
