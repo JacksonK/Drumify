@@ -28,6 +28,10 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
         return beats.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: "existingBeat", sender: indexPath)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "beatCell", for: indexPath) as! BeatTableViewCell
         cell.nameLabel?.text = beats[indexPath.row].name
@@ -35,8 +39,8 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
         cell.dateLabel?.text = dateFormatter.string(from: beats[indexPath.row].date)
-        cell.measuresLabel?.text = "\(beats[indexPath.row].measures)"
-        cell.bpmLabel?.text = "\(beats[indexPath.row].bpm)"
+        cell.measuresLabel?.text = "bars: \(beats[indexPath.row].measures)"
+        cell.bpmLabel?.text = "bpm: \(beats[indexPath.row].bpm)"
         return cell
     }
     
@@ -44,6 +48,16 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
         return 100
     }
 
+    func saveBeats() {
+        do {
+            let encodedBeats = try PropertyListEncoder().encode(self.beats)
+            
+            UserDefaults.standard.set(encodedBeats, forKey: "beats")
+        }
+        catch {
+            print("error encoding beats in beat view controller!")
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,14 +66,48 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
         UIDevice.current.setValue(value, forKey: "orientation")
         
         beats = []
+        
+        //decode beat data
+        if let beatData = UserDefaults.standard.value(forKey:"beats") as? Data {
+            beats = try? PropertyListDecoder().decode([Beat].self, from:beatData)
+        }
+        else { beats = [] }
+        
         //beats.append(Beat(name:"Hip-Hop Beat", date:Date(), measures:32, bpm:90))
         //beats.append(Beat(name:"Lo-fi House Beat", date:Date(), measures:64, bpm:110))
         //beats.append(Beat(name:"All Hand Sounds Beat", date:Date(), measures:16, bpm:100))
         // Do any additional setup after loading the view.
     }
     
-    @IBAction func unwindFromSoundPicker (_ sender: UIStoryboardSegue) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if (segue.identifier == "newBeat") {
+            let sequencerViewController = segue.destination as! SoundPickerViewController
+            sequencerViewController.newBeat = true
+            sequencerViewController.beat = Beat(name: "test", cellPerRow: 8)
+
+        }
+        if(segue.identifier == "existingBeat") {
+            let sequencerViewController = segue.destination as! SoundPickerViewController
+            sequencerViewController.newBeat = false
+            let row = (sender as! NSIndexPath).row;
+            sequencerViewController.beat = beats[row]
+            sequencerViewController.beatNumber = row
+        }
+    }
     
+    @IBAction func unwindFromSoundPicker (_ sender: UIStoryboardSegue) {
+        let sequencerViewController = sender.source as! SoundPickerViewController
+        if sequencerViewController.newBeat {
+            beats.append(sequencerViewController.beat)
+            
+        }
+        // if existing beat, update the beat in the table with new changes
+        else {
+            beats[sequencerViewController.beatNumber] = sequencerViewController.beat
+        }
+        beatTableView.reloadData()
+        saveBeats()
+        
     }
     
 

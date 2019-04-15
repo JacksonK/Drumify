@@ -567,7 +567,7 @@
                                             </state>
                                             <connections>
                                                 <action selector="record:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BUa-Qc-gEg"/>
-                                                <segue destination="1Zi-xt-Xj9" kind="show" id="lHb-4n-npM"/>
+                                                <segue destination="1Zi-xt-Xj9" kind="show" identifier="newBeat" id="lHb-4n-npM"/>
                                             </connections>
                                         </button>
                                     </barButtonItem>
@@ -698,6 +698,7 @@
                     </view>
                     <connections>
                         <outlet property="beatTableView" destination="9L9-NQ-87q" id="jrR-Tc-FMb"/>
+                        <segue destination="1Zi-xt-Xj9" kind="show" identifier="existingBeat" id="iYw-vR-ngE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qwH-aR-vC5" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -705,4 +706,7 @@
             <point key="canvasLocation" x="895.20000000000005" y="-211.84407796101951"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="iYw-vR-ngE"/>
+    </inferredMetricsTieBreakers>
 </document>

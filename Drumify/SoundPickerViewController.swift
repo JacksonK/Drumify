@@ -17,6 +17,9 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     
     @IBOutlet weak var sequencerCollectionView: UICollectionView!
     var beat:Beat!
+    var newBeat:Bool=false
+    var beatNumber:Int=0
+    
     let laneColors = [UIColor.red,UIColor.yellow, UIColor.green, UIColor.blue, UIColor.purple]
     
     let columnLayout = ColumnFlowLayout(
@@ -127,7 +130,6 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         
         sequencerCollectionView?.collectionViewLayout = columnLayout
         
-        beat = Beat(name: "test", cellPerRow: 8)
         titleLabel.text = beat.name
         //UIViewController.attemptRotationToDeviceOrientation()
         // Do any additional setup after loading the view.
