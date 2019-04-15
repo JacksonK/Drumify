@@ -384,11 +384,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="667" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8D-z1-NdE">
-                                        <rect key="frame" x="8" y="8" width="42" height="30"/>
+                                        <rect key="frame" x="12" y="8" width="34" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <state key="normal" title="return"/>
+                                        <state key="normal" title="Save"/>
                                         <connections>
-                                            <segue destination="iVs-vJ-Yzs" kind="unwind" unwindAction="unwindFromSoundPicker:" id="Btc-q3-cRT"/>
+                                            <action selector="returnClick:" destination="1Zi-xt-Xj9" eventType="touchUpInside" id="swS-Qv-ttW"/>
                                         </connections>
                                     </button>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tvp-bP-oL9">
@@ -522,6 +522,7 @@
                         <outlet property="rightOfLaneView" destination="4TC-eA-9J6" id="8gO-bl-m2c"/>
                         <outlet property="sequencerCollectionView" destination="wsb-Vo-7TF" id="vhe-mM-3oR"/>
                         <outlet property="titleLabel" destination="tvp-bP-oL9" id="8JK-GK-qDT"/>
+                        <segue destination="iVs-vJ-Yzs" kind="unwind" identifier="unwindSave" unwindAction="unwindFromSoundPicker:" id="cUv-vj-evc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2gP-2Y-Toh" userLabel="First Responder" sceneMemberID="firstResponder"/>

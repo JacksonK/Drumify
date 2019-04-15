@@ -53,6 +53,25 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         sequencerCollectionView.reloadData()
     }
     
+    @IBAction func returnClick(_ sender: Any) {
+        if newBeat {
+            let alert = UIAlertController(title: "Name your beat", message: "", preferredStyle: .alert)
+            alert.addTextField { (textField) in
+                textField.text = "new beat"
+            }
+            
+            alert.addAction(UIAlertAction(title: "Save", style: .default, handler: { [weak alert] (_) in
+                self.beat.name = alert?.textFields?.first?.text ?? "new beat"
+                self.performSegue(withIdentifier: "unwindSave", sender: self)
+            }))
+            alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+        }
+        else {
+          performSegue(withIdentifier: "unwindSave", sender: self)
+        }
+        
+    }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return beat.lanes.count * beat.cellPerRow
     }
