@@ -10,6 +10,9 @@ import UIKit
 
 class SoundPickerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var velocityModeButton: UIButton!
+    @IBOutlet weak var bpmButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var laneBarView: UIView!
     @IBOutlet weak var rightOfLaneView: UIView!
@@ -51,6 +54,22 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         
         beat.toggleCellActivation(index: indexPath.row, bar: 0)
         sequencerCollectionView.reloadData()
+    }
+    @IBAction func changeBPM(_ sender: Any) {
+        let alert = UIAlertController(title: "Change BPM", message: "", preferredStyle: .alert)
+        alert.addTextField { (textField) in
+            textField.text = "\(self.beat.bpm)"
+        }
+        
+        alert.addAction(UIAlertAction(title: "Update", style: .default, handler: { [weak alert] (_) in
+            if let newBPM = Int(alert?.textFields?.first?.text ?? "120") {
+                self.beat.bpm = newBPM
+                self.bpmButton.setTitle("BPM: " + "\(newBPM)", for: .normal)
+            }
+                
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
     }
     
     @IBAction func returnClick(_ sender: Any) {
@@ -149,6 +168,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         
         sequencerCollectionView?.collectionViewLayout = columnLayout
         
+        bpmButton.setTitle("BPM: " + "\(beat.bpm)", for: .normal)
         titleLabel.text = beat.name
         //UIViewController.attemptRotationToDeviceOrientation()
         // Do any additional setup after loading the view.

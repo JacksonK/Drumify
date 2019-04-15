@@ -425,16 +425,31 @@
                                             <action selector="playBeat:" destination="1Zi-xt-Xj9" eventType="touchUpInside" id="Upo-DW-uQR"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yN8-Op-wCl">
+                                        <rect key="frame" x="122" y="10" width="128" height="30"/>
+                                        <state key="normal" title="Velocity Mode: Off"/>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TOu-b5-0wQ">
+                                        <rect key="frame" x="467" y="10" width="65" height="30"/>
+                                        <state key="normal" title="BPM: 120"/>
+                                        <connections>
+                                            <action selector="changeBPM:" destination="1Zi-xt-Xj9" eventType="touchUpInside" id="w0d-dD-WJ4"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="cKk-wi-nCp" secondAttribute="trailing" constant="615" id="BgF-OL-gnL"/>
                                     <constraint firstAttribute="bottom" secondItem="cKk-wi-nCp" secondAttribute="bottom" constant="5" id="Hhq-fS-6it"/>
                                     <constraint firstItem="cKk-wi-nCp" firstAttribute="leading" secondItem="2oV-id-uWb" secondAttribute="leading" constant="8" id="PX7-f6-ZcH"/>
+                                    <constraint firstAttribute="bottom" secondItem="TOu-b5-0wQ" secondAttribute="bottom" constant="10" id="Rmo-yI-Kzy"/>
                                     <constraint firstAttribute="height" constant="50" id="VuG-JP-V2E"/>
+                                    <constraint firstItem="TOu-b5-0wQ" firstAttribute="leading" secondItem="udw-3p-Yon" secondAttribute="trailing" constant="119" id="a92-og-3ka"/>
                                     <constraint firstItem="udw-3p-Yon" firstAttribute="leading" secondItem="2oV-id-uWb" secondAttribute="leading" constant="318" id="dQu-IJ-GNc"/>
+                                    <constraint firstItem="udw-3p-Yon" firstAttribute="leading" secondItem="yN8-Op-wCl" secondAttribute="trailing" constant="68" id="iNp-Lj-h1l"/>
                                     <constraint firstAttribute="trailing" secondItem="udw-3p-Yon" secondAttribute="trailing" constant="319" id="jej-ff-9Ud"/>
                                     <constraint firstAttribute="bottom" secondItem="udw-3p-Yon" secondAttribute="bottom" constant="7" id="kIf-iZ-ffL"/>
+                                    <constraint firstAttribute="bottom" secondItem="yN8-Op-wCl" secondAttribute="bottom" constant="10" id="tYJ-Lk-dC9"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kbr-PU-Nls" userLabel="Lane Bar View">
@@ -517,11 +532,14 @@
                         <viewLayoutGuide key="safeArea" id="Aiu-qD-5vU"/>
                     </view>
                     <connections>
+                        <outlet property="bpmButton" destination="TOu-b5-0wQ" id="pgI-K3-eYT"/>
                         <outlet property="laneBarView" destination="Kbr-PU-Nls" id="ppG-v6-LJs"/>
                         <outlet property="leftOfLaneView" destination="1Rd-mF-m65" id="iSd-IP-S35"/>
-                        <outlet property="rightOfLaneView" destination="4TC-eA-9J6" id="8gO-bl-m2c"/>
+                        <outlet property="playButton" destination="udw-3p-Yon" id="yCx-dq-ejo"/>
+                        <outlet property="rightOfLaneView" destination="TOu-b5-0wQ" id="Spf-zf-U4m"/>
                         <outlet property="sequencerCollectionView" destination="wsb-Vo-7TF" id="vhe-mM-3oR"/>
                         <outlet property="titleLabel" destination="tvp-bP-oL9" id="8JK-GK-qDT"/>
+                        <outlet property="velocityModeButton" destination="yN8-Op-wCl" id="KIz-cS-zI5"/>
                         <segue destination="iVs-vJ-Yzs" kind="unwind" identifier="unwindSave" unwindAction="unwindFromSoundPicker:" id="cUv-vj-evc"/>
                     </connections>
                 </viewController>

@@ -95,6 +95,24 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == UITableViewCell.EditingStyle.delete {
+            deleteBeat(at: indexPath)
+        }
+    }
+    
+    func deleteBeat(at indexPath: IndexPath) {
+        let alert = UIAlertController(title: "Are you sure you want to delete this Beat?", message: "", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { action in
+            
+            self.beats.remove(at: indexPath.row)
+            self.saveBeats()
+            self.beatTableView.reloadData()
+        }))
+        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertAction.Style.cancel, handler: nil))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     @IBAction func unwindFromSoundPicker (_ sender: UIStoryboardSegue) {
         let sequencerViewController = sender.source as! SoundPickerViewController
         if sequencerViewController.newBeat {
