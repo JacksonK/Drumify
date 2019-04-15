@@ -8,9 +8,25 @@
 
 import UIKit
 
-class SoundPickerViewController: UIViewController {
+class SoundPickerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var laneBarView: UIView!
+    @IBOutlet weak var rightOfLaneView: UIView!
+    @IBOutlet weak var leftOfLaneView: UIView!
+    
+    @IBOutlet weak var sequencerCollectionView: UICollectionView!
+    var beat:Beat!
+    let laneColors = [UIColor.red,UIColor.yellow, UIColor.green, UIColor.blue, UIColor.purple]
+    
+    let columnLayout = ColumnFlowLayout(
+        cellsPerRow: 8,
+        minimumInteritemSpacing: 10,
+        minimumLineSpacing: 10,
+        sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    )
     //somehow setting this to true correctly forces the view to be landscape only, idk why.
+    
     override var shouldAutorotate: Bool {
         return true
     }
@@ -23,21 +39,39 @@ class SoundPickerViewController: UIViewController {
         return .landscapeLeft
     }
     
-    @IBOutlet weak var laneBarView: UIView!
-    @IBOutlet weak var rightOfLaneView: UIView!
-    @IBOutlet weak var leftOfLaneView: UIView!
+    @IBAction func playBeat(_ sender: Any) {
+    }
     
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        //let cell = collectionView.cellForItem(at: indexPath)
+        
+        beat.toggleCellActivation(index: indexPath.row, bar: 0)
+        sequencerCollectionView.reloadData()
+    }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return beat.lanes.count * beat.cellPerRow
+    }
+    
+    @IBAction func addLane(_ sender: Any) {
+        beat.addLane()
+        sequencerCollectionView.reloadData()
+    }
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomSequencerCell
+        print("index path: ", indexPath)
         
-        let value = UIInterfaceOrientation.landscapeLeft.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
         
-        initializeGestures()
-        
-        //UIViewController.attemptRotationToDeviceOrientation()
-        // Do any additional setup after loading the view.
+        if beat.isCellActive(index: indexPath.row, bar: 0){
+            cell.backgroundColor = laneColors[ indexPath.row / (beat.cellPerRow) ]
+        }
+        else {
+            cell.backgroundColor = .gray
+        }
+        cell.layer.cornerRadius = 10
+        cell.layer.masksToBounds = true
+        return cell
     }
     
     private func initializeGestures() {
@@ -83,15 +117,20 @@ class SoundPickerViewController: UIViewController {
         }
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        
+        initializeGestures()
+        
+        sequencerCollectionView?.collectionViewLayout = columnLayout
+        
+        beat = Beat(name: "test", cellPerRow: 8)
+        titleLabel.text = beat.name
+        //UIViewController.attemptRotationToDeviceOrientation()
+        // Do any additional setup after loading the view.
     }
-    */
 
 }
