@@ -8,9 +8,9 @@
 
 import UIKit
 
-class SoundPickerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
-
-   
+class SoundPickerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
+    
+    
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var rightOfLaneView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -24,7 +24,10 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     
     @IBOutlet weak var soundPickerLeftTable: UITableView!
     @IBOutlet weak var soundPickerRightTable: UITableView!
+    @IBOutlet weak var categoryTab: UISegmentedControl!
     
+    var recordings:[[Recording]]!
+
     var beat:Beat!
     var newBeat:Bool=false
     var beatNumber:Int=0
@@ -38,6 +41,10 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     )
     //somehow setting this to true correctly forces the view to be landscape only, idk why.
+    
+    @IBAction func changedTab(_ sender: Any) {
+        soundPickerLeftTable.reloadData()
+    }
     
     override var shouldAutorotate: Bool {
         return true
@@ -168,6 +175,30 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         }
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if tableView == soundPickerLeftTable  {
+            let categoryIndex = categoryTab.selectedSegmentIndex
+            return recordings[categoryIndex].count
+        }
+        else {
+            return 0
+        }
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let categoryIndex = categoryTab.selectedSegmentIndex
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "recordingCell", for: indexPath) as! RecordingTableViewCell
+        //cell.playButtonRight.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
+        
+        cell.recordingName?.text = recordings[categoryIndex][indexPath.row].name
+        
+        return cell
+    }
+    
+    @objc func tappedPlayButton(sender: UIButton) {
+
+        }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -176,6 +207,26 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         
         initializeGestures()
         
+        var bassRecordings:[Recording]!
+        var snareRecordings:[Recording]!
+        var hatRecordings:[Recording]!
+        
+        if let bassData = UserDefaults.standard.value(forKey:"bassRecordings") as? Data {
+            bassRecordings = try? PropertyListDecoder().decode([Recording].self, from:bassData)
+        }
+        else { bassRecordings = [] }
+        if let snareData = UserDefaults.standard.value(forKey:"snareRecordings") as? Data {
+            snareRecordings = try? PropertyListDecoder().decode([Recording].self, from:snareData)
+        }
+        else { snareRecordings = [] }
+        if let hatData = UserDefaults.standard.value(forKey:"hatRecordings") as? Data {
+            hatRecordings = try? PropertyListDecoder().decode([Recording].self, from:hatData)
+        }
+        else { hatRecordings = [] }
+        //bassRecordings = [Recording(filepath: "test", creation_date: Date(), name: "my recording", duration: 10, start_time: 0, category: DrumType.bass)]
+        //snareRecordings = []
+        //hatRecordings = []
+        recordings = [bassRecordings, snareRecordings, hatRecordings]
         sequencerCollectionView?.collectionViewLayout = columnLayout
         
         bpmButton.setTitle("BPM: " + "\(beat.bpm)", for: .normal)
