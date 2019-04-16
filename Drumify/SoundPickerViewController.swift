@@ -11,6 +11,7 @@ import UIKit
 class SoundPickerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
    
+    @IBOutlet weak var topView: UIView!
     @IBOutlet weak var rightOfLaneView: UIView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var laneBarView: UIView!
@@ -20,6 +21,9 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var bpmButton: UIButton!
     
     @IBOutlet weak var sequencerCollectionView: UICollectionView!
+    
+    @IBOutlet weak var soundPickerLeftTable: UITableView!
+    @IBOutlet weak var soundPickerRightTable: UITableView!
     
     var beat:Beat!
     var newBeat:Bool=false
@@ -136,11 +140,13 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         let laneCurrentPosition = self.laneBarView.layer.position
         let rightCurrentPosition = self.rightOfLaneView.layer.position
         let leftCurrentPosition = self.leftOfLaneView.layer.position
+        let topCurrentPosition = self.topView.layer.position
         
         UIView.animate(withDuration: 0.4) { 
             self.laneBarView.layer.position = CGPoint(x: laneCurrentPosition.x - 617, y: laneCurrentPosition.y)
             self.rightOfLaneView.layer.position = CGPoint(x: rightCurrentPosition.x - 617, y: rightCurrentPosition.y)
             self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x - 617, y: leftCurrentPosition.y)
+            self.topView.layer.position = CGPoint(x: topCurrentPosition.x - (617 / 2 - 5), y: topCurrentPosition.y)
             
         }
     }
@@ -151,11 +157,13 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         let laneCurrentPosition = self.laneBarView.layer.position
         let rightCurrentPosition = self.rightOfLaneView.layer.position
         let leftCurrentPosition = self.leftOfLaneView.layer.position
+        let topCurrentPosition = self.topView.layer.position
         
         UIView.animate(withDuration: 0.4) { 
             self.laneBarView.layer.position = CGPoint(x: laneCurrentPosition.x + 617, y: laneCurrentPosition.y)
             self.rightOfLaneView.layer.position = CGPoint(x: rightCurrentPosition.x + 617, y: rightCurrentPosition.y)
             self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x + 617, y: leftCurrentPosition.y)
+            self.topView.layer.position = CGPoint(x: topCurrentPosition.x + (617 / 2 - 5), y: topCurrentPosition.y)
             
         }
     }
