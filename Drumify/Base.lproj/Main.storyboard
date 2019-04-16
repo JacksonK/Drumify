@@ -489,7 +489,10 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.81303052244622065" green="0.94897347206482308" blue="0.99958628419999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="wsb-Vo-7TF" secondAttribute="trailing" id="93c-2v-f2H"/>
+                                    <constraint firstAttribute="bottom" secondItem="wsb-Vo-7TF" secondAttribute="bottom" id="55v-eS-RTD"/>
+                                    <constraint firstAttribute="trailing" secondItem="wsb-Vo-7TF" secondAttribute="trailing" id="5R9-Zo-L5P"/>
+                                    <constraint firstItem="wsb-Vo-7TF" firstAttribute="leading" secondItem="4TC-eA-9J6" secondAttribute="leading" id="7Es-Sx-1jX"/>
+                                    <constraint firstItem="wsb-Vo-7TF" firstAttribute="top" secondItem="4TC-eA-9J6" secondAttribute="top" id="c8L-QY-njW"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Rd-mF-m65" userLabel="Left View">
@@ -514,14 +517,11 @@
                             <constraint firstItem="1Rd-mF-m65" firstAttribute="trailing" secondItem="Kbr-PU-Nls" secondAttribute="leading" id="7FA-l6-gmv"/>
                             <constraint firstItem="c5U-t3-Qh9" firstAttribute="leading" secondItem="Aiu-qD-5vU" secondAttribute="leading" id="Gmf-gX-L40"/>
                             <constraint firstItem="2oV-id-uWb" firstAttribute="leading" secondItem="Aiu-qD-5vU" secondAttribute="leading" id="J7P-UK-ePJ"/>
-                            <constraint firstItem="2oV-id-uWb" firstAttribute="top" secondItem="wsb-Vo-7TF" secondAttribute="bottom" id="NJf-c2-66O"/>
                             <constraint firstItem="2oV-id-uWb" firstAttribute="top" secondItem="Kbr-PU-Nls" secondAttribute="bottom" id="NgS-Jf-aQe"/>
-                            <constraint firstItem="wsb-Vo-7TF" firstAttribute="leading" secondItem="Kbr-PU-Nls" secondAttribute="trailing" id="Vey-cN-xNE"/>
                             <constraint firstItem="2oV-id-uWb" firstAttribute="trailing" secondItem="Aiu-qD-5vU" secondAttribute="trailing" id="W6A-Qk-69t"/>
                             <constraint firstItem="2oV-id-uWb" firstAttribute="bottom" secondItem="Aiu-qD-5vU" secondAttribute="bottom" id="ZuI-At-Wiy"/>
                             <constraint firstItem="2oV-id-uWb" firstAttribute="top" secondItem="4TC-eA-9J6" secondAttribute="bottom" id="cgW-eu-RIf"/>
                             <constraint firstItem="Kbr-PU-Nls" firstAttribute="leading" secondItem="Aiu-qD-5vU" secondAttribute="leading" id="jJ4-v2-qtg"/>
-                            <constraint firstItem="wsb-Vo-7TF" firstAttribute="top" secondItem="c5U-t3-Qh9" secondAttribute="bottom" id="jq8-lb-hfw"/>
                             <constraint firstItem="4TC-eA-9J6" firstAttribute="leading" secondItem="Kbr-PU-Nls" secondAttribute="trailing" id="q6v-hB-f5F"/>
                             <constraint firstItem="Kbr-PU-Nls" firstAttribute="top" secondItem="c5U-t3-Qh9" secondAttribute="bottom" id="rVP-3o-rRb"/>
                             <constraint firstItem="Aiu-qD-5vU" firstAttribute="trailing" secondItem="4TC-eA-9J6" secondAttribute="trailing" id="vOz-1D-Vgh"/>
@@ -536,7 +536,7 @@
                         <outlet property="laneBarView" destination="Kbr-PU-Nls" id="ppG-v6-LJs"/>
                         <outlet property="leftOfLaneView" destination="1Rd-mF-m65" id="iSd-IP-S35"/>
                         <outlet property="playButton" destination="udw-3p-Yon" id="yCx-dq-ejo"/>
-                        <outlet property="rightOfLaneView" destination="TOu-b5-0wQ" id="Spf-zf-U4m"/>
+                        <outlet property="rightOfLaneView" destination="4TC-eA-9J6" id="xT6-1K-myV"/>
                         <outlet property="sequencerCollectionView" destination="wsb-Vo-7TF" id="vhe-mM-3oR"/>
                         <outlet property="titleLabel" destination="tvp-bP-oL9" id="8JK-GK-qDT"/>
                         <outlet property="velocityModeButton" destination="yN8-Op-wCl" id="KIz-cS-zI5"/>

@@ -10,15 +10,17 @@ import UIKit
 
 class SoundPickerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
+   
+    @IBOutlet weak var rightOfLaneView: UIView!
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var laneBarView: UIView!
+    @IBOutlet weak var leftOfLaneView: UIView!
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var velocityModeButton: UIButton!
     @IBOutlet weak var bpmButton: UIButton!
-    @IBOutlet weak var titleLabel: UILabel!
-    @IBOutlet weak var laneBarView: UIView!
-    @IBOutlet weak var rightOfLaneView: UIView!
-    @IBOutlet weak var leftOfLaneView: UIView!
     
     @IBOutlet weak var sequencerCollectionView: UICollectionView!
+    
     var beat:Beat!
     var newBeat:Bool=false
     var beatNumber:Int=0
