@@ -384,7 +384,7 @@
                                 <rect key="frame" x="0.0" y="325" width="667" height="50"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cKk-wi-nCp">
-                                        <rect key="frame" x="8" y="1" width="44" height="44"/>
+                                        <rect key="frame" x="8" y="6" width="44" height="39"/>
                                         <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="27"/>
                                         <state key="normal" title=""/>
                                         <connections>
@@ -392,7 +392,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="udw-3p-Yon">
-                                        <rect key="frame" x="318" y="3" width="30" height="40"/>
+                                        <rect key="frame" x="318" y="7" width="30" height="36"/>
                                         <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="24"/>
                                         <state key="normal" title=""/>
                                         <connections>

@@ -7,6 +7,7 @@
 
 import UIKit
 
+
 class SequencerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate {
 
     @IBOutlet weak var sequencerCollectionView: UICollectionView!

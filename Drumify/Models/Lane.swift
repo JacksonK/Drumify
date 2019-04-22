@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import AudioKit
 
 struct Lane: Codable {
     var recording: Recording?
@@ -17,6 +18,11 @@ struct Lane: Codable {
             bars[0].append(false)
         }
     }
+    
+    mutating func setRecording(recording: Recording) {
+        self.recording = recording
+    }
+    
     //self.recording = nil
     //self.bars = Array(repeating: [Bool](), count: 1)
 }

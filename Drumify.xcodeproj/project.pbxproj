@@ -16,6 +16,9 @@
 		B43C4B65221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = B43C4B64221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf */; };
 		B43CC7372238C7B0004B4F57 /* AddRecordingModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43CC7362238C7B0004B4F57 /* AddRecordingModalViewController.swift */; };
 		B463BBA4221C7E7100E310AA /* RecordingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B463BBA3221C7E7100E310AA /* RecordingTableViewCell.swift */; };
+		DC0189DE226D3B0B00A232B2 /* snare.wav in Resources */ = {isa = PBXBuildFile; fileRef = DC0189DB226D3B0A00A232B2 /* snare.wav */; };
+		DC0189DF226D3B0B00A232B2 /* hat.wav in Resources */ = {isa = PBXBuildFile; fileRef = DC0189DC226D3B0A00A232B2 /* hat.wav */; };
+		DC0189E0226D3B0B00A232B2 /* bass.wav in Resources */ = {isa = PBXBuildFile; fileRef = DC0189DD226D3B0A00A232B2 /* bass.wav */; };
 		DC36AE71223439A0004CC951 /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC36AE70223439A0004CC951 /* Analysis.swift */; };
 		DC3EFD1621FEA9FE000ED222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */; };
 		DC3EFD1821FEA9FE000ED222 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3EFD1721FEA9FE000ED222 /* ViewController.swift */; };
@@ -66,6 +69,9 @@
 		B461EF5731B55F01F7C329FE /* Pods-DrumifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyUITests.release.xcconfig"; path = "Target Support Files/Pods-DrumifyUITests/Pods-DrumifyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B463BBA3221C7E7100E310AA /* RecordingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingTableViewCell.swift; sourceTree = "<group>"; };
 		CB27D441B5C9C8148C4C265F /* Pods-DrumifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyTests.release.xcconfig"; path = "Target Support Files/Pods-DrumifyTests/Pods-DrumifyTests.release.xcconfig"; sourceTree = "<group>"; };
+		DC0189DB226D3B0A00A232B2 /* snare.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = snare.wav; sourceTree = "<group>"; };
+		DC0189DC226D3B0A00A232B2 /* hat.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = hat.wav; sourceTree = "<group>"; };
+		DC0189DD226D3B0A00A232B2 /* bass.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = bass.wav; sourceTree = "<group>"; };
 		DC36AE70223439A0004CC951 /* Analysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analysis.swift; sourceTree = "<group>"; };
 		DC3EFD1221FEA9FE000ED222 /* Drumify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Drumify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -175,6 +181,9 @@
 		DC3EFD1421FEA9FE000ED222 /* Drumify */ = {
 			isa = PBXGroup;
 			children = (
+				DC0189DD226D3B0A00A232B2 /* bass.wav */,
+				DC0189DC226D3B0A00A232B2 /* hat.wav */,
+				DC0189DB226D3B0A00A232B2 /* snare.wav */,
 				B43C4B61221BB59100659D1C /* Font Awesome */,
 				B4176A352239C39B00FFF813 /* Constants.swift */,
 				DC70EB1F2258133400BA9B22 /* Models */,
@@ -299,6 +308,9 @@
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1020;
 						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
 							com.apple.Keychain = {
 								enabled = 0;
 							};
@@ -344,7 +356,10 @@
 				DC70EB212258194A00BA9B22 /* Sequencer.storyboard in Resources */,
 				DC3EFD2021FEAA00000ED222 /* LaunchScreen.storyboard in Resources */,
 				DC3EFD1D21FEAA00000ED222 /* Assets.xcassets in Resources */,
+				DC0189DF226D3B0B00A232B2 /* hat.wav in Resources */,
 				DC3EFD1B21FEA9FE000ED222 /* Main.storyboard in Resources */,
+				DC0189E0226D3B0B00A232B2 /* bass.wav in Resources */,
+				DC0189DE226D3B0B00A232B2 /* snare.wav in Resources */,
 				B43C4B65221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

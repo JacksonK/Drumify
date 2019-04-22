@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AudioKit
 
 class SoundPickerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
@@ -31,6 +32,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     var beat:Beat!
     var newBeat:Bool=false
     var beatNumber:Int=0
+    var sequencer:AKSequencer = AKSequencer()
     
     let laneColors = [UIColor.red,UIColor.yellow, UIColor.green, UIColor.blue, UIColor.purple]
     
@@ -59,6 +61,15 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     @IBAction func playBeat(_ sender: Any) {
+        if sequencer.isPlaying  {
+            beat.stopPlaying(sequencer: sequencer)
+            playButton.setTitle("\u{f04b}", for: .normal )
+
+        }
+        else {
+            beat.startPlaying(sequencer: sequencer)
+            playButton.setTitle("\u{f0c8}", for: .normal )
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -67,6 +78,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         
         beat.toggleCellActivation(index: indexPath.row, bar: 0)
         sequencerCollectionView.reloadData()
+        beat.prepareSequencer(sequencer: sequencer)
     }
     @IBAction func changeBPM(_ sender: Any) {
         let alert = UIAlertController(title: "Change BPM", message: "", preferredStyle: .alert)
@@ -114,7 +126,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomSequencerCell
-        print("index path: ", indexPath)
+        //print("index path: ", indexPath)
         
         
         if beat.isCellActive(index: indexPath.row, bar: 0){
@@ -231,6 +243,9 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         
         bpmButton.setTitle("BPM: " + "\(beat.bpm)", for: .normal)
         titleLabel.text = beat.name
+        
+        beat.prepareSequencer(sequencer: sequencer)
+        beat.printContents()
         //UIViewController.attemptRotationToDeviceOrientation()
         // Do any additional setup after loading the view.
     }
