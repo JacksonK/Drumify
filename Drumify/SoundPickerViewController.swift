@@ -22,6 +22,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var bpmButton: UIButton!
     
     @IBOutlet weak var sequencerCollectionView: UICollectionView!
+    @IBOutlet weak var laneBarCollectionView: UICollectionView!
     
     @IBOutlet weak var soundPickerLeftTable: UITableView!
     @IBOutlet weak var soundPickerRightTable: UITableView!
@@ -36,8 +37,16 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     
     let laneColors = [UIColor.red,UIColor.yellow, UIColor.green, UIColor.blue, UIColor.purple]
     
-    let columnLayout = ColumnFlowLayout(
+    let sequencerColumnLayout = ColumnFlowLayout(
         cellsPerRow: 8,
+        cellsPerColumn: 5,
+        minimumInteritemSpacing: 10,
+        minimumLineSpacing: 10,
+        sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    )
+    let laneBarColumnLayout = ColumnFlowLayout(
+        cellsPerRow: 1,
+        cellsPerColumn: 5,
         minimumInteritemSpacing: 10,
         minimumLineSpacing: 10,
         sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
@@ -72,14 +81,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         }
     }
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        //let cell = collectionView.cellForItem(at: indexPath)
-        
-        beat.toggleCellActivation(index: indexPath.row, bar: 0)
-        sequencerCollectionView.reloadData()
-        beat.prepareSequencer(sequencer: sequencer)
-    }
+    
     @IBAction func changeBPM(_ sender: Any) {
         let alert = UIAlertController(title: "Change BPM", message: "", preferredStyle: .alert)
         alert.addTextField { (textField) in
@@ -116,30 +118,57 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         }
         
     }
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return beat.lanes.count * beat.cellPerRow
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == sequencerCollectionView {
+            beat.toggleCellActivation(index: indexPath.row, bar: 0)
+            sequencerCollectionView.reloadData()
+            beat.prepareSequencer(sequencer: sequencer)
+        }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        if collectionView == sequencerCollectionView  {
+            return beat.lanes.count * beat.cellPerRow
+        }
+        else {
+            return beat.lanes.count
+        }
+    }
+    
+   
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if collectionView == sequencerCollectionView {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomSequencerCell
+            //print("index path: ", indexPath)
+            
+            if beat.isCellActive(index: indexPath.row, bar: 0){
+                cell.backgroundColor = laneColors[ indexPath.row / (beat.cellPerRow) ]
+            }
+            else {
+                cell.backgroundColor = .gray
+            }
+            cell.layer.cornerRadius = 10
+            cell.layer.masksToBounds = true
+            return cell
+        }
+        else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "laneCell", for: indexPath) as! CustomSequencerCell
+            cell.backgroundColor = .blue
+            cell.layer.cornerRadius = 10
+            cell.layer.masksToBounds = true
+            return cell
+        }
+        
+    }
+    
     
     @IBAction func addLane(_ sender: Any) {
         beat.addLane()
         sequencerCollectionView.reloadData()
+        laneBarCollectionView.reloadData()
     }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! CustomSequencerCell
-        //print("index path: ", indexPath)
-        
-        
-        if beat.isCellActive(index: indexPath.row, bar: 0){
-            cell.backgroundColor = laneColors[ indexPath.row / (beat.cellPerRow) ]
-        }
-        else {
-            cell.backgroundColor = .gray
-        }
-        cell.layer.cornerRadius = 10
-        cell.layer.masksToBounds = true
-        return cell
-    }
-    
     private func initializeGestures() {
         //code from tutorial https://www.codevscolor.com/ios-adding-swipe-gesture-to-a-view-in-swift-4/
         let left = UISwipeGestureRecognizer(target : self, action : #selector(self.leftSwipeOnLane))
@@ -211,14 +240,9 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     @objc func tappedPlayButton(sender: UIButton) {
 
         }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        let value = UIInterfaceOrientation.landscapeLeft.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        
-        initializeGestures()
-        
+    
+    
+    func loadRecordings () {
         var bassRecordings:[Recording]!
         var snareRecordings:[Recording]!
         var hatRecordings:[Recording]!
@@ -235,11 +259,21 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
             hatRecordings = try? PropertyListDecoder().decode([Recording].self, from:hatData)
         }
         else { hatRecordings = [] }
-        //bassRecordings = [Recording(filepath: "test", creation_date: Date(), name: "my recording", duration: 10, start_time: 0, category: DrumType.bass)]
-        //snareRecordings = []
-        //hatRecordings = []
+        
         recordings = [bassRecordings, snareRecordings, hatRecordings]
-        sequencerCollectionView?.collectionViewLayout = columnLayout
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        let value = UIInterfaceOrientation.landscapeLeft.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        
+        initializeGestures()
+        loadRecordings()
+       
+        sequencerCollectionView?.collectionViewLayout = sequencerColumnLayout
+        laneBarCollectionView?.collectionViewLayout = laneBarColumnLayout
         
         bpmButton.setTitle("BPM: " + "\(beat.bpm)", for: .normal)
         titleLabel.text = beat.name

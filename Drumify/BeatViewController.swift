@@ -83,7 +83,7 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
         if (segue.identifier == "newBeat") {
             let sequencerViewController = segue.destination as! SoundPickerViewController
             sequencerViewController.newBeat = true
-            sequencerViewController.beat = Beat(name: "test", cellPerRow: 8)
+            sequencerViewController.beat = Beat(name: "new beat", cellPerRow: 8)
             
             //sample recordings
             let testKick = Recording(filepath: "bass", creation_date: Date(), name: "kick", duration: 10, start_time: 0, category: DrumType.bass)

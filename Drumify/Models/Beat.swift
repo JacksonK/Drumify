@@ -100,6 +100,7 @@ struct Beat: Codable {
             print("error, number of tracks in sequencer does not match lanes")
         }
         
+        
         if(AudioKit.engine.isRunning) {
             try? AudioKit.stop()
         }
@@ -138,14 +139,15 @@ struct Beat: Codable {
         let mixer = AKMixer(tracks)
         AudioKit.output = mixer
         
-        
         do {
+            print( "PREPARE SEQUENCER: starting audiokit...")
+
             if !AudioKit.engine.isRunning {
                 try AudioKit.start()
             }
         }
         catch {
-            print( "error playing audio in sequencer")
+            print( "PREPARE SEQUENCER: error playing audio in sequencer")
         }
     }
     
@@ -179,6 +181,7 @@ struct Beat: Codable {
             for seqUnit in lane.bars[0] {
                 print("\(seqUnit) ", terminator: "" )
             }
+            print("")
         }
     }
 }
