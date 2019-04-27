@@ -26,8 +26,9 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var soundChoiceCollectionView: UICollectionView!
     
     @IBOutlet weak var soundPickerLeftTable: UITableView!
-    @IBOutlet weak var soundPickerRightTable: UITableView!
     @IBOutlet weak var categoryTab: UISegmentedControl!
+                   var soundPickerLeftTableSelectedIndex:IndexPath? = nil
+                   var selectedRecording:Recording? = nil
     
     var recordings:[[Recording]]!
 
@@ -134,6 +135,15 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
             sequencerCollectionView.reloadData()
             beat.prepareSequencer(sequencer: sequencer)
         }
+        
+        if collectionView == soundChoiceCollectionView {
+            if selectedRecording != nil {
+                beat.lanes[indexPath.row].setRecording(recording: selectedRecording!)
+                soundChoiceCollectionView.reloadData()
+                
+            }
+            
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -171,7 +181,11 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         }
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pickedSoundCell", for: indexPath) as! CustomSequencerCell
-            cell.backgroundColor = .gray
+            if beat.lanes[indexPath.row].recording != nil {
+                cell.backgroundColor = .red
+            } else {
+                cell.backgroundColor = .gray
+            }
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
             return cell
@@ -260,6 +274,43 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         cell.recordingName?.text = recordings[categoryIndex][indexPath.row].name
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {        
+//        selectedIndexPath = indexPath
+//        let cell = tableView.cellForRow(at: indexPath) as! RecordingTableViewCell
+//        cell.playButtonRight.isHidden = true;
+//        myTableView.beginUpdates()
+//        myTableView.endUpdates()
+        
+        
+        if tableView == soundPickerLeftTable {
+            let categoryIndex = categoryTab.selectedSegmentIndex
+            let cell = tableView.cellForRow(at: indexPath) as! RecordingTableViewCell
+//            soundPickerLeftTableSelectedIndex = indexPath
+//            cell.backgroundColor = UIColor.yellow
+            
+            selectedRecording = recordings[categoryIndex][indexPath.row]
+            print("selected recording: " + (selectedRecording?.name ?? "uh oh nil selectedRecording"))
+        }
+        
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+//        let cell = tableView.cellForRow(at: indexPath) as! RecordingTableViewCell
+//        cell.playButtonRight.isHidden = false;
+//        myTableView.beginUpdates()
+//        myTableView.endUpdates()
+        
+        if tableView == soundPickerLeftTable {
+//            let categoryIndex = categoryTab.selectedSegmentIndex
+            let cell = tableView.cellForRow(at: indexPath) as! RecordingTableViewCell
+//            soundPickerLeftTableSelectedIndex = nil
+//            cell.backgroundColor = UIColor.white
+            selectedRecording = nil
+            print("deselected recording: " + (selectedRecording?.name ?? "uh oh nil selectedRecording"))
+
+        }
     }
     
     @objc func tappedPlayButton(sender: UIButton) {
