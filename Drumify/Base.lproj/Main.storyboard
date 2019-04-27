@@ -504,14 +504,14 @@
                                 <rect key="frame" x="-714" y="0.0" width="758" height="343"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tp3-eB-ePZ" userLabel="Left Table">
-                                        <rect key="frame" x="0.0" y="50" width="309" height="293"/>
+                                        <rect key="frame" x="0.0" y="50" width="375" height="293"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recordingCell" id="K7s-Zm-p4B" customClass="RecordingTableViewCell" customModule="Drumify" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="309" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K7s-Zm-p4B" id="eeh-qy-jxE">
-                                                    <rect key="frame" x="44" y="0.0" width="265" height="43.5"/>
+                                                    <rect key="frame" x="44" y="0.0" width="331" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qS-hi-bsi">
@@ -538,7 +538,7 @@
                                         </connections>
                                     </tableView>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VeI-Ib-g4b">
-                                        <rect key="frame" x="8" y="11" width="155" height="29"/>
+                                        <rect key="frame" x="77" y="11" width="221" height="29"/>
                                         <segments>
                                             <segment title="bass"/>
                                             <segment title="snare"/>
@@ -549,7 +549,7 @@
                                         </connections>
                                     </segmentedControl>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OHl-aV-ifh">
-                                        <rect key="frame" x="317" y="50" width="441" height="293"/>
+                                        <rect key="frame" x="383" y="50" width="375" height="293"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LLC-43-Aku">
                                             <size key="itemSize" width="50" height="50"/>
@@ -579,13 +579,14 @@
                                     <constraint firstAttribute="trailing" secondItem="OHl-aV-ifh" secondAttribute="trailing" id="CAx-Gk-X3X"/>
                                     <constraint firstItem="Tp3-eB-ePZ" firstAttribute="top" secondItem="VeI-Ib-g4b" secondAttribute="bottom" constant="11" id="Ets-Ve-26q"/>
                                     <constraint firstAttribute="bottom" secondItem="OHl-aV-ifh" secondAttribute="bottom" id="FpO-lA-4Oq"/>
-                                    <constraint firstItem="VeI-Ib-g4b" firstAttribute="leading" secondItem="1Rd-mF-m65" secondAttribute="leading" constant="8" id="KaZ-lG-Bpb"/>
                                     <constraint firstAttribute="bottom" secondItem="Tp3-eB-ePZ" secondAttribute="bottom" id="MQ4-DF-Y1f"/>
                                     <constraint firstItem="Tp3-eB-ePZ" firstAttribute="top" secondItem="1Rd-mF-m65" secondAttribute="top" constant="50" id="PPG-g3-aab"/>
                                     <constraint firstItem="VeI-Ib-g4b" firstAttribute="width" secondItem="Tp3-eB-ePZ" secondAttribute="width" constant="-154" id="Rh8-uF-exi"/>
                                     <constraint firstItem="OHl-aV-ifh" firstAttribute="top" secondItem="1Rd-mF-m65" secondAttribute="top" constant="50" id="Rqv-3m-pJ1"/>
+                                    <constraint firstItem="Tp3-eB-ePZ" firstAttribute="width" secondItem="OHl-aV-ifh" secondAttribute="width" id="gGc-T0-Vh2"/>
                                     <constraint firstItem="Tp3-eB-ePZ" firstAttribute="leading" secondItem="1Rd-mF-m65" secondAttribute="leading" id="k54-Rx-Aw7"/>
                                     <constraint firstItem="OHl-aV-ifh" firstAttribute="leading" secondItem="Tp3-eB-ePZ" secondAttribute="trailing" constant="8" id="n9L-6Y-CzP"/>
+                                    <constraint firstItem="VeI-Ib-g4b" firstAttribute="centerX" secondItem="Tp3-eB-ePZ" secondAttribute="centerX" id="q5P-q2-UB3"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5U-t3-Qh9" userLabel="Top View">
