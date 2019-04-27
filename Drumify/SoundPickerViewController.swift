@@ -23,6 +23,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     
     @IBOutlet weak var sequencerCollectionView: UICollectionView!
     @IBOutlet weak var laneBarCollectionView: UICollectionView!
+    @IBOutlet weak var soundChoiceCollectionView: UICollectionView!
     
     @IBOutlet weak var soundPickerLeftTable: UITableView!
     @IBOutlet weak var soundPickerRightTable: UITableView!
@@ -45,6 +46,14 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
     )
     let laneBarColumnLayout = ColumnFlowLayout(
+        cellsPerRow: 1,
+        cellsPerColumn: 5,
+        minimumInteritemSpacing: 10,
+        minimumLineSpacing: 10,
+        sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+    )
+    
+    let soundChoiceColumnLayout = ColumnFlowLayout(
         cellsPerRow: 1,
         cellsPerColumn: 5,
         minimumInteritemSpacing: 10,
@@ -153,9 +162,16 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
             cell.layer.masksToBounds = true
             return cell
         }
-        else {
+        else if collectionView == laneBarCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "laneCell", for: indexPath) as! CustomSequencerCell
             cell.backgroundColor = .blue
+            cell.layer.cornerRadius = 10
+            cell.layer.masksToBounds = true
+            return cell
+        }
+        else {
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pickedSoundCell", for: indexPath) as! CustomSequencerCell
+            cell.backgroundColor = .gray
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
             return cell
@@ -168,6 +184,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         beat.addLane()
         sequencerCollectionView.reloadData()
         laneBarCollectionView.reloadData()
+        soundChoiceCollectionView.reloadData()
     }
     private func initializeGestures() {
         //code from tutorial https://www.codevscolor.com/ios-adding-swipe-gesture-to-a-view-in-swift-4/
@@ -274,6 +291,8 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
        
         sequencerCollectionView?.collectionViewLayout = sequencerColumnLayout
         laneBarCollectionView?.collectionViewLayout = laneBarColumnLayout
+        soundChoiceCollectionView?.collectionViewLayout = soundChoiceColumnLayout
+        
         
         bpmButton.setTitle("BPM: " + "\(beat.bpm)", for: .normal)
         titleLabel.text = beat.name

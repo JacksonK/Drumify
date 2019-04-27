@@ -33,8 +33,9 @@ class ColumnFlowLayout: UICollectionViewFlowLayout {
         
         guard let collectionView = collectionView else { return }
         let marginsAndInsets = sectionInset.left + sectionInset.right + collectionView.safeAreaInsets.left + collectionView.safeAreaInsets.right + minimumInteritemSpacing * CGFloat(cellsPerRow - 1)
+        let heightMarginsAndInsets = sectionInset.top + sectionInset.bottom + collectionView.safeAreaInsets.top + collectionView.safeAreaInsets.bottom + minimumInteritemSpacing * CGFloat(cellsPerColumn - 1)
         let itemWidth = ((collectionView.bounds.size.width - marginsAndInsets) / CGFloat(cellsPerRow)).rounded(.down)
-        let itemHeight = ((collectionView.bounds.size.height - marginsAndInsets) / CGFloat(cellsPerColumn)).rounded(.down)
+        let itemHeight = ((collectionView.bounds.size.height - heightMarginsAndInsets) / CGFloat(cellsPerColumn)).rounded(.down)
         itemSize = CGSize(width: itemWidth, height: itemHeight)
     }
     
