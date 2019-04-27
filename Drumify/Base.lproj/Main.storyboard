@@ -504,14 +504,14 @@
                                 <rect key="frame" x="-617" y="0.0" width="617" height="325"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Tp3-eB-ePZ" userLabel="Left Table">
-                                        <rect key="frame" x="0.0" y="50" width="303.5" height="275"/>
+                                        <rect key="frame" x="0.0" y="50" width="309" height="275"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recordingCell" id="K7s-Zm-p4B" customClass="RecordingTableViewCell" customModule="Drumify" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="303.5" height="44"/>
+                                                <rect key="frame" x="0.0" y="28" width="309" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="K7s-Zm-p4B" id="eeh-qy-jxE">
-                                                    <rect key="frame" x="0.0" y="0.0" width="303.5" height="43.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="309" height="43.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1qS-hi-bsi">
@@ -537,31 +537,8 @@
                                             <outlet property="delegate" destination="1Zi-xt-Xj9" id="5j6-uL-PnY"/>
                                         </connections>
                                     </tableView>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="NBY-J2-8gP" userLabel="Right Table">
-                                        <rect key="frame" x="313.5" y="50" width="303.5" height="275"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="recordingCell" id="tmn-Gi-nUP" customClass="RecordingTableViewCell" customModule="Drumify" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="28" width="303.5" height="44"/>
-                                                <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tmn-Gi-nUP" id="43B-lX-bdA">
-                                                    <rect key="frame" x="0.0" y="0.0" width="303.5" height="43.5"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Table" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mwW-Hn-g9z">
-                                                            <rect key="frame" x="15" y="12" width="41" height="21"/>
-                                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <nil key="textColor"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
-                                                    </subviews>
-                                                </tableViewCellContentView>
-                                            </tableViewCell>
-                                        </prototypes>
-                                    </tableView>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="VeI-Ib-g4b">
-                                        <rect key="frame" x="8" y="11" width="287.5" height="29"/>
+                                        <rect key="frame" x="8" y="11" width="155" height="29"/>
                                         <segments>
                                             <segment title="bass"/>
                                             <segment title="snare"/>
@@ -571,21 +548,44 @@
                                             <action selector="changedTab:" destination="1Zi-xt-Xj9" eventType="valueChanged" id="TDi-sg-u6l"/>
                                         </connections>
                                     </segmentedControl>
+                                    <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="OHl-aV-ifh">
+                                        <rect key="frame" x="317" y="50" width="300" height="275"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="LLC-43-Aku">
+                                            <size key="itemSize" width="50" height="50"/>
+                                            <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                            <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                            <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                        </collectionViewFlowLayout>
+                                        <cells>
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="pickedSoundCell" id="ro2-H5-gZY" customClass="CustomSequencerCell" customModule="Drumify" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                                    <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </view>
+                                            </collectionViewCell>
+                                        </cells>
+                                        <connections>
+                                            <outlet property="dataSource" destination="1Zi-xt-Xj9" id="XOH-87-ugw"/>
+                                            <outlet property="delegate" destination="1Zi-xt-Xj9" id="Ocu-jh-9Rz"/>
+                                        </connections>
+                                    </collectionView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.99958628419999995" green="0.99022926436945213" blue="0.82188982779005937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstItem="Tp3-eB-ePZ" firstAttribute="width" secondItem="NBY-J2-8gP" secondAttribute="width" id="4O9-QC-eci"/>
                                     <constraint firstItem="VeI-Ib-g4b" firstAttribute="top" secondItem="1Rd-mF-m65" secondAttribute="top" constant="11" id="5tz-yx-XKo"/>
+                                    <constraint firstAttribute="trailing" secondItem="OHl-aV-ifh" secondAttribute="trailing" id="CAx-Gk-X3X"/>
                                     <constraint firstItem="Tp3-eB-ePZ" firstAttribute="top" secondItem="VeI-Ib-g4b" secondAttribute="bottom" constant="11" id="Ets-Ve-26q"/>
-                                    <constraint firstAttribute="bottom" secondItem="NBY-J2-8gP" secondAttribute="bottom" id="GUA-gt-OVY"/>
-                                    <constraint firstItem="NBY-J2-8gP" firstAttribute="top" secondItem="1Rd-mF-m65" secondAttribute="top" constant="50" id="HMl-os-XAs"/>
+                                    <constraint firstAttribute="bottom" secondItem="OHl-aV-ifh" secondAttribute="bottom" id="FpO-lA-4Oq"/>
                                     <constraint firstItem="VeI-Ib-g4b" firstAttribute="leading" secondItem="1Rd-mF-m65" secondAttribute="leading" constant="8" id="KaZ-lG-Bpb"/>
                                     <constraint firstAttribute="bottom" secondItem="Tp3-eB-ePZ" secondAttribute="bottom" id="MQ4-DF-Y1f"/>
                                     <constraint firstItem="Tp3-eB-ePZ" firstAttribute="top" secondItem="1Rd-mF-m65" secondAttribute="top" constant="50" id="PPG-g3-aab"/>
-                                    <constraint firstItem="VeI-Ib-g4b" firstAttribute="width" secondItem="Tp3-eB-ePZ" secondAttribute="width" constant="-16" id="Rh8-uF-exi"/>
+                                    <constraint firstItem="VeI-Ib-g4b" firstAttribute="width" secondItem="Tp3-eB-ePZ" secondAttribute="width" constant="-154" id="Rh8-uF-exi"/>
+                                    <constraint firstItem="OHl-aV-ifh" firstAttribute="top" secondItem="1Rd-mF-m65" secondAttribute="top" constant="50" id="Rqv-3m-pJ1"/>
                                     <constraint firstItem="Tp3-eB-ePZ" firstAttribute="leading" secondItem="1Rd-mF-m65" secondAttribute="leading" id="k54-Rx-Aw7"/>
-                                    <constraint firstItem="NBY-J2-8gP" firstAttribute="leading" secondItem="Tp3-eB-ePZ" secondAttribute="trailing" constant="10" id="lYb-Ty-rpt"/>
-                                    <constraint firstAttribute="trailing" secondItem="NBY-J2-8gP" secondAttribute="trailing" id="qOj-cC-ivQ"/>
+                                    <constraint firstItem="OHl-aV-ifh" firstAttribute="leading" secondItem="Tp3-eB-ePZ" secondAttribute="trailing" constant="8" id="n9L-6Y-CzP"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5U-t3-Qh9" userLabel="Top View">
@@ -646,8 +646,8 @@
                         <outlet property="playButton" destination="udw-3p-Yon" id="yCx-dq-ejo"/>
                         <outlet property="rightOfLaneView" destination="4TC-eA-9J6" id="xT6-1K-myV"/>
                         <outlet property="sequencerCollectionView" destination="wsb-Vo-7TF" id="vhe-mM-3oR"/>
+                        <outlet property="soundChoiceCollectionView" destination="OHl-aV-ifh" id="o3v-xg-REf"/>
                         <outlet property="soundPickerLeftTable" destination="Tp3-eB-ePZ" id="Pg7-rh-NcR"/>
-                        <outlet property="soundPickerRightTable" destination="NBY-J2-8gP" id="u7x-Fd-aRI"/>
                         <outlet property="titleLabel" destination="tvp-bP-oL9" id="8JK-GK-qDT"/>
                         <outlet property="topView" destination="c5U-t3-Qh9" id="3Ey-wr-Cw5"/>
                         <outlet property="velocityModeButton" destination="yN8-Op-wCl" id="KIz-cS-zI5"/>
