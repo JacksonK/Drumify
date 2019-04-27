@@ -28,6 +28,16 @@ struct Constants {
     
     struct Screen {
         static let width = UIScreen.main.fixedCoordinateSpace.bounds.width
-        static let height = UIScreen.main.fixedCoordinateSpace.bounds.height
+        static let height = UIScreen.main.fixedCoordinateSpace.bounds.height 
+//        
+//        static let safeHeight = height - 
+//            ((UIApplication.shared.keyWindow?.safeAreaInsets.bottom ?? 0) * 2) -
+//            ((UIApplication.shared.keyWindow?.safeAreaInsets.top ?? 0) * 2)
+        static let window = UIApplication.shared.keyWindow
+        static let leftPadding = window?.safeAreaInsets.left ?? 0
+        static let rightPadding = window?.safeAreaInsets.right ?? 0
+        
+        static let safeHeight = height - leftPadding - rightPadding
+        
     }
 }
