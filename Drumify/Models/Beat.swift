@@ -117,11 +117,15 @@ struct Beat: Codable {
             }
         }
         
-        
         for lane in lanes {
             let track = sequencer.newTrack()
             let sampler = AKMIDISampler()
-            try! sampler.loadWav(lane.recording!.filepath)
+            if let filepath = lane.recording?.filepath {
+                try! sampler.loadWav(filepath)
+            }
+            else {
+                try! sampler.loadAudioFile(AKAudioFile.silent(samples: 10))
+            }
             track?.setMIDIOutput(sampler.midiIn)
             for (ind, seqUnit) in lane.bars[0].enumerated() {
                 if seqUnit {
