@@ -48,9 +48,9 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     let laneBarColumnLayout = ColumnFlowLayout(
         cellsPerRow: 1,
         cellsPerColumn: 5,
-        minimumInteritemSpacing: 10,
-        minimumLineSpacing: 10,
-        sectionInset: UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        minimumInteritemSpacing: 5,
+        minimumLineSpacing: 5,
+        sectionInset: UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 0)
     )
     
     let soundChoiceColumnLayout = ColumnFlowLayout(
@@ -164,9 +164,8 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         }
         else if collectionView == laneBarCollectionView {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "laneCell", for: indexPath) as! CustomSequencerCell
-            cell.backgroundColor = .blue
-            cell.layer.cornerRadius = 10
-            cell.layer.masksToBounds = true
+            cell.backgroundColor =  laneColors[ indexPath.row ]
+            //cell.hasSoundLabel.text = "Test"
             return cell
         }
         else {
@@ -293,6 +292,8 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         laneBarCollectionView?.collectionViewLayout = laneBarColumnLayout
         soundChoiceCollectionView?.collectionViewLayout = soundChoiceColumnLayout
         
+        laneBarCollectionView.layer.borderWidth = 5.0;
+        laneBarCollectionView.layer.borderColor = UIColor.lightGray.cgColor
         
         bpmButton.setTitle("BPM: " + "\(beat.bpm)", for: .normal)
         titleLabel.text = beat.name
