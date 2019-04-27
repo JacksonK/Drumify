@@ -202,8 +202,8 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     @objc private func leftSwipeOnLane() {
         print("swiped left")
         
-        let height = Constants.Screen.height
-        print(height)
+        let toMove = Constants.Screen.height - self.laneBarView.frame.width
+        print(toMove)
         
         
         let laneCurrentPosition = self.laneBarView.layer.position
@@ -212,10 +212,10 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         let topCurrentPosition = self.topView.layer.position
         
         UIView.animate(withDuration: 0.4) { 
-            self.laneBarView.layer.position = CGPoint(x: laneCurrentPosition.x - height, y: laneCurrentPosition.y)
-            self.rightOfLaneView.layer.position = CGPoint(x: rightCurrentPosition.x - height, y: rightCurrentPosition.y)
-            self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x - height, y: leftCurrentPosition.y)
-            self.topView.layer.position = CGPoint(x: topCurrentPosition.x - (height / 2 - 5), y: topCurrentPosition.y)
+            self.laneBarView.layer.position = CGPoint(x: laneCurrentPosition.x - toMove, y: laneCurrentPosition.y)
+            self.rightOfLaneView.layer.position = CGPoint(x: rightCurrentPosition.x - toMove, y: rightCurrentPosition.y)
+            self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x - toMove, y: leftCurrentPosition.y)
+            self.topView.layer.position = CGPoint(x: topCurrentPosition.x - (toMove / 2 - 5), y: topCurrentPosition.y)
             
         }
     }
@@ -223,8 +223,8 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     @objc private func rightSwipeOnLane() {
         print("swiped right")
         
-        let height = Constants.Screen.height
-        print(height)
+        let toMove = Constants.Screen.height - self.laneBarView.frame.width
+        print(toMove)
         
         
         let laneCurrentPosition = self.laneBarView.layer.position
@@ -233,10 +233,10 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         let topCurrentPosition = self.topView.layer.position
         
         UIView.animate(withDuration: 0.4) { 
-            self.laneBarView.layer.position = CGPoint(x: laneCurrentPosition.x + height, y: laneCurrentPosition.y)
-            self.rightOfLaneView.layer.position = CGPoint(x: rightCurrentPosition.x + height, y: rightCurrentPosition.y)
-            self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x + height, y: leftCurrentPosition.y)
-            self.topView.layer.position = CGPoint(x: topCurrentPosition.x + (height / 2 - 5), y: topCurrentPosition.y)
+            self.laneBarView.layer.position = CGPoint(x: laneCurrentPosition.x + toMove, y: laneCurrentPosition.y)
+            self.rightOfLaneView.layer.position = CGPoint(x: rightCurrentPosition.x + toMove, y: rightCurrentPosition.y)
+            self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x + toMove, y: leftCurrentPosition.y)
+            self.topView.layer.position = CGPoint(x: topCurrentPosition.x + (toMove / 2 - 5), y: topCurrentPosition.y)
             
         }
     }
