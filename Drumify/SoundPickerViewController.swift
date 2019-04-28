@@ -188,11 +188,13 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
             return cell
         }
         else {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pickedSoundCell", for: indexPath) as! CustomSequencerCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pickedSoundCell", for: indexPath) as! CustomLaneBarCell
             if beat.lanes[indexPath.row].recording != nil {
                 cell.backgroundColor = .red
+                cell.hasSoundLabel.text = beat.lanes[indexPath.row].recording!.name
             } else {
                 cell.backgroundColor = .gray
+                cell.hasSoundLabel.text = "No recording selected"
             }
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
