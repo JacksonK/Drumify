@@ -85,13 +85,13 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
             print("pausing beat...")
 
             beat.stopPlaying(sequencer: sequencer)
-            playButton.setTitle("\u{f04b}", for: .normal )
+            playButton.setTitle("\u{f144}", for: .normal )
 
         }
         else {
             print("playing beat...")
             beat.startPlaying(sequencer: sequencer)
-            playButton.setTitle("\u{f0c8}", for: .normal )
+            playButton.setTitle("\u{f28b}", for: .normal )
         }
     }
     
@@ -144,7 +144,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
             if selectedRecording != nil {
                 beat.lanes[indexPath.row].setRecording(recording: selectedRecording!)
                 soundChoiceCollectionView.reloadData()
-                
+                laneBarCollectionView.reloadData()
             }
             
         }
@@ -183,7 +183,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
                 cell.hasSoundLabel.text = "\u{f1c7}"
             }
             else {
-                cell.hasSoundLabel.text = "\u{f410}"
+                cell.hasSoundLabel.text = "\u{f146}"
             }
             return cell
         }
