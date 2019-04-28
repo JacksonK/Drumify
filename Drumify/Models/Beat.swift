@@ -94,6 +94,13 @@ struct Beat: Codable {
         player.play()
     }
     
+    func stripFileExtension ( _ filename: String ) -> String {
+        var components = filename.components(separatedBy: ".")
+        guard components.count > 1 else { return filename }
+        components.removeLast()
+        return components.joined(separator: ".")
+    }
+    
     func prepareSequencer(sequencer: AKSequencer) {
         
         if( sequencer.tracks.count != lanes.count) {
@@ -125,8 +132,18 @@ struct Beat: Codable {
                 //try! sampler.loadWav(filepath)
                 print("recording filepath in lane #", i, " filepath: ", filepath)
 
-                let file = try! AKAudioFile(readFileName: filepath, baseDir: .documents)
-                try! sampler.loadAudioFile(file)
+                if let audioFilePath = Bundle.main.path(forResource: filepath, ofType: "wav", inDirectory: "AudioPresetFiles") {
+                    print("path with bundle path in lane #", i, " path: ", audioFilePath)
+                    let newPath = stripFileExtension(audioFilePath)
+                    print("new path: ", newPath )
+                    //try! sampler.loadWav( newPath )
+                }
+                else {
+                    print("couldn't find file using bundle.path...")
+                }
+
+                //let file = try! AKAudioFile(readFileName: filepath, baseDir: .documents)
+                //try! sampler.loadAudioFile(file)
                 print("audio files in sampler #", i, " : ", sampler.audioFiles.count)
                 //print( sampler.audioFiles[0].fileName
                 //try load path:

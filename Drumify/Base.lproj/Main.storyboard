@@ -626,9 +626,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="c5U-t3-Qh9" userLabel="Top View">
                                 <rect key="frame" x="44" y="0.0" width="808" height="50"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8D-z1-NdE">
-                                        <rect key="frame" x="12" y="8" width="34" height="30"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P8D-z1-NdE">
+                                        <rect key="frame" x="10" y="8" width="34" height="30"/>
                                         <state key="normal" title="Save"/>
                                         <connections>
                                             <action selector="returnClick:" destination="1Zi-xt-Xj9" eventType="touchUpInside" id="swS-Qv-ttW"/>
@@ -640,13 +639,26 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="f9V-Ms-Keo">
+                                        <rect key="frame" x="96" y="10" width="131" height="30"/>
+                                        <state key="normal" title="Use Preset Sounds"/>
+                                        <connections>
+                                            <action selector="AddPresetSounds:" destination="1Zi-xt-Xj9" eventType="touchUpInside" id="J8a-wc-ta5"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstItem="tvp-bP-oL9" firstAttribute="top" secondItem="c5U-t3-Qh9" secondAttribute="top" constant="15" id="4bO-lZ-d8p"/>
                                     <constraint firstItem="tvp-bP-oL9" firstAttribute="leading" secondItem="c5U-t3-Qh9" secondAttribute="leading" constant="268" id="Naq-5m-bkW"/>
+                                    <constraint firstItem="tvp-bP-oL9" firstAttribute="leading" secondItem="f9V-Ms-Keo" secondAttribute="trailing" constant="41" id="Rrd-hm-3l0"/>
                                     <constraint firstAttribute="trailing" secondItem="tvp-bP-oL9" secondAttribute="trailing" constant="268" id="SOa-rf-4PL"/>
+                                    <constraint firstItem="P8D-z1-NdE" firstAttribute="leading" secondItem="c5U-t3-Qh9" secondAttribute="leading" constant="10" id="TS2-wK-qJT"/>
                                     <constraint firstAttribute="height" constant="50" id="TSG-XA-TaR"/>
+                                    <constraint firstItem="f9V-Ms-Keo" firstAttribute="top" secondItem="c5U-t3-Qh9" secondAttribute="top" constant="10" id="eSN-N7-M5b"/>
+                                    <constraint firstItem="f9V-Ms-Keo" firstAttribute="leading" secondItem="c5U-t3-Qh9" secondAttribute="leading" constant="96" id="egG-BI-a1q"/>
+                                    <constraint firstItem="P8D-z1-NdE" firstAttribute="top" secondItem="c5U-t3-Qh9" secondAttribute="top" constant="8" id="gc2-kr-bG0"/>
+                                    <constraint firstItem="tvp-bP-oL9" firstAttribute="leading" secondItem="P8D-z1-NdE" secondAttribute="trailing" constant="224" id="kPC-ah-w5f"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -679,6 +691,7 @@
                         <outlet property="laneBarView" destination="Kbr-PU-Nls" id="ppG-v6-LJs"/>
                         <outlet property="leftOfLaneView" destination="1Rd-mF-m65" id="iSd-IP-S35"/>
                         <outlet property="playButton" destination="udw-3p-Yon" id="yCx-dq-ejo"/>
+                        <outlet property="presetSoundsButton" destination="f9V-Ms-Keo" id="yuK-5g-fun"/>
                         <outlet property="rightOfLaneView" destination="4TC-eA-9J6" id="xT6-1K-myV"/>
                         <outlet property="sequencerCollectionView" destination="wsb-Vo-7TF" id="vhe-mM-3oR"/>
                         <outlet property="soundChoiceCollectionView" destination="OHl-aV-ifh" id="o3v-xg-REf"/>
@@ -692,7 +705,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2gP-2Y-Toh" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="iVs-vJ-Yzs" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1787.8560719640182" y="-260"/>
+            <point key="canvasLocation" x="1787.2767857142856" y="-260.86956521739131"/>
         </scene>
         <!--Beat View Controller-->
         <scene sceneID="8z6-LU-9oo">

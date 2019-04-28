@@ -21,6 +21,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     @IBOutlet weak var velocityModeButton: UIButton!
     @IBOutlet weak var bpmButton: UIButton!
     
+    @IBOutlet weak var presetSoundsButton: UIButton!
     @IBOutlet weak var sequencerCollectionView: UICollectionView!
     @IBOutlet weak var laneBarCollectionView: UICollectionView!
     @IBOutlet weak var soundChoiceCollectionView: UICollectionView!
@@ -79,6 +80,20 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         return .landscapeLeft
     }
     
+    @IBAction func AddPresetSounds(_ sender: Any) {
+        let presetKick = Recording(filepath: "bass", creation_date: Date(), name: "kick preset", duration: 10, start_time: 0, category: DrumType.bass)
+        let presetSnare = Recording(filepath: "snare", creation_date: Date(), name: "snare preset", duration: 10, start_time: 0, category: DrumType.snare)
+        let presetHat = Recording(filepath: "hat", creation_date: Date(), name: "hat preset", duration: 10, start_time: 0, category: DrumType.hat)
+        
+        beat.setSound(laneIndex: 0, recording: presetKick)
+        beat.setSound(laneIndex: 1, recording: presetSnare)
+        beat.setSound(laneIndex: 2, recording: presetHat)
+        
+        soundChoiceCollectionView.reloadData()
+        laneBarCollectionView.reloadData()
+        beat.prepareSequencer(sequencer: sequencer)
+
+    }
     @IBAction func playBeat(_ sender: Any) {
         
         if sequencer.isPlaying  {
@@ -145,6 +160,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
                 beat.lanes[indexPath.row].setRecording(recording: selectedRecording!)
                 soundChoiceCollectionView.reloadData()
                 laneBarCollectionView.reloadData()
+                beat.prepareSequencer(sequencer: sequencer)
             }
             
         }
