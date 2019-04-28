@@ -1,20 +1,19 @@
 //
-//  CustomSequencerCell.swift
+//  CustomLaneBarCell.swift
 //  Drumify
 //
-//  Created by Jackson Kurtz on 4/12/19.
+//  Created by Jackson Kurtz on 4/28/19.
 //  Copyright © 2019 Jackson Kurtz. All rights reserved.
 //
 
 import UIKit
 
-class CustomSequencerCell: UICollectionViewCell {
+class CustomLaneBarCell: UICollectionViewCell {
     
-    //var hasSoundLabel: UILabel!
     
+    @IBOutlet weak var hasSoundLabel: UILabel!
     override init(frame: CGRect) {
         super.init( frame : frame)
-        
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -29,6 +29,7 @@
 		DC3EFD3621FEAA00000ED222 /* DrumifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3EFD3521FEAA00000ED222 /* DrumifyUITests.swift */; };
 		DC70EB1E2258132A00BA9B22 /* Lane.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70EB1D2258132A00BA9B22 /* Lane.swift */; };
 		DC70EB212258194A00BA9B22 /* Sequencer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC70EB202258194A00BA9B22 /* Sequencer.storyboard */; };
+		DCAE4FB322761EA900E2D01F /* CustomLaneBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE4FB222761EA900E2D01F /* CustomLaneBarCell.swift */; };
 		DCB3B012223E1B8800C8E05E /* BeatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB3B011223E1B8800C8E05E /* BeatTableViewCell.swift */; };
 		DCB3B014223E1B9F00C8E05E /* Beat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB3B013223E1B9F00C8E05E /* Beat.swift */; };
 		DCB9C1AF223DEA3000475E13 /* BeatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB9C1AE223DEA3000475E13 /* BeatViewController.swift */; };
@@ -87,6 +88,7 @@
 		DC3EFD3721FEAA00000ED222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC70EB1D2258132A00BA9B22 /* Lane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lane.swift; sourceTree = "<group>"; };
 		DC70EB202258194A00BA9B22 /* Sequencer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sequencer.storyboard; sourceTree = "<group>"; };
+		DCAE4FB222761EA900E2D01F /* CustomLaneBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLaneBarCell.swift; sourceTree = "<group>"; };
 		DCB3B011223E1B8800C8E05E /* BeatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatTableViewCell.swift; sourceTree = "<group>"; };
 		DCB3B013223E1B9F00C8E05E /* Beat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beat.swift; sourceTree = "<group>"; };
 		DCB9C1AE223DEA3000475E13 /* BeatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatViewController.swift; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 				DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */,
 				B463BBA3221C7E7100E310AA /* RecordingTableViewCell.swift */,
 				DCEC3E8922614827003ABA7C /* CustomSequencerCell.swift */,
+				DCAE4FB222761EA900E2D01F /* CustomLaneBarCell.swift */,
 				DCEC3E8B2261500E003ABA7C /* ColumnFlowLayout.swift */,
 				DCB3B011223E1B8800C8E05E /* BeatTableViewCell.swift */,
 				DC36AE70223439A0004CC951 /* Analysis.swift */,
@@ -453,6 +456,7 @@
 			files = (
 				DC3EFD1821FEA9FE000ED222 /* ViewController.swift in Sources */,
 				DCEC3E8C2261500E003ABA7C /* ColumnFlowLayout.swift in Sources */,
+				DCAE4FB322761EA900E2D01F /* CustomLaneBarCell.swift in Sources */,
 				B463BBA4221C7E7100E310AA /* RecordingTableViewCell.swift in Sources */,
 				DCEC3E8A22614827003ABA7C /* CustomSequencerCell.swift in Sources */,
 				DCB3B012223E1B8800C8E05E /* BeatTableViewCell.swift in Sources */,
@@ -642,14 +646,14 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FJ5DVU875S;
+				DEVELOPMENT_TEAM = 64548X6W8H;
 				INFOPLIST_FILE = Drumify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				ONLY_ACTIVE_ARCH = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify1;
+				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
@@ -664,13 +668,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = FJ5DVU875S;
+				DEVELOPMENT_TEAM = 64548X6W8H;
 				INFOPLIST_FILE = Drumify/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify1;
+				PRODUCT_BUNDLE_IDENTIFIER = jk.Drumify;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;

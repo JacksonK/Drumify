@@ -439,13 +439,30 @@
                                             <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                         </collectionViewFlowLayout>
                                         <cells>
-                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="laneCell" id="CKd-2S-due" customClass="CustomSequencerCell" customModule="Drumify" customModuleProvider="target">
+                                            <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="laneCell" id="CKd-2S-due" customClass="CustomLaneBarCell" customModule="Drumify" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                     <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
                                                     <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IV4-Fp-C8u">
+                                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                                            <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="18"/>
+                                                            <nil key="textColor"/>
+                                                            <nil key="highlightedColor"/>
+                                                        </label>
+                                                    </subviews>
                                                 </view>
+                                                <constraints>
+                                                    <constraint firstItem="IV4-Fp-C8u" firstAttribute="top" secondItem="CKd-2S-due" secondAttribute="top" id="00c-Bp-oat"/>
+                                                    <constraint firstItem="IV4-Fp-C8u" firstAttribute="leading" secondItem="CKd-2S-due" secondAttribute="leading" id="9rz-jO-xal"/>
+                                                    <constraint firstAttribute="trailing" secondItem="IV4-Fp-C8u" secondAttribute="trailing" id="T5u-sI-q5W"/>
+                                                    <constraint firstAttribute="bottom" secondItem="IV4-Fp-C8u" secondAttribute="bottom" id="iv6-jR-ro1"/>
+                                                </constraints>
+                                                <connections>
+                                                    <outlet property="hasSoundLabel" destination="IV4-Fp-C8u" id="HMi-rC-bf7"/>
+                                                </connections>
                                             </collectionViewCell>
                                         </cells>
                                         <connections>

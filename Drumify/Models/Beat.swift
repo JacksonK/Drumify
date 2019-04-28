@@ -110,27 +110,37 @@ struct Beat: Codable {
         }
         
         var tracks:[AKMIDISampler] = []
-        
+        print("tracks before delete: ", sequencer.trackCount)
         if sequencer.tracks.count > 0 {
             for i in 0...sequencer.tracks.count-1 {
                 sequencer.deleteTrack(trackIndex: i)
             }
         }
-        
-        for lane in lanes {
+        print("tracks after delete: ", sequencer.trackCount)
+
+        for (i, lane) in lanes.enumerated() {
             let track = sequencer.newTrack()
             let sampler = AKMIDISampler()
             if let filepath = lane.recording?.filepath {
-                try! sampler.loadWav(filepath)
+                //try! sampler.loadWav(filepath)
+                print("recording filepath in lane #", i, " filepath: ", filepath)
+
+                let file = try! AKAudioFile(readFileName: filepath, baseDir: .documents)
+                try! sampler.loadAudioFile(file)
+                print("audio files in sampler #", i, " : ", sampler.audioFiles.count)
+                //print( sampler.audioFiles[0].fileName
+                //try load path:
             }
             else {
+                print("no recording found in lane #", i)
+
                 try! sampler.loadAudioFile(AKAudioFile.silent(samples: 10))
             }
             track?.setMIDIOutput(sampler.midiIn)
             for (ind, seqUnit) in lane.bars[0].enumerated() {
                 if seqUnit {
                     let position = Double(ind)/2.0
-                    print("position value: " + String(position))
+                    //print("position value: " + String(position))
                     track?.add(noteNumber: 60, velocity: 100, position: AKDuration(beats: position), duration: AKDuration(beats: 0.5))
                 }
             }
@@ -142,7 +152,8 @@ struct Beat: Codable {
         
         let mixer = AKMixer(tracks)
         AudioKit.output = mixer
-        
+        print("tracks before play: ", sequencer.trackCount)
+
         do {
             print( "PREPARE SEQUENCER: starting audiokit...")
 

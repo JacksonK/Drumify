@@ -80,12 +80,16 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     @IBAction func playBeat(_ sender: Any) {
+        
         if sequencer.isPlaying  {
+            print("pausing beat...")
+
             beat.stopPlaying(sequencer: sequencer)
             playButton.setTitle("\u{f04b}", for: .normal )
 
         }
         else {
+            print("playing beat...")
             beat.startPlaying(sequencer: sequencer)
             playButton.setTitle("\u{f0c8}", for: .normal )
         }
@@ -173,9 +177,14 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
             return cell
         }
         else if collectionView == laneBarCollectionView {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "laneCell", for: indexPath) as! CustomSequencerCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "laneCell", for: indexPath) as! CustomLaneBarCell
             cell.backgroundColor =  laneColors[ indexPath.row ]
-            //cell.hasSoundLabel.text = "Test"
+            if beat.lanes[indexPath.row].recording != nil {
+                cell.hasSoundLabel.text = "\u{f1c7}"
+            }
+            else {
+                cell.hasSoundLabel.text = "\u{f410}"
+            }
             return cell
         }
         else {
@@ -285,7 +294,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         
         if tableView == soundPickerLeftTable {
             let categoryIndex = categoryTab.selectedSegmentIndex
-            let cell = tableView.cellForRow(at: indexPath) as! RecordingTableViewCell
+            //let cell = tableView.cellForRow(at: indexPath) as! RecordingTableViewCell
 //            soundPickerLeftTableSelectedIndex = indexPath
 //            cell.backgroundColor = UIColor.yellow
             
@@ -303,7 +312,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         
         if tableView == soundPickerLeftTable {
 //            let categoryIndex = categoryTab.selectedSegmentIndex
-            let cell = tableView.cellForRow(at: indexPath) as! RecordingTableViewCell
+            //let cell = tableView.cellForRow(at: indexPath) as! RecordingTableViewCell
 //            soundPickerLeftTableSelectedIndex = nil
 //            cell.backgroundColor = UIColor.white
             selectedRecording = nil
@@ -358,7 +367,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         titleLabel.text = beat.name
         
         beat.prepareSequencer(sequencer: sequencer)
-        beat.printContents()
+        //beat.printContents()
         //UIViewController.attemptRotationToDeviceOrientation()
         // Do any additional setup after loading the view.
     }

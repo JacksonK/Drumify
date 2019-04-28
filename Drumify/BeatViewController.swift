@@ -85,6 +85,7 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
             sequencerViewController.newBeat = true
             sequencerViewController.beat = Beat(name: "new beat", cellPerRow: 8)
             
+            /*
             //sample recordings
             let testKick = Recording(filepath: "bass", creation_date: Date(), name: "kick", duration: 10, start_time: 0, category: DrumType.bass)
             let testSnare = Recording(filepath: "snare", creation_date: Date(), name: "snare", duration: 10, start_time: 0, category: DrumType.snare)
@@ -92,7 +93,7 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
             sequencerViewController.beat.setSound(laneIndex: 0, recording: testKick)
             sequencerViewController.beat.setSound(laneIndex: 1, recording: testSnare)
-            sequencerViewController.beat.setSound(laneIndex: 2, recording: testHat)
+            sequencerViewController.beat.setSound(laneIndex: 2, recording: testHat)*/
 
         }
         if(segue.identifier == "existingBeat") {
