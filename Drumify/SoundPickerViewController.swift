@@ -224,8 +224,8 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     @objc private func leftSwipeOnLane() {
         print("swiped left")
         
-        let toMove = Constants.Screen.height - self.laneBarView.frame.width
-        print(toMove)
+        let toMove = Constants.Screen.safeHeight - self.laneBarView.frame.width
+        //print(toMove)
         
         
         let laneCurrentPosition = self.laneBarView.layer.position
@@ -245,8 +245,9 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     @objc private func rightSwipeOnLane() {
         print("swiped right")
         
-        let toMove = Constants.Screen.height - self.laneBarView.frame.width
-        print(toMove)
+        
+        let toMove = Constants.Screen.safeHeight - self.laneBarView.frame.width
+        //print(toMove)
         
         
         let laneCurrentPosition = self.laneBarView.layer.position
