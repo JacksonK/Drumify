@@ -255,7 +255,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
             self.laneBarView.layer.position = CGPoint(x: laneCurrentPosition.x - toMove, y: laneCurrentPosition.y)
             self.rightOfLaneView.layer.position = CGPoint(x: rightCurrentPosition.x - toMove, y: rightCurrentPosition.y)
             self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x - toMove, y: leftCurrentPosition.y)
-            self.topView.layer.position = CGPoint(x: topCurrentPosition.x - (toMove / 2 + 4 ), y: topCurrentPosition.y)
+            self.topView.layer.position = CGPoint(x: topCurrentPosition.x - (toMove / 2), y: topCurrentPosition.y)
             
         }
     }
@@ -277,7 +277,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
             self.laneBarView.layer.position = CGPoint(x: laneCurrentPosition.x + toMove, y: laneCurrentPosition.y)
             self.rightOfLaneView.layer.position = CGPoint(x: rightCurrentPosition.x + toMove, y: rightCurrentPosition.y)
             self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x + toMove, y: leftCurrentPosition.y)
-            self.topView.layer.position = CGPoint(x: topCurrentPosition.x + (toMove / 2 + 4), y: topCurrentPosition.y)
+            self.topView.layer.position = CGPoint(x: topCurrentPosition.x + (toMove / 2), y: topCurrentPosition.y)
             
         }
     }
@@ -299,7 +299,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         //cell.playButtonRight.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
         
         cell.recordingName?.text = recordings[categoryIndex][indexPath.row].name
-        
+        cell.backgroundColor = .clear
         return cell
     }
     
@@ -384,6 +384,9 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         
         bpmButton.setTitle("BPM: " + "\(beat.bpm)", for: .normal)
         titleLabel.text = beat.name
+        
+        soundPickerLeftTable.backgroundColor = .darkGray
+        soundPickerLeftTable.tableFooterView = UIView()
         
         beat.prepareSequencer(sequencer: sequencer)
         //beat.printContents()
