@@ -81,9 +81,9 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     }
     
     @IBAction func AddPresetSounds(_ sender: Any) {
-        let presetKick = Recording(filepath: "bass", creation_date: Date(), name: "kick preset", duration: 10, start_time: 0, category: DrumType.bass)
-        let presetSnare = Recording(filepath: "snare", creation_date: Date(), name: "snare preset", duration: 10, start_time: 0, category: DrumType.snare)
-        let presetHat = Recording(filepath: "hat", creation_date: Date(), name: "hat preset", duration: 10, start_time: 0, category: DrumType.hat)
+        let presetKick = Recording(filepath: "bass.m4a", creation_date: Date(), name: "kick preset", duration: 10, start_time: 0, category: DrumType.bass)
+        let presetSnare = Recording(filepath: "snare.m4a", creation_date: Date(), name: "snare preset", duration: 10, start_time: 0, category: DrumType.snare)
+        let presetHat = Recording(filepath: "hat.m4a", creation_date: Date(), name: "hat preset", duration: 10, start_time: 0, category: DrumType.hat)
         
         beat.setSound(laneIndex: 0, recording: presetKick)
         beat.setSound(laneIndex: 1, recording: presetSnare)
@@ -366,6 +366,28 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         recordings = [bassRecordings, snareRecordings, hatRecordings]
     }
     
+    func copyFileToDocuments(resource: String, type: String) {
+        let bundlePath = Bundle.main.path(forResource: resource, ofType: type)
+        do {
+            let contents = try String(contentsOfFile: bundlePath!)
+            print("bundle path contents: ", contents)
+        } catch {
+            // contents could not be loaded
+        }
+        let destPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+        let fileManager = FileManager.default
+        let fullDestPath = NSURL(fileURLWithPath: destPath).appendingPathComponent(resource + type)
+        let fullDestPathString = fullDestPath!.path
+        print(fileManager.fileExists(atPath: bundlePath!)) // prints true
+        
+        do{
+            try fileManager.copyItem(atPath: bundlePath!, toPath: fullDestPathString)
+        }catch{
+            print("\n")
+            print(error)
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -386,9 +408,27 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         titleLabel.text = beat.name
         
         beat.prepareSequencer(sequencer: sequencer)
-        //beat.printContents()
-        //UIViewController.attemptRotationToDeviceOrientation()
-        // Do any additional setup after loading the view.
+        
+        print("preparing to copy files to documents folder...")
+
+        //copy presets to documents folder
+        copyFileToDocuments(resource: "bass", type: ".m4a")
+        copyFileToDocuments(resource: "snare", type: ".m4a")
+        copyFileToDocuments(resource: "hat", type: ".m4a")
+
+        
+        print("preparing to print documents files...")
+        
+        let fileManager = FileManager.default
+
+        let documentsURL = fileManager.urls(for: .documentDirectory, in: .userDomainMask)[0]
+        do {
+            let fileURLs = try fileManager.contentsOfDirectory(at: documentsURL, includingPropertiesForKeys: nil)
+            print(fileURLs)
+            // process files
+        } catch {
+            print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
+        }
     }
 
 }

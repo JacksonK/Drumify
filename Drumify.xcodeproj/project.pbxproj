@@ -26,7 +26,9 @@
 		DC3EFD3621FEAA00000ED222 /* DrumifyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3EFD3521FEAA00000ED222 /* DrumifyUITests.swift */; };
 		DC70EB1E2258132A00BA9B22 /* Lane.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC70EB1D2258132A00BA9B22 /* Lane.swift */; };
 		DC70EB212258194A00BA9B22 /* Sequencer.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DC70EB202258194A00BA9B22 /* Sequencer.storyboard */; };
-		DC78DC9E2276685E009BA755 /* AudioPresetFiles in Resources */ = {isa = PBXBuildFile; fileRef = DC78DC9D2276685E009BA755 /* AudioPresetFiles */; };
+		DC78DCA622767828009BA755 /* bass.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DC78DCA522767827009BA755 /* bass.m4a */; };
+		DC78DCAD227678E4009BA755 /* snare.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DC78DCAB227678E3009BA755 /* snare.m4a */; };
+		DC78DCAE227678E4009BA755 /* hat.m4a in Resources */ = {isa = PBXBuildFile; fileRef = DC78DCAC227678E3009BA755 /* hat.m4a */; };
 		DCAE4FB322761EA900E2D01F /* CustomLaneBarCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCAE4FB222761EA900E2D01F /* CustomLaneBarCell.swift */; };
 		DCB3B012223E1B8800C8E05E /* BeatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB3B011223E1B8800C8E05E /* BeatTableViewCell.swift */; };
 		DCB3B014223E1B9F00C8E05E /* Beat.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCB3B013223E1B9F00C8E05E /* Beat.swift */; };
@@ -83,7 +85,9 @@
 		DC3EFD3721FEAA00000ED222 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DC70EB1D2258132A00BA9B22 /* Lane.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Lane.swift; sourceTree = "<group>"; };
 		DC70EB202258194A00BA9B22 /* Sequencer.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Sequencer.storyboard; sourceTree = "<group>"; };
-		DC78DC9D2276685E009BA755 /* AudioPresetFiles */ = {isa = PBXFileReference; lastKnownFileType = folder; path = AudioPresetFiles; sourceTree = "<group>"; };
+		DC78DCA522767827009BA755 /* bass.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = bass.m4a; sourceTree = "<group>"; };
+		DC78DCAB227678E3009BA755 /* snare.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = snare.m4a; sourceTree = "<group>"; };
+		DC78DCAC227678E3009BA755 /* hat.m4a */ = {isa = PBXFileReference; lastKnownFileType = file; path = hat.m4a; sourceTree = "<group>"; };
 		DCAE4FB222761EA900E2D01F /* CustomLaneBarCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomLaneBarCell.swift; sourceTree = "<group>"; };
 		DCB3B011223E1B8800C8E05E /* BeatTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BeatTableViewCell.swift; sourceTree = "<group>"; };
 		DCB3B013223E1B9F00C8E05E /* Beat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Beat.swift; sourceTree = "<group>"; };
@@ -155,6 +159,9 @@
 		DC3EFD0921FEA9FE000ED222 = {
 			isa = PBXGroup;
 			children = (
+				DC78DCAC227678E3009BA755 /* hat.m4a */,
+				DC78DCAB227678E3009BA755 /* snare.m4a */,
+				DC78DCA522767827009BA755 /* bass.m4a */,
 				DC3EFD1421FEA9FE000ED222 /* Drumify */,
 				DC3EFD2921FEAA00000ED222 /* DrumifyTests */,
 				DC3EFD3421FEAA00000ED222 /* DrumifyUITests */,
@@ -177,7 +184,6 @@
 		DC3EFD1421FEA9FE000ED222 /* Drumify */ = {
 			isa = PBXGroup;
 			children = (
-				DC78DC9D2276685E009BA755 /* AudioPresetFiles */,
 				DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */,
 				B43C4B61221BB59100659D1C /* Font Awesome */,
 				B4176A352239C39B00FFF813 /* Constants.swift */,
@@ -357,7 +363,9 @@
 			files = (
 				DC70EB212258194A00BA9B22 /* Sequencer.storyboard in Resources */,
 				DC3EFD2021FEAA00000ED222 /* LaunchScreen.storyboard in Resources */,
-				DC78DC9E2276685E009BA755 /* AudioPresetFiles in Resources */,
+				DC78DCA622767828009BA755 /* bass.m4a in Resources */,
+				DC78DCAD227678E4009BA755 /* snare.m4a in Resources */,
+				DC78DCAE227678E4009BA755 /* hat.m4a in Resources */,
 				DC3EFD1D21FEAA00000ED222 /* Assets.xcassets in Resources */,
 				DC3EFD1B21FEA9FE000ED222 /* Main.storyboard in Resources */,
 				B43C4B65221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf in Resources */,
