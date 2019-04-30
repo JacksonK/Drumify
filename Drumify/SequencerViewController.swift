@@ -9,7 +9,7 @@
 import UIKit
 import AudioKit
 
-class SoundPickerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class SequencerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBOutlet weak var topView: UIView!

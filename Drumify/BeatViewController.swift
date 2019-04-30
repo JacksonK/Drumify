@@ -81,7 +81,7 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if (segue.identifier == "newBeat") {
-            let sequencerViewController = segue.destination as! SoundPickerViewController
+            let sequencerViewController = segue.destination as! SequencerViewController
             sequencerViewController.newBeat = true
             sequencerViewController.beat = Beat(name: "new beat", cellPerRow: 8)
             
@@ -97,7 +97,7 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         }
         if(segue.identifier == "existingBeat") {
-            let sequencerViewController = segue.destination as! SoundPickerViewController
+            let sequencerViewController = segue.destination as! SequencerViewController
             sequencerViewController.newBeat = false
             let row = (sender as! NSIndexPath).row;
             sequencerViewController.beat = beats[row]
@@ -124,7 +124,7 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func unwindFromSoundPicker (_ sender: UIStoryboardSegue) {
-        let sequencerViewController = sender.source as! SoundPickerViewController
+        let sequencerViewController = sender.source as! SequencerViewController
         if sequencerViewController.newBeat {
             beats.append(sequencerViewController.beat)
             
