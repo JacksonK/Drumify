@@ -245,7 +245,6 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         
     }
     
-    //note: the 617 value for movement is hard-coded to work with iPhone 8 sized screens (for now).
     @objc private func leftSwipeOnLane() {
         print("swiped left")
         
@@ -261,9 +260,11 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         UIView.animate(withDuration: 0.4) { 
             self.laneBarView.layer.position = CGPoint(x: laneCurrentPosition.x - toMove, y: laneCurrentPosition.y)
             self.rightOfLaneView.layer.position = CGPoint(x: rightCurrentPosition.x - toMove, y: rightCurrentPosition.y)
-            //self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x - toMove, y: leftCurrentPosition.y)
+//            
+            self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x - toMove, y: leftCurrentPosition.y)
+//            
             self.topView.layer.position = CGPoint(x: topCurrentPosition.x - (toMove / 2), y: topCurrentPosition.y)
-            
+            self.view.layoutIfNeeded()
         }
     }
     
@@ -288,9 +289,11 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
             //uncomment the line below and the same line in leftSwipeOnLane()
             //and change the constraint in Main.storyboard. It does have the bug where the left
             //table's cell labels are misaligned but it's not a big deal.
-            //self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x + toMove, y: leftCurrentPosition.y)
+//            
+            self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x + toMove, y: leftCurrentPosition.y)
+//            
             self.topView.layer.position = CGPoint(x: topCurrentPosition.x + (toMove / 2), y: topCurrentPosition.y)
-            
+            self.view.layoutIfNeeded()
         }
     }
     
