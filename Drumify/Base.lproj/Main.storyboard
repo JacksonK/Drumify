@@ -186,6 +186,13 @@
                                     <navigationItem title="Recordings" id="3Hf-P2-sb2"/>
                                 </items>
                             </navigationBar>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XFx-E6-MEB" userLabel="Dark Status Bar View">
+                                <rect key="frame" x="0.0" y="-80" width="375" height="100"/>
+                                <color key="backgroundColor" red="0.14693158864974976" green="0.14695450663566589" blue="0.14692386984825134" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="100" id="nqv-eD-Dpp"/>
+                                </constraints>
+                            </view>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="es5-8y-0pg" userLabel="Segment Control: Categories">
                                 <rect key="frame" x="8" y="73" width="359" height="29"/>
                                 <segments>
@@ -208,8 +215,11 @@
                             <constraint firstItem="4tA-Zb-JOs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="H1L-VV-SEu"/>
                             <constraint firstItem="KC8-cy-4yN" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="OuT-ZK-ZPO"/>
                             <constraint firstItem="4tA-Zb-JOs" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="RZ6-Cp-QkM"/>
+                            <constraint firstItem="XFx-E6-MEB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="TDO-8C-XFb"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="top" secondItem="XFx-E6-MEB" secondAttribute="bottom" id="WWK-Nb-iGE"/>
                             <constraint firstItem="MdH-Zc-GpA" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bxb-s5-MUL"/>
                             <constraint firstItem="4tA-Zb-JOs" firstAttribute="top" secondItem="KC8-cy-4yN" secondAttribute="bottom" id="dGN-gF-yUW"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="XFx-E6-MEB" secondAttribute="trailing" id="gkj-Y6-UQN"/>
                             <constraint firstItem="MdH-Zc-GpA" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="h12-tc-YOn"/>
                             <constraint firstItem="4tA-Zb-JOs" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="onh-2Y-rqq"/>
                             <constraint firstItem="MdH-Zc-GpA" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="xPn-Ex-hOw"/>
