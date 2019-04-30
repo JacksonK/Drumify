@@ -38,7 +38,12 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
     var beatNumber:Int=0
     var sequencer:AKSequencer = AKSequencer()
     
-    let laneColors = [UIColor.red,UIColor.yellow, UIColor.green, UIColor.blue, UIColor.purple]
+    let laneColors =   [UIColor(red: 225/255, green: 98/255, blue: 98/255, alpha: 1.0),   //#e16262
+                        UIColor(red: 229/255, green: 168/255, blue: 78/255, alpha: 1.0),  //#e5a84e
+                        UIColor(red: 58/255, green: 150/255, blue: 121/255, alpha: 1.0),  //#3a9679
+                        UIColor(red: 83/255, green: 120/255, blue: 232/255, alpha: 1.0),   //#5378e8
+                        UIColor(red: 133/255, green: 59/255, blue: 175/255, alpha: 1.0),  //#853baf
+                       ]
     
     let sequencerColumnLayout = ColumnFlowLayout(
         cellsPerRow: 8,
@@ -186,7 +191,8 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
                 cell.backgroundColor = laneColors[ indexPath.row / (beat.cellPerRow) ]
             }
             else {
-                cell.backgroundColor = .gray
+                cell.backgroundColor = (laneColors[ indexPath.row / (beat.cellPerRow) ]).withAlphaComponent(0.1)
+                //cell.backgroundColor = .lightGray
             }
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
@@ -206,11 +212,12 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pickedSoundCell", for: indexPath) as! CustomLaneBarCell
             if beat.lanes[indexPath.row].recording != nil {
-                cell.backgroundColor = .red
+                cell.backgroundColor = laneColors[ indexPath.row ]
                 cell.hasSoundLabel.text = beat.lanes[indexPath.row].recording!.name
             } else {
-                cell.backgroundColor = .gray
+                cell.backgroundColor = .darkGray
                 cell.hasSoundLabel.text = "No recording selected"
+                cell.hasSoundLabel.textColor = .white
             }
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
