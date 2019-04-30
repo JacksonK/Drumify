@@ -381,7 +381,6 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         recordings = [bassRecordings, snareRecordings, hatRecordings]
     }
     
-<<<<<<< HEAD:Drumify/SoundPickerViewController.swift
     func copyFileToDocuments(resource: String, type: String) {
         let bundlePath = Bundle.main.path(forResource: resource, ofType: type)
         do {
@@ -403,14 +402,11 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
             print(error)
         }
     }
-    
-||||||| Added new button to use preset sounds in sequencer. Also added better folder groups
-=======
+
 //    override var prefersHomeIndicatorAutoHidden: Bool {
 //        return true
 //    }
     
->>>>>>> master:Drumify/SequencerViewController.swift
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -434,7 +430,6 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         soundPickerLeftTable.tableFooterView = UIView()
         
         beat.prepareSequencer(sequencer: sequencer)
-<<<<<<< HEAD:Drumify/SoundPickerViewController.swift
         
         print("preparing to copy files to documents folder...")
 
@@ -456,16 +451,13 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         } catch {
             print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
         }
-||||||| Added new button to use preset sounds in sequencer. Also added better folder groups
         //beat.printContents()
         //UIViewController.attemptRotationToDeviceOrientation()
         // Do any additional setup after loading the view.
-=======
         
         //beat.printContents()
         //UIViewController.attemptRotationToDeviceOrientation()
         // Do any additional setup after loading the view.
->>>>>>> master:Drumify/SequencerViewController.swift
     }
     
     override func viewDidAppear(_ animated: Bool) {
