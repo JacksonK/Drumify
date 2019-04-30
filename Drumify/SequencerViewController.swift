@@ -9,7 +9,7 @@
 import UIKit
 import AudioKit
 
-class SoundPickerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
+class SequencerViewController: UIViewController, UICollectionViewDataSource, UICollectionViewDelegate, UITableViewDelegate, UITableViewDataSource {
     
     
     @IBOutlet weak var topView: UIView!
@@ -38,7 +38,12 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
     var beatNumber:Int=0
     var sequencer:AKSequencer = AKSequencer()
     
-    let laneColors = [UIColor.red,UIColor.yellow, UIColor.green, UIColor.blue, UIColor.purple]
+    let laneColors =   [UIColor(red: 225/255, green: 98/255, blue: 98/255, alpha: 1.0),     //#e16262   red
+                        UIColor(red: 229/255, green: 168/255, blue: 78/255, alpha: 1.0),    //#e5a84e   yellow
+                        UIColor(red: 58/255, green: 150/255, blue: 121/255, alpha: 1.0),    //#3a9679   green
+                        UIColor(red: 83/255, green: 120/255, blue: 232/255, alpha: 1.0),    //#5378e8   blue
+                        UIColor(red: 133/255, green: 59/255, blue: 175/255, alpha: 1.0),    //#853baf   purple
+                       ]
     
     let sequencerColumnLayout = ColumnFlowLayout(
         cellsPerRow: 8,
@@ -186,7 +191,8 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
                 cell.backgroundColor = laneColors[ indexPath.row / (beat.cellPerRow) ]
             }
             else {
-                cell.backgroundColor = .gray
+                cell.backgroundColor = (laneColors[ indexPath.row / (beat.cellPerRow) ]).withAlphaComponent(0.15)
+                //cell.backgroundColor = .lightGray
             }
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
@@ -206,11 +212,12 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "pickedSoundCell", for: indexPath) as! CustomLaneBarCell
             if beat.lanes[indexPath.row].recording != nil {
-                cell.backgroundColor = .red
+                cell.backgroundColor = laneColors[ indexPath.row ]
                 cell.hasSoundLabel.text = beat.lanes[indexPath.row].recording!.name
             } else {
-                cell.backgroundColor = .gray
+                cell.backgroundColor = (laneColors[ indexPath.row ]).withAlphaComponent(0.15)
                 cell.hasSoundLabel.text = "No recording selected"
+                cell.hasSoundLabel.textColor = .white
             }
             cell.layer.cornerRadius = 10
             cell.layer.masksToBounds = true
@@ -238,7 +245,6 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         
     }
     
-    //note: the 617 value for movement is hard-coded to work with iPhone 8 sized screens (for now).
     @objc private func leftSwipeOnLane() {
         print("swiped left")
         
@@ -254,9 +260,11 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         UIView.animate(withDuration: 0.4) { 
             self.laneBarView.layer.position = CGPoint(x: laneCurrentPosition.x - toMove, y: laneCurrentPosition.y)
             self.rightOfLaneView.layer.position = CGPoint(x: rightCurrentPosition.x - toMove, y: rightCurrentPosition.y)
+//            
             self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x - toMove, y: leftCurrentPosition.y)
-            self.topView.layer.position = CGPoint(x: topCurrentPosition.x - (toMove / 2 - 5), y: topCurrentPosition.y)
-            
+//            
+            self.topView.layer.position = CGPoint(x: topCurrentPosition.x - (toMove / 2), y: topCurrentPosition.y)
+            self.view.layoutIfNeeded()
         }
     }
     
@@ -276,9 +284,16 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         UIView.animate(withDuration: 0.4) { 
             self.laneBarView.layer.position = CGPoint(x: laneCurrentPosition.x + toMove, y: laneCurrentPosition.y)
             self.rightOfLaneView.layer.position = CGPoint(x: rightCurrentPosition.x + toMove, y: rightCurrentPosition.y)
-            self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x + toMove, y: leftCurrentPosition.y)
-            self.topView.layer.position = CGPoint(x: topCurrentPosition.x + (toMove / 2 - 5), y: topCurrentPosition.y)
             
+            //to change back animation so that the left view slides in instead of being static,
+            //uncomment the line below and the same line in leftSwipeOnLane()
+            //and change the constraint in Main.storyboard. It does have the bug where the left
+            //table's cell labels are misaligned but it's not a big deal.
+//            
+            self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x + toMove, y: leftCurrentPosition.y)
+//            
+            self.topView.layer.position = CGPoint(x: topCurrentPosition.x + (toMove / 2), y: topCurrentPosition.y)
+            self.view.layoutIfNeeded()
         }
     }
     
@@ -299,7 +314,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         //cell.playButtonRight.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
         
         cell.recordingName?.text = recordings[categoryIndex][indexPath.row].name
-        
+        cell.backgroundColor = .clear
         return cell
     }
     
@@ -334,8 +349,8 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
             //let cell = tableView.cellForRow(at: indexPath) as! RecordingTableViewCell
 //            soundPickerLeftTableSelectedIndex = nil
 //            cell.backgroundColor = UIColor.white
+            print("deselected recording: " + (selectedRecording?.name ?? "uh oh nil deselectedRecording"))
             selectedRecording = nil
-            print("deselected recording: " + (selectedRecording?.name ?? "uh oh nil selectedRecording"))
 
         }
     }
@@ -366,6 +381,7 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         recordings = [bassRecordings, snareRecordings, hatRecordings]
     }
     
+<<<<<<< HEAD:Drumify/SoundPickerViewController.swift
     func copyFileToDocuments(resource: String, type: String) {
         let bundlePath = Bundle.main.path(forResource: resource, ofType: type)
         do {
@@ -388,6 +404,13 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         }
     }
     
+||||||| Added new button to use preset sounds in sequencer. Also added better folder groups
+=======
+//    override var prefersHomeIndicatorAutoHidden: Bool {
+//        return true
+//    }
+    
+>>>>>>> master:Drumify/SequencerViewController.swift
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -402,12 +425,16 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
         soundChoiceCollectionView?.collectionViewLayout = soundChoiceColumnLayout
         
         laneBarCollectionView.layer.borderWidth = 5.0;
-        laneBarCollectionView.layer.borderColor = UIColor.lightGray.cgColor
+        laneBarCollectionView.layer.borderColor = UIColor.darkGray.cgColor
         
         bpmButton.setTitle("BPM: " + "\(beat.bpm)", for: .normal)
         titleLabel.text = beat.name
         
+        soundPickerLeftTable.backgroundColor = .darkGray
+        soundPickerLeftTable.tableFooterView = UIView()
+        
         beat.prepareSequencer(sequencer: sequencer)
+<<<<<<< HEAD:Drumify/SoundPickerViewController.swift
         
         print("preparing to copy files to documents folder...")
 
@@ -428,6 +455,22 @@ class SoundPickerViewController: UIViewController, UICollectionViewDataSource, U
             // process files
         } catch {
             print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
+        }
+||||||| Added new button to use preset sounds in sequencer. Also added better folder groups
+        //beat.printContents()
+        //UIViewController.attemptRotationToDeviceOrientation()
+        // Do any additional setup after loading the view.
+=======
+        
+        //beat.printContents()
+        //UIViewController.attemptRotationToDeviceOrientation()
+        // Do any additional setup after loading the view.
+>>>>>>> master:Drumify/SequencerViewController.swift
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        if (newBeat) {
+            rightSwipeOnLane()
         }
     }
 
