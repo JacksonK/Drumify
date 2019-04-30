@@ -38,11 +38,11 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
     var beatNumber:Int=0
     var sequencer:AKSequencer = AKSequencer()
     
-    let laneColors =   [UIColor(red: 225/255, green: 98/255, blue: 98/255, alpha: 1.0),   //#e16262
-                        UIColor(red: 229/255, green: 168/255, blue: 78/255, alpha: 1.0),  //#e5a84e
-                        UIColor(red: 58/255, green: 150/255, blue: 121/255, alpha: 1.0),  //#3a9679
-                        UIColor(red: 83/255, green: 120/255, blue: 232/255, alpha: 1.0),   //#5378e8
-                        UIColor(red: 133/255, green: 59/255, blue: 175/255, alpha: 1.0),  //#853baf
+    let laneColors =   [UIColor(red: 225/255, green: 98/255, blue: 98/255, alpha: 1.0),     //#e16262   red
+                        UIColor(red: 229/255, green: 168/255, blue: 78/255, alpha: 1.0),    //#e5a84e   yellow
+                        UIColor(red: 58/255, green: 150/255, blue: 121/255, alpha: 1.0),    //#3a9679   green
+                        UIColor(red: 83/255, green: 120/255, blue: 232/255, alpha: 1.0),    //#5378e8   blue
+                        UIColor(red: 133/255, green: 59/255, blue: 175/255, alpha: 1.0),    //#853baf   purple
                        ]
     
     let sequencerColumnLayout = ColumnFlowLayout(
@@ -378,9 +378,9 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         recordings = [bassRecordings, snareRecordings, hatRecordings]
     }
     
-    override var prefersHomeIndicatorAutoHidden: Bool {
-        return true
-    }
+//    override var prefersHomeIndicatorAutoHidden: Bool {
+//        return true
+//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
