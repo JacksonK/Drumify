@@ -191,7 +191,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
                 cell.backgroundColor = laneColors[ indexPath.row / (beat.cellPerRow) ]
             }
             else {
-                cell.backgroundColor = (laneColors[ indexPath.row / (beat.cellPerRow) ]).withAlphaComponent(0.1)
+                cell.backgroundColor = (laneColors[ indexPath.row / (beat.cellPerRow) ]).withAlphaComponent(0.15)
                 //cell.backgroundColor = .lightGray
             }
             cell.layer.cornerRadius = 10
@@ -215,7 +215,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
                 cell.backgroundColor = laneColors[ indexPath.row ]
                 cell.hasSoundLabel.text = beat.lanes[indexPath.row].recording!.name
             } else {
-                cell.backgroundColor = .darkGray
+                cell.backgroundColor = (laneColors[ indexPath.row ]).withAlphaComponent(0.15)
                 cell.hasSoundLabel.text = "No recording selected"
                 cell.hasSoundLabel.textColor = .white
             }
@@ -284,7 +284,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
             self.laneBarView.layer.position = CGPoint(x: laneCurrentPosition.x + toMove, y: laneCurrentPosition.y)
             self.rightOfLaneView.layer.position = CGPoint(x: rightCurrentPosition.x + toMove, y: rightCurrentPosition.y)
             
-            //to chnage back animation so that the left view slides in instead of being static,
+            //to change back animation so that the left view slides in instead of being static,
             //uncomment the line below and the same line in leftSwipeOnLane()
             //and change the constraint in Main.storyboard. It does have the bug where the left
             //table's cell labels are misaligned but it's not a big deal.
@@ -396,7 +396,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         soundChoiceCollectionView?.collectionViewLayout = soundChoiceColumnLayout
         
         laneBarCollectionView.layer.borderWidth = 5.0;
-        laneBarCollectionView.layer.borderColor = UIColor.lightGray.cgColor
+        laneBarCollectionView.layer.borderColor = UIColor.darkGray.cgColor
         
         bpmButton.setTitle("BPM: " + "\(beat.bpm)", for: .normal)
         titleLabel.text = beat.name
