@@ -4,7 +4,7 @@
 <dict>
 	<key>CFBundleIconFiles</key>
 	<array>
-		<string>AppLogo.png</string>
+		<string>AppIcon.png</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
