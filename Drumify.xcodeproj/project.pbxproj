@@ -15,6 +15,7 @@
 		B41F409422335DB600C293C4 /* Recording.swift in Sources */ = {isa = PBXBuildFile; fileRef = B41F409322335DB600C293C4 /* Recording.swift */; };
 		B43C4B65221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf in Resources */ = {isa = PBXBuildFile; fileRef = B43C4B64221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf */; };
 		B43CC7372238C7B0004B4F57 /* AddRecordingModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B43CC7362238C7B0004B4F57 /* AddRecordingModalViewController.swift */; };
+		B45D67E0227844C9006F2972 /* AppLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = B45D67DF227844C9006F2972 /* AppLogo.png */; };
 		B463BBA4221C7E7100E310AA /* RecordingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B463BBA3221C7E7100E310AA /* RecordingTableViewCell.swift */; };
 		DC36AE71223439A0004CC951 /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC36AE70223439A0004CC951 /* Analysis.swift */; };
 		DC3EFD1621FEA9FE000ED222 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC3EFD1521FEA9FE000ED222 /* AppDelegate.swift */; };
@@ -64,6 +65,7 @@
 		B41F409322335DB600C293C4 /* Recording.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recording.swift; sourceTree = "<group>"; };
 		B43C4B64221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Font Awesome 5 Free-Solid-900.otf"; sourceTree = "<group>"; };
 		B43CC7362238C7B0004B4F57 /* AddRecordingModalViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddRecordingModalViewController.swift; sourceTree = "<group>"; };
+		B45D67DF227844C9006F2972 /* AppLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = AppLogo.png; sourceTree = SOURCE_ROOT; };
 		B461EF5731B55F01F7C329FE /* Pods-DrumifyUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyUITests.release.xcconfig"; path = "Target Support Files/Pods-DrumifyUITests/Pods-DrumifyUITests.release.xcconfig"; sourceTree = "<group>"; };
 		B463BBA3221C7E7100E310AA /* RecordingTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordingTableViewCell.swift; sourceTree = "<group>"; };
 		CB27D441B5C9C8148C4C265F /* Pods-DrumifyTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DrumifyTests.release.xcconfig"; path = "Target Support Files/Pods-DrumifyTests/Pods-DrumifyTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -195,6 +197,7 @@
 				DC3EFD1C21FEAA00000ED222 /* Assets.xcassets */,
 				DC3EFD1E21FEAA00000ED222 /* LaunchScreen.storyboard */,
 				DC3EFD2121FEAA00000ED222 /* Info.plist */,
+				B45D67DF227844C9006F2972 /* AppLogo.png */,
 			);
 			path = Drumify;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				DC78DC9E2276685E009BA755 /* AudioPresetFiles in Resources */,
 				DC3EFD1D21FEAA00000ED222 /* Assets.xcassets in Resources */,
 				DC3EFD1B21FEA9FE000ED222 /* Main.storyboard in Resources */,
+				B45D67E0227844C9006F2972 /* AppLogo.png in Resources */,
 				B43C4B65221BB86F00659D1C /* Font Awesome 5 Free-Solid-900.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
