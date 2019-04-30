@@ -378,6 +378,10 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         recordings = [bassRecordings, snareRecordings, hatRecordings]
     }
     
+    override var prefersHomeIndicatorAutoHidden: Bool {
+        return true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
