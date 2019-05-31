@@ -95,7 +95,14 @@ struct Beat: Codable {
     }
     
     
-    func prepareSequencer(sequencer: AKSequencer) {
+    func playSample(sequencer: AKSequencer, laneIndex: Int) {
+        
+        print("attempting to play sample from sequencer")
+        print( "num tracks: ", sequencer.tracks.count )
+        //sequencer.tracks[laneIndex]
+    }
+    
+    func prepareSequencer(sequencer: AKSequencer) -> [AKMIDISampler] {
         
         if( sequencer.tracks.count != lanes.count) {
             print("error, number of tracks in sequencer does not match lanes")
@@ -110,10 +117,11 @@ struct Beat: Codable {
             sequencer.stop()
         }
         
-        var tracks:[AKMIDISampler] = []
-        print("tracks before delete: ", sequencer.trackCount)
-        if sequencer.tracks.count > 0 {
-            for i in 0...sequencer.tracks.count-1 {
+        var samplers:[AKMIDISampler] = []
+        let trackCount = sequencer.tracks.count
+        print("tracks before delete: ", trackCount)
+        if trackCount > 0 {
+            for i in 0...trackCount-1 {
                 sequencer.deleteTrack(trackIndex: i)
             }
         }
@@ -137,6 +145,10 @@ struct Beat: Codable {
                 }*/
 
                 let file = try! AKAudioFile(readFileName: filepath, baseDir: .documents)
+                
+                print("BEAT: filepath: ",  file.directoryPath )
+                print("BEAT: file name with ext: " , file.fileNamePlusExtension)
+                
                 try! sampler.loadAudioFile(file)
                 print("audio files in sampler #", i, " : ", sampler.audioFiles.count)
                 //print( sampler.audioFiles[0].fileName
@@ -155,13 +167,13 @@ struct Beat: Codable {
                     track?.add(noteNumber: 60, velocity: 100, position: AKDuration(beats: position), duration: AKDuration(beats: 0.5))
                 }
             }
-            tracks.append(sampler)
+            samplers.append(sampler)
         }
         sequencer.setLength(AKDuration(beats: 4.0))
         sequencer.enableLooping()
         sequencer.setTempo(Double(self.bpm))
         
-        let mixer = AKMixer(tracks)
+        let mixer = AKMixer(samplers)
         AudioKit.output = mixer
         print("tracks before play: ", sequencer.trackCount)
 
@@ -175,6 +187,8 @@ struct Beat: Codable {
         catch {
             print( "PREPARE SEQUENCER: error playing audio in sequencer")
         }
+        
+        return samplers
     }
     
     //triggers beat playback

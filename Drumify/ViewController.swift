@@ -45,6 +45,27 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         return .portrait
     }
     
+    //new akrecorder stuff
+    var micMixer: AKMixer!
+    var recorder: AKNodeRecorder!
+    var recPlayer: AKPlayer!
+    var tape: AKAudioFile!
+    var micBooster: AKBooster!
+    var moogLadder: AKMoogLadder!
+    var mainMixer: AKMixer!
+    
+    let mic = AKMicrophone()
+    
+    var state = State.readyToRecord
+    
+    enum State {
+        case readyToRecord
+        case recording
+    }
+    var conductor = Conductor()
+    
+    //end of akrecorder stuff
+    
     @IBOutlet weak var buttonLabel: UIButton!
     @IBOutlet weak var myTableView: UITableView!
     @IBOutlet weak var categoryTab: UISegmentedControl!
@@ -115,24 +136,26 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         }
     }
     
-    @IBAction func record(_ sender: Any) {
+    
+    func oldRecord() {
         //Check if we have active recorder
         if audioRecorder == nil
         {
-           
+            
             currentUID = UUID().uuidString
             print("created UID: ", currentUID)
             //let numberOfRecords = recordings.count + 1
             //currentRecording = TempRecording(filepath: "\(numberOfRecords).m4a", creation_date: Date())
             setupRecSession()
-
+            
             let file = currentUID + ".m4a"
             let filename = getDirectory().appendingPathComponent(file)
             print("saving file with name: ", filename)
             let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
-                            AVSampleRateKey: 12000,
+                            AVSampleRateKey: 44100,
                             AVNumberOfChannelsKey: 1,
                             AVEncoderAudioQualityKey: AVAudioQuality.high.rawValue]
+            
             
             //Start audio recording
             do
@@ -144,7 +167,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                 
                 print("recording status: ", start_status)
                 print("recording during status: ", audioRecorder.isRecording)
-
+                
                 buttonLabel.setTitle("\u{f04d}", for: .normal)
                 print("started recording")
             }
@@ -164,12 +187,155 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             let filename = currentUID + ".m4a"
             
             print("categorization filepath: ", filename)
-
+            
             //starts analysis of recorded file, segue occurs on completion
             getDrumCategory(fname: filename, view: self)
             currentUID = nil
             buttonLabel.setTitle("\u{f111}", for: .normal)
         }
+    }
+    
+    func newRecord() {
+        print("pressed record button in state: " + "\(state)")
+
+        switch state {
+        case .readyToRecord :
+            setupAKRecSession()
+            buttonLabel.setTitle("\u{f04d}", for: .normal)
+            print("started recording")
+            
+            state = .recording
+            // microphone will be monitored while recording
+            // only if headphones are plugged
+            if AKSettings.headPhonesPlugged {
+                micBooster.gain = 1
+            }
+            do {
+                try recorder.record()
+            } catch { AKLog("Errored recording.") }
+            
+        case .recording :
+            // Microphone monitoring is muted
+            //micBooster.gain = 0
+            print("attempting to get tape...")
+            tape = recorder.audioFile!
+            print("after get tape...")
+            //player.load(audioFile: tape)
+            
+            if let _ = tape?.duration {
+                print("attempting to stop recorder...")
+                recorder.stop()
+                let filename = UUID().uuidString + ".wav"
+                print("attempting to export new file: " + filename)
+                tape.exportAsynchronously(name: filename,
+                                          baseDir: .documents,
+                                          exportFormat: .wav) {_, exportError in
+                                            if let error = exportError {
+                                                AKLog("Export Failed \(error)")
+                                            } else {
+                                                AKLog("Export succeeded")
+                                                try! AudioKit.stop()
+                                                //self.conductor.playRecording(filePath: filename)
+                                                getDrumCategory(fname: filename, view: self)
+                                            }
+                }
+                self.state = .readyToRecord
+                buttonLabel.setTitle("\u{f111}", for: .normal)
+
+                //setupUIForPlaying()
+            }
+        }
+    }
+    
+    // from https://stackoverflow.com/questions/35738133/ios-code-to-convert-m4a-to-wav
+    func convertAudio(_ url: URL, outputURL: URL) {
+        var error : OSStatus = noErr
+        var destinationFile: ExtAudioFileRef? = nil
+        var sourceFile : ExtAudioFileRef? = nil
+        
+        var srcFormat : AudioStreamBasicDescription = AudioStreamBasicDescription()
+        var dstFormat : AudioStreamBasicDescription = AudioStreamBasicDescription()
+        
+        ExtAudioFileOpenURL(url as CFURL, &sourceFile)
+        
+        var thePropertySize: UInt32 = UInt32(MemoryLayout.stride(ofValue: srcFormat))
+        
+        ExtAudioFileGetProperty(sourceFile!,
+                                kExtAudioFileProperty_FileDataFormat,
+                                &thePropertySize, &srcFormat)
+        
+        dstFormat.mSampleRate = 44100  //Set sample rate
+        dstFormat.mFormatID = kAudioFormatLinearPCM
+        dstFormat.mChannelsPerFrame = 1
+        dstFormat.mBitsPerChannel = 16
+        dstFormat.mBytesPerPacket = 2 * dstFormat.mChannelsPerFrame
+        dstFormat.mBytesPerFrame = 2 * dstFormat.mChannelsPerFrame
+        dstFormat.mFramesPerPacket = 1
+        dstFormat.mFormatFlags = kLinearPCMFormatFlagIsPacked |
+        kAudioFormatFlagIsSignedInteger
+        
+        // Create destination file
+        error = ExtAudioFileCreateWithURL(
+            outputURL as CFURL,
+            kAudioFileWAVEType,
+            &dstFormat,
+            nil,
+            AudioFileFlags.eraseFile.rawValue,
+            &destinationFile)
+        print("Error 1 in convertAudio: \(error.description)")
+        
+        error = ExtAudioFileSetProperty(sourceFile!,
+                                        kExtAudioFileProperty_ClientDataFormat,
+                                        thePropertySize,
+                                        &dstFormat)
+        print("Error 2 in convertAudio: \(error.description)")
+        
+        error = ExtAudioFileSetProperty(destinationFile!,
+                                        kExtAudioFileProperty_ClientDataFormat,
+                                        thePropertySize,
+                                        &dstFormat)
+        print("Error 3 in convertAudio: \(error.description)")
+        
+        let bufferByteSize : UInt32 = 32768
+        var srcBuffer = [UInt8](repeating: 0, count: 32768)
+        var sourceFrameOffset : ULONG = 0
+        
+        while(true){
+            var fillBufList = AudioBufferList(
+                mNumberBuffers: 1,
+                mBuffers: AudioBuffer(
+                    mNumberChannels: 2,
+                    mDataByteSize: UInt32(srcBuffer.count),
+                    mData: &srcBuffer
+                )
+            )
+            var numFrames : UInt32 = 0
+            
+            if(dstFormat.mBytesPerFrame > 0){
+                numFrames = bufferByteSize / dstFormat.mBytesPerFrame
+            }
+            
+            error = ExtAudioFileRead(sourceFile!, &numFrames, &fillBufList)
+            print("Error 4 in convertAudio: \(error.description)")
+            
+            if(numFrames == 0){
+                error = noErr;
+                break;
+            }
+            
+            sourceFrameOffset += numFrames
+            error = ExtAudioFileWrite(destinationFile!, numFrames, &fillBufList)
+            print("Error 5 in convertAudio: \(error.description)")
+        }
+        
+        error = ExtAudioFileDispose(destinationFile!)
+        print("Error 6 in convertAudio: \(error.description)")
+        error = ExtAudioFileDispose(sourceFile!)
+        print("Error 7 in convertAudio: \(error.description)")
+    }
+    
+    @IBAction func record(_ sender: Any) {
+        newRecord()
     }
     
     //send this ViewController instance to the modal which pops up when recording ends
@@ -277,52 +443,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        recordingSession = AVAudioSession.sharedInstance()
 
-        currentCategory = nil
-        currentUID = nil
-        
-        // Method below forces audio to playback through speakers instead of earpiece,
-        // based on https://stackoverflow.com/q/1022992
-        
-        /*
-        if let number:Int = UserDefaults.standard.object(forKey: "myNumber") as? Int
-        {
-            numberOfRecords = number
-        }*/
-        
-        let value = UIInterfaceOrientation.portrait.rawValue
-        UIDevice.current.setValue(value, forKey: "orientation")
-        
-        //retrieve recordings data from local storage
-        if let bassData = UserDefaults.standard.value(forKey:"bassRecordings") as? Data {
-            bassRecordings = try? PropertyListDecoder().decode([Recording].self, from:bassData)
-        }
-        else { bassRecordings = [] }
-        if let snareData = UserDefaults.standard.value(forKey:"snareRecordings") as? Data {
-            snareRecordings = try? PropertyListDecoder().decode([Recording].self, from:snareData)
-        }
-        else { snareRecordings = [] }
-        if let hatData = UserDefaults.standard.value(forKey:"hatRecordings") as? Data {
-            hatRecordings = try? PropertyListDecoder().decode([Recording].self, from:hatData)
-        }
-        else { hatRecordings = [] }
-        
-        recordingSession.requestRecordPermission{(hasPermission) in
-            if hasPermission
-            {
-                print("ACCEPTED")
-            }
-        }
-        
-        setupRecSession()
-        
-        myTableView.dataSource = self;
-        myTableView.tableFooterView = UIView()
-    }
 
     //Function that returns ppath to directory
     func getDirectory() -> URL
@@ -501,6 +622,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                 self.player.stop()
                 try AudioKit.stop()
             }
+            try! AKSettings.session.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
+
             selectedIndexPath = indexPath
             
             let file = try AKAudioFile(readFileName: filePath, baseDir: .documents)
@@ -531,5 +654,85 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     func megaPrint(string: String) {
         print("\n\n\n\n\n" + string + "\n\n\n\n\n")
     }
+    
+    func setupAKRecSession() {
+        AKAudioFile.cleanTempDirectory()
+        AKSettings.bufferLength = .medium
+        do {
+            try AKSettings.setSession(category: .playAndRecord, with: .allowBluetoothA2DP)
+        } catch {
+            AKLog("Could not set session category.")
+        }
+        AKSettings.defaultToSpeaker = true
+
+        // Patching
+        let monoToStereo = AKStereoFieldLimiter(mic, amount: 1)
+        micMixer = AKMixer(monoToStereo)
+        //micBooster = AKBooster(micMixer)
+        
+        // Will set the level of microphone monitoring
+        //micBooster.gain = 0
+        recorder = try? AKNodeRecorder(node: micMixer)
+        /*if let file = recorder.audioFile {
+            recPlayer = AKPlayer(audioFile: file)
+        }
+        recPlayer.isLooping = true
+        //player.completionHandler = playingEnded
+        
+        moogLadder = AKMoogLadder(recPlayer)
+        
+        mainMixer = AKMixer(moogLadder, micBooster)
+        
+        AudioKit.output = mainMixer
+         */
+        do {
+            try AudioKit.start()
+        } catch {
+            AKLog("AudioKit did not start!")
+        }
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        //recordingSession = AVAudioSession.sharedInstance()
+        
+        currentCategory = nil
+        currentUID = nil
+        
+        // Method below forces audio to playback through speakers instead of earpiece,
+        // based on https://stackoverflow.com/q/1022992
+        
+        let value = UIInterfaceOrientation.portrait.rawValue
+        UIDevice.current.setValue(value, forKey: "orientation")
+        
+        //retrieve recordings data from local storage
+        if let bassData = UserDefaults.standard.value(forKey:"bassRecordings") as? Data {
+            bassRecordings = try? PropertyListDecoder().decode([Recording].self, from:bassData)
+        }
+        else { bassRecordings = [] }
+        if let snareData = UserDefaults.standard.value(forKey:"snareRecordings") as? Data {
+            snareRecordings = try? PropertyListDecoder().decode([Recording].self, from:snareData)
+        }
+        else { snareRecordings = [] }
+        if let hatData = UserDefaults.standard.value(forKey:"hatRecordings") as? Data {
+            hatRecordings = try? PropertyListDecoder().decode([Recording].self, from:hatData)
+        }
+        else { hatRecordings = [] }
+        
+        /*
+        recordingSession.requestRecordPermission{(hasPermission) in
+            if hasPermission
+            {
+                print("ACCEPTED")
+            }
+        }*/
+        
+        //setupRecSession()
+        
+        //setupAKRecSession()
+        myTableView.dataSource = self;
+        myTableView.tableFooterView = UIView()
+    }
+    
 }
 

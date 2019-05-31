@@ -71,6 +71,7 @@ class AddRecordingModalViewController: UIViewController/*, UITextFieldDelegate*/
         // catorization failed, uncategorized
         else {
             drumCategorySegmentedControl.selectedSegmentIndex = 0
+            chosen_category = DrumType.bass
         }
     }
     @IBAction func pickedCategory(_ sender: Any) {

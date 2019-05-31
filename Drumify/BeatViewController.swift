@@ -73,6 +73,8 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         else { beats = [] }
         
+        beatTableView.tableFooterView = UIView()
+        
         //beats.append(Beat(name:"Hip-Hop Beat", date:Date(), measures:32, bpm:90))
         //beats.append(Beat(name:"Lo-fi House Beat", date:Date(), measures:64, bpm:110))
         //beats.append(Beat(name:"All Hand Sounds Beat", date:Date(), measures:16, bpm:100))

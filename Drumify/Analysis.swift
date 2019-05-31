@@ -18,7 +18,7 @@ var timer:  Timer!
 //categorizes file on completion, calling popover AddRecordingModalViewController
 func getDrumCategory(fname: String, view: ViewController) {
     //#1 setup variables
-    print("getting drum category")
+    print("getting drum category for file: " + fname)
     var ampProfile = [Double]()
     var selectedFreqs: [Int] = []
     var freqMatrix = Array(repeating: [Double](), count: 9)
@@ -28,6 +28,7 @@ func getDrumCategory(fname: String, view: ViewController) {
     }
     print(selectedFreqs)
     
+    print("test1")
     //#2 setup player and FFT tap
     if let drum = try? AKAudioFile(readFileName: fname, baseDir: .documents) {
         var norm_drum:AKAudioFile
@@ -41,7 +42,7 @@ func getDrumCategory(fname: String, view: ViewController) {
         }
         player = AKPlayer(audioFile: drum)
         player.startTime = getPeakTime(file: drum) - Constants.Analysis.Offset
-        
+        print("test2")
         //called once analysis is complete
         player.completionHandler = {
             timer.invalidate()
@@ -65,12 +66,15 @@ func getDrumCategory(fname: String, view: ViewController) {
             print( "fname in analysis: ", fname)
             view.performSegue(withIdentifier: "showAddRecordingModal", sender: fname)
         }
+        print("test3")
+
         player.isLooping = false
         player.buffering = .always
         fftTap = AKFFTTap.init(player)
         AudioKit.output = player
         
         //#3 start player and analysis timer
+        print("test4")
         do {
             try AudioKit.start()
             

@@ -37,6 +37,8 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
     var newBeat:Bool=false
     var beatNumber:Int=0
     var sequencer:AKSequencer = AKSequencer()
+    var conductor = Conductor()
+    var samplers: [AKMIDISampler] = []
     
     let laneColors =   [UIColor(red: 225/255, green: 98/255, blue: 98/255, alpha: 1.0),     //#e16262   red
                         UIColor(red: 229/255, green: 168/255, blue: 78/255, alpha: 1.0),    //#e5a84e   yellow
@@ -96,21 +98,22 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         
         soundChoiceCollectionView.reloadData()
         laneBarCollectionView.reloadData()
-        beat.prepareSequencer(sequencer: sequencer)
+        //samplers = beat.prepareSequencer(sequencer: sequencer)
 
     }
     @IBAction func playBeat(_ sender: Any) {
         
-        if sequencer.isPlaying  {
+        if conductor.isPlaying == true  {
             print("pausing beat...")
-
-            beat.stopPlaying(sequencer: sequencer)
+            conductor.pauseBeat()
+            //beat.stopPlaying(sequencer: sequencer)
             playButton.setTitle("\u{f144}", for: .normal )
 
         }
         else {
             print("playing beat...")
-            beat.startPlaying(sequencer: sequencer)
+            //beat.startPlaying(sequencer: sequencer)
+            conductor.playPattern(beat: beat, looping: true)
             playButton.setTitle("\u{f28b}", for: .normal )
         }
     }
@@ -150,14 +153,12 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         else {
           performSegue(withIdentifier: "unwindSave", sender: self)
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == sequencerCollectionView {
             beat.toggleCellActivation(index: indexPath.row, bar: 0)
             sequencerCollectionView.reloadData()
-            beat.prepareSequencer(sequencer: sequencer)
         }
         
         if collectionView == soundChoiceCollectionView {
@@ -165,10 +166,29 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
                 beat.lanes[indexPath.row].setRecording(recording: selectedRecording!)
                 soundChoiceCollectionView.reloadData()
                 laneBarCollectionView.reloadData()
-                beat.prepareSequencer(sequencer: sequencer)
             }
             
         }
+        
+        if collectionView == laneBarCollectionView {
+            
+            conductor.playLane(index: indexPath.row)
+        }
+    }
+    
+    func printFileDescription(file: AKAudioFile) {
+        print("name: ", file.fileName)
+        print("duration: ", file.duration)
+        print("ext: ", file.fileExt)
+        print("url: ", file.url)
+
+        print("debug desc: ", file.debugDescription)
+
+        print("Export format: ", file.fileFormat)
+        print("Format settings: ", file.fileFormat.settings)
+        print("is standard: ", file.fileFormat.isStandard)
+
+
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -180,7 +200,6 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         }
     }
     
-   
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == sequencerCollectionView {
@@ -214,6 +233,9 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
             if beat.lanes[indexPath.row].recording != nil {
                 cell.backgroundColor = laneColors[ indexPath.row ]
                 cell.hasSoundLabel.text = beat.lanes[indexPath.row].recording!.name
+                //conductor.setupMidiSampler(filepath: samplers[indexPath.row].audioFiles[0].fileNamePlusExtension)
+                //samplers[indexPath.row].audioFiles[0]
+                conductor.preparePlayers(beat: beat )
             } else {
                 cell.backgroundColor = (laneColors[ indexPath.row ]).withAlphaComponent(0.15)
                 cell.hasSoundLabel.text = "No recording selected"
@@ -334,6 +356,11 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
             
             selectedRecording = recordings[categoryIndex][indexPath.row]
             print("selected recording: " + (selectedRecording?.name ?? "uh oh nil selectedRecording"))
+            
+            //play audio of recording
+            print("attempting to play recording")
+            conductor.playRecording(filePath: recordings[categoryIndex][indexPath.row].filepath)
+
         }
         
     }
@@ -429,7 +456,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         soundPickerLeftTable.backgroundColor = .darkGray
         soundPickerLeftTable.tableFooterView = UIView()
         
-        beat.prepareSequencer(sequencer: sequencer)
+        //samplers = beat.prepareSequencer(sequencer: sequencer)
         
         print("preparing to copy files to documents folder...")
 
@@ -458,6 +485,8 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         //beat.printContents()
         //UIViewController.attemptRotationToDeviceOrientation()
         // Do any additional setup after loading the view.
+        //conductor.playRecording(filePath: "hat.m4a")
+
     }
     
     override func viewDidAppear(_ animated: Bool) {
