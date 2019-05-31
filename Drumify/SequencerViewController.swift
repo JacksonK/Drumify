@@ -164,6 +164,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         if collectionView == soundChoiceCollectionView {
             if selectedRecording != nil {
                 beat.lanes[indexPath.row].setRecording(recording: selectedRecording!)
+                conductor.preparePlayers(beat: beat)
                 soundChoiceCollectionView.reloadData()
                 laneBarCollectionView.reloadData()
             }
@@ -235,7 +236,6 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
                 cell.hasSoundLabel.text = beat.lanes[indexPath.row].recording!.name
                 //conductor.setupMidiSampler(filepath: samplers[indexPath.row].audioFiles[0].fileNamePlusExtension)
                 //samplers[indexPath.row].audioFiles[0]
-                conductor.preparePlayers(beat: beat )
             } else {
                 cell.backgroundColor = (laneColors[ indexPath.row ]).withAlphaComponent(0.15)
                 cell.hasSoundLabel.text = "No recording selected"
@@ -359,8 +359,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
             
             //play audio of recording
             print("attempting to play recording")
-            conductor.playRecording(filePath: recordings[categoryIndex][indexPath.row].filepath)
-
+            //conductor.playRecording(filePath: recordings[categoryIndex][indexPath.row].filepath)
         }
         
     }
@@ -436,6 +435,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("view did load called...")
         
         let value = UIInterfaceOrientation.landscapeLeft.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
@@ -478,14 +478,12 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         } catch {
             print("Error while enumerating files \(documentsURL.path): \(error.localizedDescription)")
         }
-        //beat.printContents()
-        //UIViewController.attemptRotationToDeviceOrientation()
-        // Do any additional setup after loading the view.
         
-        //beat.printContents()
-        //UIViewController.attemptRotationToDeviceOrientation()
-        // Do any additional setup after loading the view.
-        //conductor.playRecording(filePath: "hat.m4a")
+        print("conductor number of players: ", conductor.players.count)
+        conductor.preparePlayers(beat: beat)
+        //print("beat rec #1: ", beat.lanes[0].recording?.name)
+        //print("beat rec #2: ", beat.lanes[1].recording?.name)
+        //print("beat rec #3: ", beat.lanes[2].recording?.name)
 
     }
     

@@ -732,6 +732,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         //setupAKRecSession()
         myTableView.dataSource = self;
         myTableView.tableFooterView = UIView()
+        
+        
     }
     
 }
