@@ -698,10 +698,18 @@
                                     <constraint firstAttribute="height" constant="100" id="tDt-hA-H2l"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0s8-Yy-EZ8">
+                                <rect key="frame" x="94" y="50" width="6" height="293"/>
+                                <color key="backgroundColor" red="1" green="0.1118306135" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="6" id="LiH-vI-LaJ"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="c5U-t3-Qh9" firstAttribute="top" secondItem="Aiu-qD-5vU" secondAttribute="top" id="0AT-zd-mr8"/>
+                            <constraint firstItem="wsb-Vo-7TF" firstAttribute="top" secondItem="c5U-t3-Qh9" secondAttribute="bottom" id="0Rv-ff-m4U"/>
                             <constraint firstItem="Mbl-dO-LRf" firstAttribute="width" secondItem="NcB-f9-Evx" secondAttribute="width" id="0bb-6S-THf"/>
                             <constraint firstItem="1Rd-mF-m65" firstAttribute="top" secondItem="c5U-t3-Qh9" secondAttribute="top" id="1v6-15-n4o"/>
                             <constraint firstItem="1Rd-mF-m65" firstAttribute="width" secondItem="4TC-eA-9J6" secondAttribute="width" id="4ne-gs-yiQ"/>
@@ -711,6 +719,7 @@
                             <constraint firstItem="Mbl-dO-LRf" firstAttribute="centerX" secondItem="Aiu-qD-5vU" secondAttribute="centerX" id="HtI-JZ-hfF"/>
                             <constraint firstItem="2oV-id-uWb" firstAttribute="leading" secondItem="Aiu-qD-5vU" secondAttribute="leading" id="J7P-UK-ePJ"/>
                             <constraint firstItem="gRJ-9I-C3p" firstAttribute="top" secondItem="NcB-f9-Evx" secondAttribute="top" id="JYL-Xi-fyg"/>
+                            <constraint firstItem="0s8-Yy-EZ8" firstAttribute="top" secondItem="c5U-t3-Qh9" secondAttribute="bottom" id="LC4-Ys-0NB"/>
                             <constraint firstItem="2oV-id-uWb" firstAttribute="top" secondItem="Kbr-PU-Nls" secondAttribute="bottom" id="NgS-Jf-aQe"/>
                             <constraint firstItem="2oV-id-uWb" firstAttribute="trailing" secondItem="Aiu-qD-5vU" secondAttribute="trailing" id="W6A-Qk-69t"/>
                             <constraint firstItem="2oV-id-uWb" firstAttribute="bottom" secondItem="Aiu-qD-5vU" secondAttribute="bottom" id="ZuI-At-Wiy"/>
@@ -723,9 +732,12 @@
                             <constraint firstAttribute="bottom" secondItem="gRJ-9I-C3p" secondAttribute="bottom" id="qcc-ej-6dJ"/>
                             <constraint firstItem="Kbr-PU-Nls" firstAttribute="top" secondItem="c5U-t3-Qh9" secondAttribute="bottom" id="rVP-3o-rRb"/>
                             <constraint firstItem="RZR-Oe-OdW" firstAttribute="height" secondItem="gRJ-9I-C3p" secondAttribute="height" id="sIk-uI-e6v"/>
+                            <constraint firstItem="rsf-nG-xhW" firstAttribute="top" secondItem="0s8-Yy-EZ8" secondAttribute="bottom" id="seN-th-3dz"/>
                             <constraint firstItem="RZR-Oe-OdW" firstAttribute="top" secondItem="gRJ-9I-C3p" secondAttribute="top" id="sjP-1F-o3F"/>
                             <constraint firstItem="Aiu-qD-5vU" firstAttribute="trailing" secondItem="4TC-eA-9J6" secondAttribute="trailing" id="vOz-1D-Vgh"/>
+                            <constraint firstItem="rsf-nG-xhW" firstAttribute="top" secondItem="wsb-Vo-7TF" secondAttribute="bottom" id="wcP-o4-N10"/>
                             <constraint firstItem="4TC-eA-9J6" firstAttribute="top" secondItem="c5U-t3-Qh9" secondAttribute="bottom" id="wne-vC-oVw"/>
+                            <constraint firstItem="0s8-Yy-EZ8" firstAttribute="leading" secondItem="sgD-Gb-k4D" secondAttribute="trailing" id="zCy-fx-2uF"/>
                             <constraint firstItem="2oV-id-uWb" firstAttribute="top" secondItem="1Rd-mF-m65" secondAttribute="bottom" id="zIa-9X-7KA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Aiu-qD-5vU"/>
@@ -737,6 +749,8 @@
                         <outlet property="laneBarView" destination="Kbr-PU-Nls" id="ppG-v6-LJs"/>
                         <outlet property="leftOfLaneView" destination="1Rd-mF-m65" id="iSd-IP-S35"/>
                         <outlet property="playButton" destination="udw-3p-Yon" id="yCx-dq-ejo"/>
+                        <outlet property="playCursor" destination="0s8-Yy-EZ8" id="D0Y-aH-Sfr"/>
+                        <outlet property="playCursorX" destination="zCy-fx-2uF" id="Brl-tu-QvM"/>
                         <outlet property="presetSoundsButton" destination="f9V-Ms-Keo" id="yuK-5g-fun"/>
                         <outlet property="rightOfLaneView" destination="4TC-eA-9J6" id="xT6-1K-myV"/>
                         <outlet property="sequencerCollectionView" destination="wsb-Vo-7TF" id="vhe-mM-3oR"/>

@@ -91,16 +91,16 @@ class Conductor {
     }
     
     
-    func pauseBeat() {
+    func pauseBeat(cursorConstraint: NSLayoutConstraint) {
+        cursorConstraint.constant = 0
         timer.invalidate()
         for player in players {
             player.stop()
         }
         isPlaying = false
-
     }
     
-    func playPattern(beat: Beat, looping: Bool) {
+    func playPattern(beat: Beat, looping: Bool, cursorConstraint: NSLayoutConstraint, sequencerWidth: CGFloat) {
         print("CONDUCTOR: play pattern..." )
         let numBeats = beat.lanes[0].bars[0].count
         let timePattern = getTimePattern(numBeats: numBeats, tempo: beat.bpm)
@@ -114,33 +114,38 @@ class Conductor {
         print("barlength: " + "\(barLength)" )
         timer = Timer.scheduledTimer(withTimeInterval: Double(rate), repeats: true, block: { (timer) in
             print("CONDUCTOR:cycling: " + "\(self.timeCounter! )"  )
-
+            cursorConstraint.constant = sequencerWidth * CGFloat((self.timeCounter - (repeatNum * barLength)) / barLength)
             let targetTime = timePattern[beatIndex] + (repeatNum * barLength)
             print("target time: " + "\(targetTime)" )
             let diff = abs( targetTime - self.timeCounter )
             //print("diff: " + "\(diff)" )
             
             if( diff <= rate / 2  ) {
+                if beatIndex >= timePattern.count - 1 {
+                    if looping {
+                        print("CONDUCTOR: resetting beat index...")
+                        beatIndex = 0
+                        repeatNum += 1
+                        cursorConstraint.constant = 0
+                    }
+                    else {
+                        timer.invalidate()
+                        
+                    }
+                }
+                
                 print("playing sound at: " + "\(self.timeCounter! )" )
                 
                 for (i,lane) in beat.lanes.enumerated() {
+                    //print("Beat index before call: ", beatIndex)
+
                     if( lane.bars[0][beatIndex] ) {
                         self.playLane(index: i)
                     }
                 }
                 beatIndex += 1
                 print("CONDUCTOR: time pattern count: ", timePattern.count)
-                if beatIndex >= timePattern.count - 1 {
-                    if looping {
-                        print("CONDUCTOR: resetting beat index...")
-                        beatIndex = 0
-                        repeatNum += 1
-                    }
-                    else {
-                        timer.invalidate()
-
-                    }
-                }
+                
             }
             self.timeCounter += rate
 

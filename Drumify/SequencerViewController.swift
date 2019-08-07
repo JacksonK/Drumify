@@ -20,6 +20,8 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
     @IBOutlet weak var playButton: UIButton!
     @IBOutlet weak var velocityModeButton: UIButton!
     @IBOutlet weak var bpmButton: UIButton!
+    @IBOutlet weak var playCursor: UIView!
+    @IBOutlet weak var playCursorX: NSLayoutConstraint!
     
     @IBOutlet weak var presetSoundsButton: UIButton!
     @IBOutlet weak var sequencerCollectionView: UICollectionView!
@@ -102,10 +104,9 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
 
     }
     @IBAction func playBeat(_ sender: Any) {
-        
         if conductor.isPlaying == true  {
             print("pausing beat...")
-            conductor.pauseBeat()
+            conductor.pauseBeat(cursorConstraint: playCursorX)
             //beat.stopPlaying(sequencer: sequencer)
             playButton.setTitle("\u{f144}", for: .normal )
 
@@ -113,7 +114,13 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         else {
             print("playing beat...")
             //beat.startPlaying(sequencer: sequencer)
-            conductor.playPattern(beat: beat, looping: true)
+            /*UIView.animate( withDuration: 4.0) {
+                self.playCursorX.constant += 200
+            }*/
+            print("sequencer width: ", sequencerCollectionView.frame.size.width)
+            
+            print("starting cursor constraint: ", playCursorX.constant)
+            conductor.playPattern(beat: beat, looping: true, cursorConstraint: playCursorX, sequencerWidth: sequencerCollectionView.frame.size.width)
             playButton.setTitle("\u{f28b}", for: .normal )
         }
     }
@@ -157,10 +164,11 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == sequencerCollectionView {
-            beat.toggleCellActivation(index: indexPath.row, bar: 0)
-            sequencerCollectionView.reloadData()
+            if(!conductor.isPlaying) {
+                beat.toggleCellActivation(index: indexPath.row, bar: 0)
+                sequencerCollectionView.reloadData()
+            }
         }
-        
         if collectionView == soundChoiceCollectionView {
             if selectedRecording != nil {
                 beat.lanes[indexPath.row].setRecording(recording: selectedRecording!)
@@ -168,11 +176,8 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
                 soundChoiceCollectionView.reloadData()
                 laneBarCollectionView.reloadData()
             }
-            
         }
-        
         if collectionView == laneBarCollectionView {
-            
             conductor.playLane(index: indexPath.row)
         }
     }
@@ -269,30 +274,30 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
     
     @objc private func leftSwipeOnLane() {
         print("swiped left")
-        
         let toMove = Constants.Screen.safeHeight - self.laneBarView.frame.width
         //print(toMove)
-        
         
         let laneCurrentPosition = self.laneBarView.layer.position
         let rightCurrentPosition = self.rightOfLaneView.layer.position
         let leftCurrentPosition = self.leftOfLaneView.layer.position
         let topCurrentPosition = self.topView.layer.position
         
-        UIView.animate(withDuration: 0.4) { 
+        UIView.animate(withDuration: 0.4, animations: {
             self.laneBarView.layer.position = CGPoint(x: laneCurrentPosition.x - toMove, y: laneCurrentPosition.y)
             self.rightOfLaneView.layer.position = CGPoint(x: rightCurrentPosition.x - toMove, y: rightCurrentPosition.y)
-//            
+            //
             self.leftOfLaneView.layer.position = CGPoint(x: leftCurrentPosition.x - toMove, y: leftCurrentPosition.y)
-//            
+            //
             self.topView.layer.position = CGPoint(x: topCurrentPosition.x - (toMove / 2), y: topCurrentPosition.y)
             self.view.layoutIfNeeded()
-        }
+        }, completion: {finished in
+            self.playCursor.isHidden = false
+        })
     }
     
     @objc private func rightSwipeOnLane() {
         print("swiped right")
-        
+        playCursor.isHidden = true
         
         let toMove = Constants.Screen.safeHeight - self.laneBarView.frame.width
         //print(toMove)

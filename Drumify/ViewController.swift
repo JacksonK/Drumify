@@ -460,17 +460,48 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         alert.addAction(UIAlertAction(title: "dismiss", style: .default, handler: nil   ))
         present(alert, animated: true, completion: nil)
     }
+   
+    //displays message if table is empty, called upon table reload
+    func tableEmptyCheck(recordings: [Recording], categoryIndex: Int) {
+
+        if recordings.count != 0 {
+            myTableView.separatorStyle = .singleLine
+            myTableView.backgroundView = nil
+            myTableView.backgroundColor = UIColor.white
+        }
+        else {
+            let emptyTableLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: myTableView.bounds.size.width, height: myTableView.bounds.size.height))
+            if categoryIndex == 0 {
+                emptyTableLabel.text = "No saved bass drum recordings"
+            }
+            else if  categoryIndex == 1{
+                emptyTableLabel.text = "No saved snare drum recordings"
+            }
+            else {
+                emptyTableLabel.text = "No saved hi-hat recordings"
+            }
+            emptyTableLabel.textColor = UIColor.black
+            emptyTableLabel.textAlignment = .center
+            myTableView.backgroundColor = UIColor.lightGray
+            myTableView.backgroundView = emptyTableLabel
+            myTableView.separatorStyle = .none
+        }
+    }
     
     //Table view setup
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let categoryIndex = categoryTab.selectedSegmentIndex
         if categoryIndex == 0 {
+            tableEmptyCheck(recordings: bassRecordings, categoryIndex: categoryIndex)
             return bassRecordings.count
+            
         }
         else if categoryIndex == 1 {
+            tableEmptyCheck(recordings: snareRecordings, categoryIndex: categoryIndex)
             return snareRecordings.count
         }
         else {
+            tableEmptyCheck(recordings: hatRecordings, categoryIndex: categoryIndex)
             return hatRecordings.count
         }
         

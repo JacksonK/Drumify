@@ -24,7 +24,26 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
         return .portrait
     }
     
+    //displays message if table is empty, called upon table reload
+    func tableEmptyCheck() {
+        if beats.count != 0 {
+            beatTableView.separatorStyle = .singleLine
+            beatTableView.backgroundView = nil
+            beatTableView.backgroundColor = UIColor.white
+        }
+        else {
+            let emptyTableLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: beatTableView.bounds.size.width, height: beatTableView.bounds.size.height))
+            emptyTableLabel.text = "No saved beats"
+            emptyTableLabel.textColor = UIColor.black
+            emptyTableLabel.textAlignment = .center
+            beatTableView.backgroundColor = UIColor.lightGray
+            beatTableView.backgroundView = emptyTableLabel
+            beatTableView.separatorStyle = .none
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        tableEmptyCheck()
         return beats.count
     }
     
