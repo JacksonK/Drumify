@@ -411,28 +411,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         
         recordings = [bassRecordings, snareRecordings, hatRecordings]
     }
-    
-    func copyFileToDocuments(resource: String, type: String) {
-        let bundlePath = Bundle.main.path(forResource: resource, ofType: type)
-        do {
-            let contents = try String(contentsOfFile: bundlePath!)
-            print("bundle path contents: ", contents)
-        } catch {
-            // contents could not be loaded
-        }
-        let destPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
-        let fileManager = FileManager.default
-        let fullDestPath = NSURL(fileURLWithPath: destPath).appendingPathComponent(resource + type)
-        let fullDestPathString = fullDestPath!.path
-        print(fileManager.fileExists(atPath: bundlePath!)) // prints true
-        
-        do{
-            try fileManager.copyItem(atPath: bundlePath!, toPath: fullDestPathString)
-        }catch{
-            print("\n")
-            print(error)
-        }
-    }
+
 
 //    override var prefersHomeIndicatorAutoHidden: Bool {
 //        return true
@@ -466,9 +445,9 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         print("preparing to copy files to documents folder...")
 
         //copy presets to documents folder
-        copyFileToDocuments(resource: "bass", type: ".m4a")
-        copyFileToDocuments(resource: "snare", type: ".m4a")
-        copyFileToDocuments(resource: "hat", type: ".m4a")
+        FileUtilities.copyFileToDocuments(resource: "bass", type: ".m4a")
+        FileUtilities.copyFileToDocuments(resource: "snare", type: ".m4a")
+        FileUtilities.copyFileToDocuments(resource: "hat", type: ".m4a")
 
         
         print("preparing to print documents files...")

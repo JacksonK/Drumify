@@ -77,7 +77,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     func createRecording(new_name: String, filepath: String) {
         //check if categorization was successful
-        print("creating recording...")
+        print("CREATERECORDING(): creating recording with filepath: ", filepath )
         if self.currentCategory == nil{
             print("failed to categorize drum sound")
             self.currentCategory = DrumType.uncategorized
@@ -143,14 +143,15 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         {
             
             currentUID = UUID().uuidString
-            print("created UID: ", currentUID)
+            print("OLDRECORD: created UID: ", currentUID ?? "bad UID")
             //let numberOfRecords = recordings.count + 1
             //currentRecording = TempRecording(filepath: "\(numberOfRecords).m4a", creation_date: Date())
             setupRecSession()
             
+            print("OLDRECORD: getting filename...")
             let file = currentUID + ".m4a"
             let filename = getDirectory().appendingPathComponent(file)
-            print("saving file with name: ", filename)
+            print("OLDRECORD: saving file with name: ", filename)
             let settings = [AVFormatIDKey: Int(kAudioFormatMPEG4AAC),
                             AVSampleRateKey: 44100,
                             AVNumberOfChannelsKey: 1,
@@ -236,7 +237,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                                                 AKLog("Export succeeded")
                                                 try! AudioKit.stop()
                                                 //self.conductor.playRecording(filePath: filename)
-                                                getDrumCategory(fname: filename, view: self)
+                                                //getDrumCategory(fname: filename, view: self)
+                                                
+                                                self.performSegue(withIdentifier: "showAddRecordingModal", sender: filename)
                                             }
                 }
                 self.state = .readyToRecord
@@ -335,7 +338,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     }
     
     @IBAction func record(_ sender: Any) {
-        newRecord()
+        oldRecord()
     }
     
     //send this ViewController instance to the modal which pops up when recording ends
@@ -431,12 +434,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     }
     
     func setupRecSession() {
+        print("OLDRECORD: setting up rec session...")
         do {
             try recordingSession.setCategory(AVAudioSession.Category.playAndRecord,
                                              mode: AVAudioSession.Mode.default,
                                              policy: AVAudioSession.RouteSharingPolicy.default,
                                              options: AVAudioSession.CategoryOptions.defaultToSpeaker)
             try recordingSession.setActive(true)
+            print("OLDRECORD: successfully setup rec session.")
         }
         catch {
             print("failed to load recording session")
@@ -453,7 +458,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         return documentDirectory
     }
     
-    //Function taht displays an alert
+    //Function that displays an alert
     func displayAlert(title:String, message:String)
     {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
@@ -653,12 +658,17 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                 self.player.stop()
                 try AudioKit.stop()
             }
+            
+            print("PlayRecording(): overriding audio port...")
             try! AKSettings.session.overrideOutputAudioPort(AVAudioSession.PortOverride.speaker)
 
             selectedIndexPath = indexPath
             
+            print("PlayRecording(): reading file...")
+
             let file = try AKAudioFile(readFileName: filePath, baseDir: .documents)
             
+            print("PlayRecording(): filelength: ", file.length)
             player = AKPlayer(audioFile: file)
             player.startTime = getPeakTime(file: file)
             player.completionHandler = {
@@ -667,12 +677,15 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                 self.player.stop()
                 do {
                     try AudioKit.stop()
+                    print("Sucessfully stopped audiokit after playing")
                 }
                 catch {
                     print("failed to stop audiokit after playing")
                 }
             }
             AudioKit.output = player
+            print("PlayRecording(): starting player...")
+
             try AudioKit.start()
             player.play()
         }
@@ -687,12 +700,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     }
     
     func setupAKRecSession() {
+        print("setupAKRecSession(): setting up...")
         AKAudioFile.cleanTempDirectory()
         AKSettings.bufferLength = .medium
         do {
             try AKSettings.setSession(category: .playAndRecord, with: .allowBluetoothA2DP)
+            print("setupAKRecSession(): successfully setup playAndRecord Session.")
         } catch {
-            AKLog("Could not set session category.")
+            AKLog("setupAKRecSession(): Could not set session category.")
         }
         AKSettings.defaultToSpeaker = true
 
@@ -703,7 +718,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         
         // Will set the level of microphone monitoring
         //micBooster.gain = 0
-        recorder = try? AKNodeRecorder(node: micMixer)
+        do {
+            recorder = try AKNodeRecorder(node: micMixer)
+            print("setupAKRecSession(): successfully initialized AKNodeRecorder.")
+        }
+        catch {
+            AKLog("setupAKRecSession(): failed to initialize AKNodeRecorder.")
+        }
         /*if let file = recorder.audioFile {
             recPlayer = AKPlayer(audioFile: file)
         }
@@ -725,7 +746,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //recordingSession = AVAudioSession.sharedInstance()
+        recordingSession = AVAudioSession.sharedInstance()
+        AKSettings.playbackWhileMuted = true
+
         
         currentCategory = nil
         currentUID = nil
@@ -750,6 +773,14 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         }
         else { hatRecordings = [] }
         
+        //sample file to test audio player
+        /*
+        self.currentCategory = DrumType.snare
+        FileUtilities.copyFileToDocuments(resource: "snare", type: ".m4a")
+        createRecording(new_name: "new test snare", filepath: "snare.m4a")
+        self.currentCategory = nil
+         */
+
         /*
         recordingSession.requestRecordPermission{(hasPermission) in
             if hasPermission
