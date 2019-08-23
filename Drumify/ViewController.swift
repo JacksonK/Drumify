@@ -193,6 +193,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             getDrumCategory(fname: filename, view: self)
             currentUID = nil
             buttonLabel.setTitle("\u{f111}", for: .normal)
+            /*
+            */
         }
     }
     
@@ -417,6 +419,12 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                 }
             }
             createRecording(new_name: filename, filepath: senderVC.filepath)
+            do {
+                try recordingSession.setActive(false)
+            }
+            catch {
+                AKLog("UNWINDMODAL: failed to stop recording session")
+            }
         }
     }
     
@@ -472,7 +480,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         if recordings.count != 0 {
             myTableView.separatorStyle = .singleLine
             myTableView.backgroundView = nil
-            myTableView.backgroundColor = UIColor.white
+            myTableView.backgroundColor = UIColor.black
         }
         else {
             let emptyTableLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: myTableView.bounds.size.width, height: myTableView.bounds.size.height))
@@ -485,9 +493,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             else {
                 emptyTableLabel.text = "No saved hi-hat recordings"
             }
-            emptyTableLabel.textColor = UIColor.black
+            emptyTableLabel.textColor = UIColor.white
             emptyTableLabel.textAlignment = .center
-            myTableView.backgroundColor = UIColor.lightGray
+            myTableView.backgroundColor = UIColor.darkGray
             myTableView.backgroundView = emptyTableLabel
             myTableView.separatorStyle = .none
         }
@@ -749,7 +757,6 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         recordingSession = AVAudioSession.sharedInstance()
         AKSettings.playbackWhileMuted = true
 
-        
         currentCategory = nil
         currentUID = nil
         
@@ -793,6 +800,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         
         //setupAKRecSession()
         myTableView.dataSource = self;
+        //myTableView.backgroundColor = .black
         myTableView.tableFooterView = UIView()
         
         
