@@ -18,6 +18,8 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
     @IBOutlet weak var laneBarView: UIView!
     @IBOutlet weak var leftOfLaneView: UIView!
     @IBOutlet weak var playButton: UIButton!
+    @IBOutlet weak var saveButton: UIButton!
+    @IBOutlet weak var addLaneButton: UIButton!
     @IBOutlet weak var velocityModeButton: UIButton!
     @IBOutlet weak var bpmButton: UIButton!
     @IBOutlet weak var playCursor: UIView!
@@ -324,7 +326,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         }
     }
     
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         if tableView == soundPickerLeftTable  {
             let categoryIndex = categoryTab.selectedSegmentIndex
             return recordings[categoryIndex].count
@@ -334,14 +336,30 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         }
     }
     
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return Constants.TableCell.cellSpacingHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let categoryIndex = categoryTab.selectedSegmentIndex
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "recordingCell", for: indexPath) as! RecordingTableViewCell
         //cell.playButtonRight.addTarget(self, action: #selector(self.tappedPlayButton(sender:)), for: .touchUpInside)
         
-        cell.recordingName?.text = recordings[categoryIndex][indexPath.row].name
-        cell.backgroundColor = .clear
+        cell.recordingName?.text = recordings[categoryIndex][indexPath.section].name
+        cell.backgroundColor = .darkGray
+        cell.layer.cornerRadius = Constants.TableCell.cornerRadius
+
         return cell
     }
     
@@ -359,7 +377,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
 //            soundPickerLeftTableSelectedIndex = indexPath
 //            cell.backgroundColor = UIColor.yellow
             
-            selectedRecording = recordings[categoryIndex][indexPath.row]
+            selectedRecording = recordings[categoryIndex][indexPath.section]
             print("selected recording: " + (selectedRecording?.name ?? "uh oh nil selectedRecording"))
             
             //play audio of recording
@@ -426,7 +444,21 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         
         initializeGestures()
         loadRecordings()
+        
+        bpmButton.setTitleColor(Constants.AppColors.blue, for: .normal )
+        playButton.setTitleColor(Constants.AppColors.blue, for: .normal )
+        velocityModeButton.setTitleColor(Constants.AppColors.blue, for: .normal )
+        presetSoundsButton.setTitleColor(Constants.AppColors.blue, for: .normal )
+        saveButton.setTitleColor(Constants.AppColors.blue, for: .normal )
+        addLaneButton.setTitleColor(Constants.AppColors.blue, for: .normal )
        
+        leftOfLaneView.backgroundColor = Constants.AppColors.darkestGray
+        soundPickerLeftTable.backgroundColor = Constants.AppColors.darkestGray
+        soundChoiceCollectionView.backgroundColor = Constants.AppColors.darkestGray
+        sequencerCollectionView.backgroundColor = Constants.AppColors.darkestGray
+        categoryTab.backgroundColor = Constants.AppColors.darkestGray
+
+        
         sequencerCollectionView?.collectionViewLayout = sequencerColumnLayout
         laneBarCollectionView?.collectionViewLayout = laneBarColumnLayout
         soundChoiceCollectionView?.collectionViewLayout = soundChoiceColumnLayout
@@ -437,7 +469,6 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         bpmButton.setTitle("BPM: " + "\(beat.bpm)", for: .normal)
         titleLabel.text = beat.name
         
-        soundPickerLeftTable.backgroundColor = .darkGray
         soundPickerLeftTable.tableFooterView = UIView()
         
         //samplers = beat.prepareSequencer(sequencer: sequencer)
