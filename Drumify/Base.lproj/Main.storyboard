@@ -812,7 +812,7 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="60"/>
                                             <state key="normal" title="">
-                                                <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             </state>
                                             <connections>
                                                 <action selector="record:" destination="BYZ-38-t0r" eventType="touchUpInside" id="BUa-Qc-gEg"/>
@@ -834,59 +834,61 @@
                                 </items>
                                 <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </toolbar>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9L9-NQ-87q">
-                                <rect key="frame" x="0.0" y="88" width="414" height="674"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9L9-NQ-87q">
+                                <rect key="frame" x="10" y="88" width="394" height="674"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="sectionIndexBackgroundColor" red="0.14507749680000001" green="0.14510986209999999" blue="0.14507544040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="beatCell" rowHeight="90" id="lum-KL-GA3" customClass="BeatTableViewCell" customModule="Drumify" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="414" height="90"/>
+                                        <rect key="frame" x="0.0" y="28" width="394" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lum-KL-GA3" id="DRn-hd-Z6D">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="89.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="394" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8po-Tf-Zv4">
-                                                    <rect key="frame" x="20" y="11" width="71" height="36"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="30"/>
-                                                    <nil key="textColor"/>
+                                                    <rect key="frame" x="20" y="11" width="71" height="38.5"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="28"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4z8-i6-5ZD">
-                                                    <rect key="frame" x="20" y="55" width="122" height="21"/>
+                                                    <rect key="frame" x="20" y="57.5" width="122" height="23.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="122" id="Xxh-Ka-sx8"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="s0V-dS-Sj7">
-                                                    <rect key="frame" x="346" y="55.5" width="116" height="20"/>
+                                                    <rect key="frame" x="149" y="57.5" width="116" height="23.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="116" id="64P-XP-nGp"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t9t-MZ-81b">
-                                                    <rect key="frame" x="668" y="55.5" width="120" height="20"/>
+                                                    <rect key="frame" x="274" y="57.5" width="120" height="23.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="120" id="jj4-4N-rht"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="calibratedWhite"/>
+                                                    <fontDescription key="fontDescription" name="Avenir-Book" family="Avenir" pointSize="17"/>
+                                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dYr-y1-M6x">
-                                                    <rect key="frame" x="758" y="8" width="30" height="39"/>
+                                                    <rect key="frame" x="364" y="8" width="30" height="39"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="30" id="qtg-U7-6WT"/>
                                                         <constraint firstAttribute="height" constant="39" id="xSU-wA-gmf"/>
                                                     </constraints>
                                                     <fontDescription key="fontDescription" name="FontAwesome5Free-Solid" family="Font Awesome 5 Free" pointSize="27"/>
                                                     <state key="normal" title="">
-                                                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     </state>
                                                 </button>
                                             </subviews>
@@ -903,6 +905,7 @@
                                                 <constraint firstItem="dYr-y1-M6x" firstAttribute="top" secondItem="DRn-hd-Z6D" secondAttribute="top" constant="8" id="bHq-wo-iK9"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.14507749680000001" green="0.14510986209999999" blue="0.14507544040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <connections>
                                             <outlet property="bpmLabel" destination="t9t-MZ-81b" id="yIC-ER-POX"/>
                                             <outlet property="dateLabel" destination="4z8-i6-5ZD" id="lL6-tS-zHn"/>
@@ -920,7 +923,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                                 <color key="barTintColor" red="0.14507749680000001" green="0.14510986209999999" blue="0.14507544040000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <textAttributes key="titleTextAttributes">
-                                    <fontDescription key="fontDescription" name="DiwanMishafi" family="Mishafi" pointSize="26"/>
+                                    <fontDescription key="fontDescription" name="Avenir-Heavy" family="Avenir" pointSize="26"/>
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Beats" id="vIz-UF-KnU"/>
@@ -940,20 +943,22 @@
                             <constraint firstItem="9L9-NQ-87q" firstAttribute="top" secondItem="Omb-eH-bKt" secondAttribute="top" constant="44" id="5D2-FL-vhq"/>
                             <constraint firstItem="Rz0-7W-xVV" firstAttribute="leading" secondItem="Omb-eH-bKt" secondAttribute="leading" id="5g3-zw-CQR"/>
                             <constraint firstItem="Omb-eH-bKt" firstAttribute="trailing" secondItem="hHe-Ji-1pw" secondAttribute="trailing" id="7Mo-qd-nZX"/>
-                            <constraint firstItem="Omb-eH-bKt" firstAttribute="trailing" secondItem="9L9-NQ-87q" secondAttribute="trailing" id="ETa-Ds-Lfy"/>
+                            <constraint firstItem="Omb-eH-bKt" firstAttribute="trailing" secondItem="9L9-NQ-87q" secondAttribute="trailing" constant="10" id="ETa-Ds-Lfy"/>
                             <constraint firstItem="Rz0-7W-xVV" firstAttribute="trailing" secondItem="Omb-eH-bKt" secondAttribute="trailing" id="NLz-bn-rSD"/>
                             <constraint firstItem="95h-7T-KN3" firstAttribute="leading" secondItem="Omb-eH-bKt" secondAttribute="leading" id="X2U-pL-Qqr"/>
                             <constraint firstItem="Rz0-7W-xVV" firstAttribute="top" secondItem="9L9-NQ-87q" secondAttribute="bottom" id="ap9-VK-vUY"/>
                             <constraint firstItem="hHe-Ji-1pw" firstAttribute="leading" secondItem="Omb-eH-bKt" secondAttribute="leading" id="c9W-RF-MKO"/>
                             <constraint firstItem="95h-7T-KN3" firstAttribute="trailing" secondItem="Omb-eH-bKt" secondAttribute="trailing" id="eeT-jK-Cma"/>
-                            <constraint firstItem="9L9-NQ-87q" firstAttribute="leading" secondItem="Omb-eH-bKt" secondAttribute="leading" id="ffn-sd-qNk"/>
+                            <constraint firstItem="9L9-NQ-87q" firstAttribute="leading" secondItem="Omb-eH-bKt" secondAttribute="leading" constant="10" id="ffn-sd-qNk"/>
                             <constraint firstItem="Omb-eH-bKt" firstAttribute="top" secondItem="hHe-Ji-1pw" secondAttribute="bottom" id="jZf-P1-PJP"/>
                             <constraint firstItem="95h-7T-KN3" firstAttribute="top" secondItem="Omb-eH-bKt" secondAttribute="top" id="xkK-af-s8e"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Omb-eH-bKt"/>
                     </view>
                     <connections>
+                        <outlet property="addBeatButton" destination="MrH-bG-Oeh" id="XEo-Gg-HYE"/>
                         <outlet property="beatTableView" destination="9L9-NQ-87q" id="jrR-Tc-FMb"/>
+                        <outlet property="mainView" destination="Nqj-3m-g5I" id="avg-yH-fIB"/>
                         <segue destination="1Zi-xt-Xj9" kind="show" identifier="existingBeat" id="iYw-vR-ngE"/>
                     </connections>
                 </viewController>

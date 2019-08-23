@@ -14,6 +14,11 @@ struct Constants {
         static let borderWidth:CGFloat = 1
     }
     
+    struct TableCell {
+        static let cornerRadius:CGFloat = 10
+        static let cellSpacingHeight:CGFloat = 8
+    }
+    
     struct Analysis {
         static let TimerRate = 0.008
         static let Offset = 0.01

@@ -11,9 +11,14 @@ import UIKit
 class BeatViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
 
+    @IBOutlet var mainView: UIView!
     @IBOutlet weak var beatTableView: UITableView!
     
+    @IBOutlet weak var addBeatButton: UIButton!
+    
     var beats:[Beat]!
+    let backgroundColor: UIColor = Constants.AppColors.blue
+    let cellSpacingHeight: CGFloat = Constants.TableCell.cellSpacingHeight
 
     //somehow setting this to true correctly forces the view to be landscape only, idk why.
     override var shouldAutorotate: Bool {
@@ -29,7 +34,7 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
         if beats.count != 0 {
             beatTableView.separatorStyle = .singleLine
             beatTableView.backgroundView = nil
-            beatTableView.backgroundColor = UIColor.white
+            beatTableView.backgroundColor = backgroundColor
         }
         else {
             let emptyTableLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: beatTableView.bounds.size.width, height: beatTableView.bounds.size.height))
@@ -42,9 +47,23 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return beats.count
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         tableEmptyCheck()
-        return beats.count
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return cellSpacingHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -53,13 +72,15 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "beatCell", for: indexPath) as! BeatTableViewCell
-        cell.nameLabel?.text = beats[indexPath.row].name
+        cell.nameLabel?.text = beats[indexPath.section].name
         
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "MM/dd/yyyy"
-        cell.dateLabel?.text = dateFormatter.string(from: beats[indexPath.row].date)
-        cell.measuresLabel?.text = "bars: \(beats[indexPath.row].measures)"
-        cell.bpmLabel?.text = "bpm: \(beats[indexPath.row].bpm)"
+        cell.dateLabel?.text = dateFormatter.string(from: beats[indexPath.section].date)
+        cell.measuresLabel?.text = "bars: \(beats[indexPath.section].measures)"
+        cell.bpmLabel?.text = "bpm: \(beats[indexPath.section].bpm)"
+        cell.layer.cornerRadius = Constants.TableCell.cornerRadius
+
         return cell
     }
     
@@ -81,6 +102,8 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+        mainView.backgroundColor = Constants.AppColors.blue
         let value = UIInterfaceOrientation.portrait.rawValue
         UIDevice.current.setValue(value, forKey: "orientation")
         
@@ -92,6 +115,7 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
         else { beats = [] }
         
+        addBeatButton.setTitleColor(Constants.AppColors.blue, for: .normal )
         beatTableView.tableFooterView = UIView()
         
         //beats.append(Beat(name:"Hip-Hop Beat", date:Date(), measures:32, bpm:90))
@@ -136,7 +160,7 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
         let alert = UIAlertController(title: "Are you sure you want to delete this Beat?", message: "", preferredStyle: .alert)
         alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { action in
             
-            self.beats.remove(at: indexPath.row)
+            self.beats.remove(at: indexPath.section)
             self.saveBeats()
             self.beatTableView.reloadData()
         }))
@@ -145,6 +169,7 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     @IBAction func unwindFromSoundPicker (_ sender: UIStoryboardSegue) {
+        
         let sequencerViewController = sender.source as! SequencerViewController
         if sequencerViewController.newBeat {
             beats.append(sequencerViewController.beat)
@@ -158,16 +183,4 @@ class BeatViewController: UIViewController, UITableViewDelegate, UITableViewData
         saveBeats()
         
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

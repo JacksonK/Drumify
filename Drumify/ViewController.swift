@@ -46,7 +46,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     }
     
     //cell spacing stuff
-    let cellSpacingHeight: CGFloat = 5
+    let cellSpacingHeight: CGFloat = Constants.TableCell.cellSpacingHeight
     
     //new akrecorder stuff
     var micMixer: AKMixer!
@@ -545,7 +545,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         cell.deleteButton.addTarget(self, action: #selector(self.deleteRecordingFromCell(sender:)), for: .touchUpInside)
         cell.currTimeLabel.text = "0.00"
         cell.selectionStyle = .none
-        cell.layer.cornerRadius = 10
+        cell.layer.cornerRadius = Constants.TableCell.cornerRadius
         //cell.recordingName?.text = "Audio File " +  String(indexPath.row+1)
         if categoryIndex == 0 {
             cell.recordingName?.text = bassRecordings![indexPath.section].name
