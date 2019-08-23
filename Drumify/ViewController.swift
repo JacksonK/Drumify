@@ -45,6 +45,9 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         return .portrait
     }
     
+    //cell spacing stuff
+    let cellSpacingHeight: CGFloat = 5
+    
     //new akrecorder stuff
     var micMixer: AKMixer!
     var recorder: AKNodeRecorder!
@@ -480,7 +483,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         if recordings.count != 0 {
             myTableView.separatorStyle = .singleLine
             myTableView.backgroundView = nil
-            myTableView.backgroundColor = UIColor.black
+            myTableView.backgroundColor = Constants.AppColors.red
         }
         else {
             let emptyTableLabel: UILabel = UILabel(frame: CGRect(x: 0, y: 0, width: myTableView.bounds.size.width, height: myTableView.bounds.size.height))
@@ -502,7 +505,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     }
     
     //Table view setup
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
         let categoryIndex = categoryTab.selectedSegmentIndex
         if categoryIndex == 0 {
             tableEmptyCheck(recordings: bassRecordings, categoryIndex: categoryIndex)
@@ -517,7 +521,20 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             tableEmptyCheck(recordings: hatRecordings, categoryIndex: categoryIndex)
             return hatRecordings.count
         }
-        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return cellSpacingHeight
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -528,20 +545,21 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         cell.deleteButton.addTarget(self, action: #selector(self.deleteRecordingFromCell(sender:)), for: .touchUpInside)
         cell.currTimeLabel.text = "0.00"
         cell.selectionStyle = .none
+        cell.layer.cornerRadius = 10
         //cell.recordingName?.text = "Audio File " +  String(indexPath.row+1)
         if categoryIndex == 0 {
-            cell.recordingName?.text = bassRecordings![indexPath.row].name
-            cell.durationLabel?.text = "\(bassRecordings![indexPath.row].duration)"
+            cell.recordingName?.text = bassRecordings![indexPath.section].name
+            cell.durationLabel?.text = "\(bassRecordings![indexPath.section].duration)"
         }
         else if categoryIndex == 1 {
-            cell.recordingName?.text = snareRecordings![indexPath.row].name
-            cell.durationLabel?.text = "\(snareRecordings![indexPath.row].duration)"
+            cell.recordingName?.text = snareRecordings![indexPath.section].name
+            cell.durationLabel?.text = "\(snareRecordings![indexPath.section].duration)"
 
 
         }
         else {
-            cell.recordingName?.text = hatRecordings![indexPath.row].name
-            cell.durationLabel?.text = "\(hatRecordings![indexPath.row].duration)"
+            cell.recordingName?.text = hatRecordings![indexPath.section].name
+            cell.durationLabel?.text = "\(hatRecordings![indexPath.section].duration)"
 
 
         }
@@ -550,7 +568,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if (selectedIndexPath != nil && selectedIndexPath!.row == indexPath.row) {
+        if (selectedIndexPath != nil && selectedIndexPath!.section == indexPath.section) {
             return 150
         } else {
             return 50
@@ -592,13 +610,13 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         alert.addAction(UIAlertAction(title: "Delete", style: UIAlertAction.Style.destructive, handler: { action in
             let categoryIndex = self.categoryTab.selectedSegmentIndex
             if categoryIndex == 0 {
-                self.bassRecordings.remove(at: indexPath.row)
+                self.bassRecordings.remove(at: indexPath.section)
             }
             else if categoryIndex == 1 {
-                self.snareRecordings.remove(at: indexPath.row)
+                self.snareRecordings.remove(at: indexPath.section)
             }
             else {
-                self.hatRecordings.remove(at: indexPath.row)
+                self.hatRecordings.remove(at: indexPath.section)
             }
             self.saveRecordingDataChange()
             self.myTableView.reloadData()

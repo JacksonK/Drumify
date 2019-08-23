@@ -42,11 +42,11 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
     var conductor = Conductor()
     var samplers: [AKMIDISampler] = []
     
-    let laneColors =   [UIColor(red: 225/255, green: 98/255, blue: 98/255, alpha: 1.0),     //#e16262   red
-                        UIColor(red: 229/255, green: 168/255, blue: 78/255, alpha: 1.0),    //#e5a84e   yellow
-                        UIColor(red: 58/255, green: 150/255, blue: 121/255, alpha: 1.0),    //#3a9679   green
-                        UIColor(red: 83/255, green: 120/255, blue: 232/255, alpha: 1.0),    //#5378e8   blue
-                        UIColor(red: 133/255, green: 59/255, blue: 175/255, alpha: 1.0),    //#853baf   purple
+    let laneColors =   [Constants.AppColors.red, 
+                        Constants.AppColors.yellow,
+                        Constants.AppColors.green,
+                        Constants.AppColors.blue,
+                        Constants.AppColors.purple
                        ]
     
     let sequencerColumnLayout = ColumnFlowLayout(
