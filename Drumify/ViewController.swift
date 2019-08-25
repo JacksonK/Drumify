@@ -546,6 +546,7 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         cell.currTimeLabel.text = "0.00"
         cell.selectionStyle = .none
         cell.layer.cornerRadius = Constants.TableCell.cornerRadius
+        cell.playbackProgressView.progressTintColor = Constants.AppColors.red
         //cell.recordingName?.text = "Audio File " +  String(indexPath.row+1)
         if categoryIndex == 0 {
             cell.recordingName?.text = bassRecordings![indexPath.section].name
@@ -635,19 +636,19 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         let cell = sender.superview?.superview
         let recording_cell = cell as! RecordingTableViewCell
         let indexPath = myTableView.indexPath(for: cell as! UITableViewCell)
-        if categoryTab.selectedSegmentIndex == 0 && indexPath!.row < bassRecordings.count{
-            let bassRec = bassRecordings[indexPath!.row]
+        if categoryTab.selectedSegmentIndex == 0 && indexPath!.section < bassRecordings.count{
+            let bassRec = bassRecordings[indexPath!.section]
             updateProgressView(cell: recording_cell, rec: bassRec)
             playRecording(filePath: bassRec.filepath, indexPath: indexPath!)
         }
-        else if categoryTab.selectedSegmentIndex == 1 && indexPath!.row < snareRecordings.count{
-            let snareRec = snareRecordings![indexPath!.row]
+        else if categoryTab.selectedSegmentIndex == 1 && indexPath!.section < snareRecordings.count{
+            let snareRec = snareRecordings![indexPath!.section]
             updateProgressView(cell: recording_cell, rec: snareRec)
             playRecording(filePath: snareRec.filepath, indexPath: indexPath!)
 
         }
-        else if categoryTab.selectedSegmentIndex == 2 && indexPath!.row < hatRecordings.count{
-            let hatRec = hatRecordings![indexPath!.row]
+        else if categoryTab.selectedSegmentIndex == 2 && indexPath!.section < hatRecordings.count{
+            let hatRec = hatRecordings![indexPath!.section]
             updateProgressView(cell: recording_cell, rec: hatRec)
             playRecording(filePath: hatRec.filepath, indexPath: indexPath!)
         }
@@ -674,15 +675,20 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
     
     //plays audio of given file
     func playRecording(filePath: String, indexPath: IndexPath) {
+        
+        print("PlayRecording(): is audiokit running?:", AudioKit.engine.isRunning )
+        
         let path = getDirectory().appendingPathComponent(filePath)
-        print("attempting to play file with name: ", path)
+        print("PlayRecording(): attempting to play file with name: ", path)
         do
         {
+            if( AudioKit.engine.isRunning ) {
+                try AudioKit.stop()
+            }
             // player is initialized
             if (player != nil )
             {
                 self.player.stop()
-                try AudioKit.stop()
             }
             
             print("PlayRecording(): overriding audio port...")
@@ -696,6 +702,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
             
             print("PlayRecording(): filelength: ", file.length)
             player = AKPlayer(audioFile: file)
+            print("PlayRecording(): player initialized")
+
             player.startTime = getPeakTime(file: file)
             player.completionHandler = {
                 print( "callback!")
@@ -709,6 +717,8 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
                     print("failed to stop audiokit after playing")
                 }
             }
+            print("PlayRecording(): setting output")
+
             AudioKit.output = player
             print("PlayRecording(): starting player...")
 
@@ -770,6 +780,15 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         }
     }
     
+    func setupSegmentController() {
+        print("VDL: setting up segment controller..." )
+        let font = UIFont(name: "Avenir-Heavy", size: 22)
+        categoryTab.setTitleTextAttributes([NSAttributedString.Key.font: font!], for: .normal)
+        //categoryTab.backgroundColor = Constants.AppColors.red
+        categoryTab.layer.cornerRadius = 4.0;
+        categoryTab.clipsToBounds = true;
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         recordingSession = AVAudioSession.sharedInstance()
@@ -817,9 +836,11 @@ class ViewController: UIViewController, AVAudioRecorderDelegate, AVAudioPlayerDe
         //setupRecSession()
         
         //setupAKRecSession()
+        
         myTableView.dataSource = self;
         //myTableView.backgroundColor = .black
         myTableView.tableFooterView = UIView()
+        setupSegmentController()
         
         
     }

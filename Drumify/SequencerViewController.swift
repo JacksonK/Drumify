@@ -435,6 +435,15 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
 //        return true
 //    }
     
+    func setupSegmentController() {
+        print("VDL: setting up segment controller..." )
+        let font = UIFont(name: "Avenir-Heavy", size: 22)
+        categoryTab.setTitleTextAttributes([NSAttributedString.Key.font: font!], for: .normal)
+        //categoryTab.backgroundColor = Constants.AppColors.red
+        categoryTab.layer.cornerRadius = 4.0;
+        categoryTab.clipsToBounds = true;
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print("view did load called...")
@@ -500,6 +509,7 @@ class SequencerViewController: UIViewController, UICollectionViewDataSource, UIC
         //print("beat rec #2: ", beat.lanes[1].recording?.name)
         //print("beat rec #3: ", beat.lanes[2].recording?.name)
 
+        setupSegmentController()
     }
     
     override func viewDidAppear(_ animated: Bool) {
