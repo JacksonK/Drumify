@@ -98,6 +98,13 @@ class Conductor {
             player.stop()
         }
         isPlaying = false
+        /*
+        do {
+            try AudioKit.stop()
+        }
+        catch {
+            AKLog("CONDUCTOR (PAUSE): Failed to stop audiokit")
+        }*/
     }
     
     func playPattern(beat: Beat, looping: Bool, cursorConstraint: NSLayoutConstraint, sequencerWidth: CGFloat) {

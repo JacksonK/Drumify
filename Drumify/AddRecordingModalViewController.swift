@@ -31,6 +31,16 @@ class AddRecordingModalViewController: UIViewController/*, UITextFieldDelegate*/
     @IBOutlet weak var saveButton: UIButton!
     @IBOutlet weak var deleteButton: UIButton!
     
+    
+    func setupSegmentController() {
+        print("VDL: setting up segment controller..." )
+        let font = UIFont(name: "Avenir-Book", size: 16)
+        drumCategorySegmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: font!], for: .normal)
+        //categoryTab.backgroundColor = Constants.AppColors.red
+        drumCategorySegmentedControl.layer.cornerRadius = 4.0;
+        drumCategorySegmentedControl.clipsToBounds = true;
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
@@ -73,6 +83,8 @@ class AddRecordingModalViewController: UIViewController/*, UITextFieldDelegate*/
             drumCategorySegmentedControl.selectedSegmentIndex = 0
             chosen_category = DrumType.bass
         }
+        
+        setupSegmentController()
     }
     @IBAction func pickedCategory(_ sender: Any) {
         print("category picked, updating global category variable")
